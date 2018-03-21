@@ -26,7 +26,7 @@
                             </b>
                         </li>
                          <li>
-                            <a class="tooltip-tip ajax-load" title="线索管理">
+                            <a class="tooltip-tip ajax-load" title="线索管理"></a>
 
                         <li>
                             <router-link to="/clueadd" class="tooltip-tip ajax-load">
@@ -143,7 +143,7 @@ export default {
   name: "menuslider",
   data() {
     return {
-      isCollapse: true
+      isCollapse: false
     };
   },
   methods: {
@@ -184,5 +184,8 @@ a {
 }
 #skin-select .icon-feed {
     top:0px
+}
+.el-menu {
+    border-right: none
 }
 </style>
