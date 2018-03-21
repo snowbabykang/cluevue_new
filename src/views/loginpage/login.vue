@@ -18,12 +18,12 @@
             <center><span class="text-center login-with"><router-link :to="{ path: 'login' }">登录</router-link> or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
            </div>            
             <div class="row-block">
-                                <div class="row">
-                                    <div class="col-md-12 row-block">
-                                        <button @click="userlogin" class="btn btn-primary btn-block">登录</button>
-                                    </div>
-                                </div>
-                            </div> 
+                <div class="row">
+                <div class="col-md-12 row-block">
+                    <button @click="userlogin" class="btn btn-primary btn-block">登录</button>
+                </div>
+            </div>
+        </div> 
     </div>
 </template>
 <script>
@@ -31,35 +31,32 @@ export default {
   name: "login",
   data() {
     return {
-        loginName:'zhangsan',
-        password:'111111'
+      loginName: "admin",
+      password: "123456"
     };
   },
-  methods:{
-    userlogin:function(){
-          this.$ajax({
-            method: 'post',
-            url: '/user',
-            data: {
-                name: 'xiaoming',
-                info: '12'
-            }
-        }).then(function(res){
-            console.log(res)
-        })
-
-
-
-        // console.log(this.$ajax.post)
-        // this.$ajax.post('/api/dologin',{loginName:this.loginName,password:this.password})
-        // .then(function(res){
-        //     console.log(res)
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+  methods: {
+    userlogin: function() {
+      this.$ajax.post("/api/dologin",{
+          loginName: this.loginName,
+          password: this.password
+    }).then((res)=>{
+        localStorage.setItem('userinfo',JSON.stringify(res.data));
+        this.$router.push("/")
+    }).catch((error)=>{
+        this.$message({
+            showClose: true,
+            message: "错误",
+            type: 'error'
+          });
+    })
     }
+  },
+  created:function(){
+        if(localStorage.getItem('userinfo')!=""){
+            this.$router.push("/")
+        }
   }
-  
 };
 </script>
 

@@ -1,10 +1,11 @@
 <template>
-  <div id="skin-select">
+<div id="skin-select">
+  <div>
         <div id="logo">
          <h1>着急赚钱 <span>v1.2</span></h1>
         </div>
 
-        <a id="toggle">
+        <a  id="toggle">
             <span class="entypo-menu"></span>
         </a>
         <!-- <div class="dark">
@@ -14,277 +15,145 @@
                 </span>
             </form>
         </div> -->
-
-       
-
-
-
-
-        <div class="skin-part">
+        <div  v-if="false" class="skin-part">
             <div id="tree-wrap">
                 <div class="side-bar">
                     <ul class="topnav menu-left-nest"   >
                         <li>
-                            <a href="#" style="border-left:0px solid!important;" class="title-menu-left">
-
+                            <b style="border-left:0px solid!important;" class="title-menu-left">
                                 <span class="">线索管理</span>
                                 <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
-
-                            </a>
+                            </b>
+                            
                         </li>
-
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="#" title="Blog App">
-                                <i class="icon-document-edit"></i>
-                                <span>录入线索</span>
-
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="blog-list.html" title="Blog List"><i class="entypo-doc-text"></i><span>Blog List</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="blog-detail.html" title="Blog Detail"><i class="entypo-newspaper"></i><span>Blog Details</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="social.html" title="Social">
+                         <li>
+                            <a class="tooltip-tip ajax-load" title="线索管理">
                                 <i class="icon-feed"></i>
-                                <span>线索明细</span>
+                                <span>线索管理</span>
+                            </a>
+                             <ul>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="blog-list.html" title="Blog List"><i class="entypo-doc-text"></i><span>线索列表</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="blog-detail.html" title="Blog Detail"><i class="entypo-newspaper"></i><span>新建线索</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a class="tooltip-tip ajax-load" title="数据统计">
+                                <i class="icon-document-edit"></i>
+                                <span>数据统计</span>
+
+                            </a>
+                            <ul>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="blog-list.html" title="Blog List"><i class="entypo-doc-text"></i><span>案件数量趋势</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="blog-detail.html" title="Blog Detail"><i class="entypo-newspaper"></i><span>各职级案件比例</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="blog-detail.html" title="Blog Detail"><i class="entypo-newspaper"></i><span>未结案件比例</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" title="登记发放">
+                                <i class="icon-feed"></i>
+                                <span>登记发放</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="media.html" title="Media">
+                            <a class="tooltip-tip ajax-load" title="案件文书&文登号登记">
                                 <i class="icon-camera"></i>
-                                <span>Media</span>
+                                <span>案件文书&文登号登记</span>
 
                             </a>
                         </li>
                     </ul>
-
-                    <ul class="topnav menu-left-nest">
-                        <li>
-                            <a href="#" style="border-left:0px solid!important;" class="title-menu-left">
-
-                                <span class="design-kit"></span>
-                                <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="index.html" title="Dashboard">
-                                <i class="icon-window"></i>
-                                <span>Dashboard</span>
-
-                            </a>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="mail.html" title="Mail">
-                                <i class="icon-mail"></i>
-                                <span>mail</span>
-                                <div class="noft-blue">289</div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="icon.html" title="Icons">
-                                <i class="icon-preview"></i>
-                                <span>Icons</span>
-                                <div class="noft-blue" style="display: inline-block; float: none;">New</div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="tooltip-tip" href="#" title="Extra Pages">
-                                <i class="icon-document-new"></i>
-                                <span>Extra Page</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="blank_page.html" title="Blank Page"><i class="icon-media-record"></i><span>Blank Page</span></a>
-                                </li>
-                                 <li>
-                                    <a class="tooltip-tip2 ajax-load" href="profile.html" title="Profile Page"><i class="icon-user"></i><span>Profile Page</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="invoice.html" title="Invoice"><i class="entypo-newspaper"></i><span>Invoice</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="pricing_table.html" title="Pricing Table"><i class="fontawesome-money"></i><span>Pricing Table</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="time-line.html" title="Time Line"><i class="entypo-clock"></i><span>Time Line</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2" href="404.html" title="404 Error Page"><i class="icon-thumbs-down"></i><span>404 Error Page</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2" href="500.html" title="500 Error Page"><i class="icon-thumbs-down"></i><span>500 Error Page</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2" href="lock-screen.html" title="Lock Screen"><i class="icon-lock"></i><span>Lock Screen</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="tooltip-tip " href="login.html" title="login">
-                                <i class="icon-download"></i>
-                                <span>Login</span>
-                            </a>
-                        </li>
-
-                    </ul>
-
-                    <ul id="menu-showhide" class="topnav menu-left-nest">
-                        <li>
-                            <a href="#" style="border-left:0px solid!important;" class="title-menu-left">
-
-                                <span class="component"></span>
-                                <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
-
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a class="tooltip-tip" href="#" title="UI Element">
-                                <i class="icon-monitor"></i>
-                                <span>UI Element</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="element.html" title="Element"><i class="icon-attachment"></i><span>Element</span></a>
-                                </li>
-                                <li><a class="tooltip-tip2 ajax-load" href="button.html" title="Button"><i class="icon-view-list-large"></i><span>Button</span> <div class="noft-blue-number">10</div></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="wizard.html" title="Tab & Accordion"><i class="icon-folder"></i><span>Wizard</span><div class="noft-purple-number">3</div></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="calendar.html" title="Calender"><i class="icon-calendar"></i><span>Calendar</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="tree.html" title="Tree View"><i class="icon-view-list"></i><span>Tree View</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="grids.html" title="Grids"><i class="icon-menu"></i><span>Grids</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="chart.html" title="Chart"><i class="icon-graph-pie"></i><span>Chart</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip ajax-load" href="typhography.html" title="Typhoghrapy">
-                                        <i class="icon-information"></i>
-                                        <span>Typhoghrapy</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip" href="#" title="Form">
-                                <i class="icon-document"></i>
-                                <span>Form</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="form-element.html" title="Form Elements"><i class="icon-document-edit"></i><span>Form Elements</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="andvance-form.html" title="Andvance Form"><i class="icon-map"></i><span>Andvance Form</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="text-editor.html" title="Text Editor"><i class="icon-code"></i><span>Text Editor</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="file-upload.html" title="File Upload"><i class="icon-upload"></i><span>File Upload</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip" href="#" title="Tables">
-                                <i class="icon-view-thumb"></i>
-                                <span>Tables</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="table-static.html" title="Table Static"><i class="entypo-layout"></i><span>Table Static</span></a>
-                                </li>
-                                <li>
-                                    <a class="tooltip-tip2 ajax-load" href="table-dynamic.html" title="Table Dynamic"><i class="entypo-menu"></i><span>Table Dynamic</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="map.html" title="Map">
-                                <i class="icon-location"></i>
-                                <span>Map</span>
-
-                            </a>
-                        </li>
-                    </ul>
-
-
-                    <div class="side-dash">
-                        <h3>
-                            <span>Device</span>
-                        </h3>
-                        <ul class="side-dashh-list">
-                            <li>Avg. Traffic
-                                <span>25k<i style="color:#44BBC1;" class="fa fa-arrow-circle-up"></i>
-                                </span>
-                            </li>
-                            <li>Visitors
-                                <span>80%<i style="color:#AB6DB0;" class="fa fa-arrow-circle-down"></i>
-                                </span>
-                            </li>
-                            <li>Convertion Rate
-                                <span>13m<i style="color:#19A1F9;" class="fa fa-arrow-circle-up"></i>
-                                </span>
-                            </li>
-                        </ul>
-                        <h3>
-                            <span>Traffic</span>
-                        </h3>
-                        <ul class="side-bar-list">
-                            <li>Avg. Traffic
-                                <div class="linebar">5,7,8,9,3,5,3,8,5</div>
-                            </li>
-                            <li>Visitors
-                                <div class="linebar2">9,7,8,9,5,9,6,8,7</div>
-                            </li>
-                            <li>Convertion Rate
-                                <div class="linebar3">5,7,8,9,3,5,3,8,5</div>
-                            </li>
-                        </ul>
-                        <h3>
-                            <span>Visitors</span>
-                        </h3>
-                        <div id="g1" style="height:180px" class="gauge"></div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+  <el-radio-button :label="false">展开</el-radio-button>
+  <el-radio-button :label="true">收起</el-radio-button>
+</el-radio-group>
+<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+  <el-submenu index="1">
+    <template slot="title">
+      <i class="el-icon-location"></i>
+      <span slot="title">导航一</span>
+    </template>
+    <el-menu-item-group>
+      <span slot="title">分组一</span>
+      <el-menu-item index="1-1">选项1</el-menu-item>
+      <el-menu-item index="1-2">选项2</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="分组2">
+      <el-menu-item index="1-3">选项3</el-menu-item>
+    </el-menu-item-group>
+    <el-submenu index="1-4">
+      <span slot="title">选项4</span>
+      <el-menu-item index="1-4-1">选项1</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">导航二</span>
+  </el-menu-item>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
+    <span slot="title">导航三</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">导航四</span>
+  </el-menu-item>
+</el-menu>
+</div>
 </template>
+
 <script>
 export default {
-  name: 'menuslider',
-  data () {
+  name: "menuslider",
+  data() {
     return {
-     
+      isCollapse: false
+    };
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
-}
+};
 </script>
 
 
 <style scoped>
 .topnav {
-    margin:10px;
+  margin: 10px;
+  position: relative;
+  top: -18px;
+}
+a {
+  cursor: pointer;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+#tree-wrap {
+  height: auto;
 }
 </style>
