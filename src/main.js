@@ -16,7 +16,7 @@ import './assets/css/bootstrap.css'
 import './assets/css/signin.css'
 import './assets/css/style.css'
 
- 
+
 Vue.config.productionTip = false;
 
 Vue.use(Vuex)
