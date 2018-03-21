@@ -9,25 +9,11 @@
                         </h1>
                     </div>
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="account-box"> 
                         <router-view></router-view>
-                        <div class="or-box">
-                            <center><span class="text-center login-with"><router-link :to="{ path: 'login' }">登录</router-link> or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
-                        </div>
-                        
-                            <div class="row-block">
-                                <div class="row">
-                                    <div class="col-md-12 row-block">
-                                        <a href="index.html" class="btn btn-primary btn-block">登录</a>
-                                    </div>
-                                </div>
-                            </div>
-                       
                         
                     </div>
                 </div>
@@ -40,13 +26,18 @@
 export default {
   name: "loginpage",
   data() {
-    return {};
+    return {
+
+    };
   }
 };
 </script>
 <style>
     .forgotLnk{
         margin-top: 0px
+    }
+    .btn {
+        background:#3DA09A
     }
 </style>
 

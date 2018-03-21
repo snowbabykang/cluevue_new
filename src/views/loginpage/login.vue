@@ -1,31 +1,65 @@
 <template>
-  <form role="form" class="clearfix">
-                            <div class="form-group">
-                                <!--a href="#" class="pull-right label-forgot">Forgot email?</a-->
-                                <label for="inputUsernameEmail">用户名</label>
-                                <input type="text" id="inputUsernameEmail" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <!--a href="#" class="pull-right label-forgot">Forgot password?</a-->
-                                <label for="inputPassword">密码</label>
-                                <input type="password" id="inputPassword" class="form-control">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">记住用户名</label>
-                                    <router-link class="forgotLnk pull-right" :to="{ path: 'findpassword' }">忘记密码？</router-link>
-                            </div>
-                            <!-- <button class="btn btn btn-primary pull-right" type="submit">
-                                登 录
-                            </button> -->
-                        </form>
+    <div class="clearfix">
+        <div class="form-group">
+            <!--a href="#" class="pull-right label-forgot">Forgot email?</a-->
+            <label for="inputUsernameEmail">用户名</label>
+            <input type="text" id="inputUsernameEmail" class="form-control" v-model="loginName" >
+        </div>
+        <div class="form-group">
+            <!--a href="#" class="pull-right label-forgot">Forgot password?</a-->
+            <label for="inputPassword">密码</label>
+            <input type="password" id="inputPassword" class="form-control" v-model="password">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox">记住用户名</label>
+            <router-link class="forgotLnk pull-right" :to="{ path: 'findpassword' }">忘记密码？</router-link>
+        </div>
+        <div class="or-box">
+            <center><span class="text-center login-with"><router-link :to="{ path: 'login' }">登录</router-link> or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
+           </div>            
+            <div class="row-block">
+                                <div class="row">
+                                    <div class="col-md-12 row-block">
+                                        <button @click="userlogin" class="btn btn-primary btn-block">登录</button>
+                                    </div>
+                                </div>
+                            </div> 
+    </div>
 </template>
 <script>
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+        loginName:'zhangsan',
+        password:'111111'
+    };
+  },
+  methods:{
+    userlogin:function(){
+          this.$ajax({
+            method: 'post',
+            url: '/user',
+            data: {
+                name: 'xiaoming',
+                info: '12'
+            }
+        }).then(function(res){
+            console.log(res)
+        })
+
+
+
+        // console.log(this.$ajax.post)
+        // this.$ajax.post('/api/dologin',{loginName:this.loginName,password:this.password})
+        // .then(function(res){
+        //     console.log(res)
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
+    }
   }
+  
 };
 </script>
 
