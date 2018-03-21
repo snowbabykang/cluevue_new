@@ -6,7 +6,7 @@
         </div>
 
         <a  id="toggle">
-            <span class="entypo-menu"></span>
+            <span class="entypo-menu" @click="showorh"></span>
         </a>
         <!-- <div class="dark">
             <form action="#">
@@ -18,13 +18,12 @@
         <div  v-if="false" class="skin-part">
             <div id="tree-wrap">
                 <div class="side-bar">
-                    <ul class="topnav menu-left-nest"   >
+                    <ul class="topnav menu-left-nest">
                         <li>
                             <b style="border-left:0px solid!important;" class="title-menu-left">
                                 <span class="">线索管理</span>
                                 <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
                             </b>
-                            
                         </li>
                          <li>
                             <a class="tooltip-tip ajax-load" title="线索管理">
@@ -40,9 +39,6 @@
                                 </li>
                             </ul>
                         </li>
-
-
-
                         <li>
                             <a class="tooltip-tip ajax-load" title="数据统计">
                                 <i class="icon-document-edit"></i>
@@ -81,42 +77,47 @@
         </div>
     </div>
 
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-  <el-radio-button :label="false">展开</el-radio-button>
-  <el-radio-button :label="true">收起</el-radio-button>
-</el-radio-group>
-<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <div class="skin-part">
+            <div id="tree-wrap">
+                <div class="side-bar">
+                <el-menu default-active="1-1-1" class="el-menu-vertical-demo topnav menu-left-nest" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+                <li>
+                    <b style="border-left:0px solid!important;" class="title-menu-left">
+                        <span class="">线索管理</span>
+                        <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
+                    </b>
+                </li>
   <el-submenu index="1">
-    <template slot="title">
-      <i class="el-icon-location"></i>
+    <template slot="title" class="tooltip-tip ajax-load">
+      <i class="icon-feed"></i>
       <span slot="title">导航一</span>
     </template>
     <el-menu-item-group>
-      <span slot="title">分组一</span>
       <el-menu-item index="1-1">选项1</el-menu-item>
       <el-menu-item index="1-2">选项2</el-menu-item>
     </el-menu-item-group>
-    <el-menu-item-group title="分组2">
-      <el-menu-item index="1-3">选项3</el-menu-item>
-    </el-menu-item-group>
+   
     <el-submenu index="1-4">
       <span slot="title">选项4</span>
       <el-menu-item index="1-4-1">选项1</el-menu-item>
     </el-submenu>
   </el-submenu>
   <el-menu-item index="2">
-    <i class="el-icon-menu"></i>
+     <i class="icon-document-edit"></i>
     <span slot="title">导航二</span>
   </el-menu-item>
-  <el-menu-item index="3" disabled>
-    <i class="el-icon-document"></i>
-    <span slot="title">导航三</span>
+  <el-menu-item index="3">
+     <i class="icon-document-edit"></i>
+    <span slot="title">导航二</span>
   </el-menu-item>
   <el-menu-item index="4">
-    <i class="el-icon-setting"></i>
+   <i class="icon-feed"></i>
     <span slot="title">导航四</span>
   </el-menu-item>
 </el-menu>
+</div>
+</div>
+</div>
 </div>
 </template>
 
@@ -125,7 +126,7 @@ export default {
   name: "menuslider",
   data() {
     return {
-      isCollapse: false
+      isCollapse: true
     };
   },
   methods: {
@@ -134,6 +135,9 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    showorh() {
+      this.isCollapse = !this.isCollapse;
     }
   }
 };
@@ -150,10 +154,18 @@ a {
   cursor: pointer;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 230px;
   min-height: 400px;
 }
 #tree-wrap {
   height: auto;
+}
+#skin-select i.el-icon-arrow-down {
+    position: absolute;
+    left: auto;
+    top:50%;
+}
+#skin-select .icon-feed {
+    top:0px
 }
 </style>
