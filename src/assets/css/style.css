@@ -784,9 +784,9 @@ img.ikon {
     padding: 10px 15px 10px 60px;
     width:100%;
 }
-input[type=text] {
+/* input[type=text] {
     color: #fff;
-}
+} */
 .search-menu {
     border-radius: 4px;
     margin: 0 10px;

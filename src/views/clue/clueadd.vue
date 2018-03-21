@@ -9,7 +9,7 @@
                     <el-form-item label="线索来源" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
-                </el-col>
+                </el-col>11
                 <el-col :span="8">
                     <el-form-item label="编号" prop="region">
                         <el-input v-model="ruleForm.name"></el-input>
@@ -65,14 +65,83 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-                         <hr/>
+            <hr/>
             <el-row>
                 <el-col :span="16">
                     <el-form-item label="领导批示" required>
                         <el-input type="textarea" v-model="ruleForm.desc" :rows="5"></el-input>
                     </el-form-item>
                 </el-col>
-
+            </el-row>
+            <hr/>
+            <el-row>
+                <el-col :span="16">
+                    <el-form-item label="备注" required>
+                         <el-input v-model="ruleForm.name"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <hr/>
+            <el-row>
+                <el-col :span="8">
+                    <el-form-item label="处置类型" prop="name">
+                        <el-input v-model="ruleForm.name"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="上级交办" prop="region">
+                         <el-switch v-model="ruleForm.name"></el-switch>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <el-form-item label="办结期限" required>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="提醒天数" prop="name">
+                        <el-input v-model="ruleForm.name"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="5">
+                    <el-form-item label="去向" required>
+                        <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="5">
+                    <el-form-item label="线索状态" prop="name">
+                        <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <hr/>
+            <el-row>
+                <el-col :span="16">
+                    <el-form-item label="上传附件" required>
+                         <el-upload
+                            class="upload-demo"
+                            ref="upload"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-preview="handlePreview"
+                            :on-remove="handleRemove"
+                            :file-list="fileList"
+                            :auto-upload="false">
+                            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                        </el-upload>
+                    </el-form-item>
+                </el-col>
             </el-row>
         </el-form>
     </div>
