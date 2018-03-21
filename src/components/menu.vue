@@ -34,11 +34,10 @@
                         </li>
 
                         <li>
-                            <a class="tooltip-tip ajax-load" href="#" title="Blog App">
+                            <router-link to="/clueadd" class="tooltip-tip ajax-load">
                                 <i class="icon-document-edit"></i>
                                 <span>录入线索</span>
-
-                            </a>
+                            </router-link>
                             <ul>
                                 <li>
                                     <a class="tooltip-tip2 ajax-load" href="blog-list.html" title="Blog List"><i class="entypo-doc-text"></i><span>Blog List</span></a>
