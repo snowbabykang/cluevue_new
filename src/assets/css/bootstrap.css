@@ -1661,9 +1661,9 @@ input[type="checkbox"] {
   /* IE8-9 */
   line-height: normal;
 }
-input[type="file"] {
+/* input[type="file"] {
   display: block;
-}
+} */
 input[type="range"] {
   display: block;
   width: 100%;
