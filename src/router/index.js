@@ -28,7 +28,7 @@ export default new Router({
           component: cluelist
         },
         {
-          path: '/clueadd',
+          path: 'clueadd',
           name: 'clueadd',
           component: clueadd
         },
