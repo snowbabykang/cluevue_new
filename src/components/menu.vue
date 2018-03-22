@@ -95,44 +95,48 @@
     </div>
 
     <div class="skin-part">
-            <div id="tree-wrap">
-                <div class="side-bar">
-                <el-menu default-active="1-1-1" class="el-menu-vertical-demo topnav menu-left-nest" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-                <li>
-                    <b style="border-left:0px solid!important;" class="title-menu-left">
-                        <span class="">线索管理</span>
-                        <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
-                    </b>
-                </li>
-  <el-submenu index="1">
-    <template slot="title" class="tooltip-tip ajax-load">
-      <i class="icon-feed"></i>
-      <span slot="title">导航一</span>
-    </template>
-    <el-menu-item-group>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-menu-item-group>
-   
-    <el-submenu index="1-4">
-      <span slot="title">选项4</span>
-      <el-menu-item index="1-4-1">选项1</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="2">
-     <i class="icon-document-edit"></i>
-    <span slot="title">导航二</span>
-  </el-menu-item>
-  <el-menu-item index="3">
-     <i class="icon-document-edit"></i>
-    <span slot="title">导航二</span>
-  </el-menu-item>
-  <el-menu-item index="4">
-   <i class="icon-feed"></i>
-    <span slot="title">导航四</span>
-  </el-menu-item>
-</el-menu>
-</div>
+        <div id="tree-wrap">
+        <div class="side-bar">
+        <el-menu class="topnav menu-left-nest" default-active="1-1-1"  @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+        <li>    
+            <b style="border-left:0px solid!important;" class="title-menu-left">
+                <span class="">线索管理</span>
+                <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
+            </b>
+        </li>
+        <el-submenu index="1">
+            <template slot="title" class="tooltip-tip ajax-load">
+                <i class="icon-feed"></i>
+                <span slot="title">线索管理</span>
+            </template>
+            <el-menu-item-group>
+               <el-menu-item class="clearsty" index="1-1"><router-link to="/clue/clueadd"> 录入线索</router-link></el-menu-item>
+                <el-menu-item class="clearsty" index="1-2"><router-link to="/clue/">线索列表</router-link></el-menu-item>
+            </el-menu-item-group>
+        </el-submenu>
+        <el-menu-item index="2">
+             <template slot="title" class="tooltip-tip ajax-load">
+            <i class="icon-feed"></i>
+            <span slot="title">数据统计</span>
+            </template>
+             <el-menu-item-group> </el-menu-item-group>
+        </el-menu-item>
+        <el-menu-item index="3">
+             <template slot="title" class="tooltip-tip ajax-load">
+            <i class="icon-feed"></i>
+            <span slot="title">登记发放</span>
+            </template>
+             <el-menu-item-group> </el-menu-item-group>
+        </el-menu-item>
+        <el-menu-item index="4">
+             <template slot="title" class="tooltip-tip ajax-load">
+            <i class="icon-feed"></i>
+            <span slot="title">案件文书&文登号登记</span>
+            </template>
+             <el-menu-item-group> </el-menu-item-group>
+        </el-menu-item>
+        </el-menu>
+    </div>
 </div>
 </div>
 </div>
@@ -178,14 +182,38 @@ a {
   height: auto;
 }
 #skin-select i.el-icon-arrow-down {
-    position: absolute;
-    left: auto;
-    top:50%;
+  position: absolute;
+  left: auto;
+  top: 50%;
 }
 #skin-select .icon-feed {
-    top:0px
+  top: 0px;
 }
 .el-menu {
-    border-right: none
+  border-right: none;
+}
+#sb-site .el-menu-item > span,
+#sb-site .el-submenu__title > span {
+  color: #fff;
+  font-size: 14px;
+}
+.ul.topnav ul{
+    display: block;
+}
+.el-menu--inline {
+    background-color: transparent;
+}
+.el-menu-item-group .el-menu-item {    
+    line-height: 50px !important;
+    font-size: 14px !important
+}
+.clearsty {
+    padding-left: 0 !important;
+     padding-right: 0 !important
+}
+.clearsty a, .clearsty a:hover{
+    background: transparent;
+    line-height: 30px;
 }
 </style>
+
