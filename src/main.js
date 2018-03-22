@@ -4,17 +4,18 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import api from "./assets/api"
-
+import config from "./assets/config"
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
 import publicnav from './components/publicnav'
 import menuslider from './components/menu'
+import publicsearch from './components/publicsearch'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
-import './assets/css/bootstrap.css'
 import './assets/css/signin.css'
 import './assets/css/style.css'
+import './assets/css/bootstrap.css'
 
 
 Vue.config.productionTip = false;
@@ -24,7 +25,13 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userToken: ''
+    userToken: '',
+    classname:"button-bg"
+  },
+  mutations:{
+    changebg(state,name){
+      state.classname = name
+    } 
   }
 })
 Vue.use(ElementUI);
@@ -60,14 +67,16 @@ const $axios = axios.create({
 });
 //axios.defaults.headers = {'X-Requested-With': 'XMLHttpRequest'};
 Vue.prototype.$ajax = $axios
-
+Vue.prototype.confindata = config
 //Vue.prototype.$ajax = axios
 Vue.component('public-nav', publicnav);
 Vue.component('menuslider', menuslider);
+Vue.component('publicsearch', publicsearch);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App, publicnav, menuslider },
   template: '<App/>'
 })
