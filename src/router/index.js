@@ -31,11 +31,6 @@ export default new Router({
           path: 'clueadd',
           name: 'clueadd',
           component: clueadd
-        },
-        {
-          path: 'findpassword',
-          name: 'findpassword',
-          component: findpassword
         }
       ]
     },
@@ -45,7 +40,7 @@ export default new Router({
       component: loginpage,
       children:[
         {
-          path: 'login',
+          path: '',
           name: 'login',
           component: login
         },
