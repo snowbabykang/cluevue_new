@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './route 
+import router from './router'
 import api from "./assets/api"
 import config from "./assets/config"
 import ElementUI from 'element-ui'
@@ -46,8 +46,15 @@ const $axios = axios.create({
   },
   transformRequest: [function (data) {
     // 对 data 进行任意转换处理
-    console.log(data)
-    return JSON.stringify(data);
+    console.log(JSON.parse(localStorage.getItem('userinfo'))==null)
+    if(JSON.parse(localStorage.getItem('userinfo'))==null){
+      return JSON.stringify(data);
+    }else{
+      var postdata = {data:data,token:JSON.parse(localStorage.getItem('userinfo')).token,type:1}
+      return JSON.stringify(postdata);
+      
+    }
+    
   }],
   transformResponse: [function (data) {
     // 对 data 进行任意转换处理
@@ -56,7 +63,7 @@ const $axios = axios.create({
       console.log("错误")
       Vue.prototype.$message({
         showClose: true,
-        message: error,
+        message: data,
         type: 'error'
       })
     }else{
@@ -65,14 +72,18 @@ const $axios = axios.create({
     
   }],
 });
-//axios.defaults.headers = {'X-Requested-With': 'XMLHttpRequest'};
 Vue.prototype.$ajax = $axios
 Vue.prototype.confindata = config
-//Vue.prototype.$ajax = axios
 Vue.component('public-nav', publicnav);
 Vue.component('menuslider', menuslider);
 Vue.component('publicsearch', publicsearch);
 /* eslint-disable no-new */
+router.beforeEach((to,from,next)=>{
+  console.log(to,!!localStorage.getItem('userinfo'))
+  next()   
+  
+  
+})
 new Vue({
   el: '#app',
   router,

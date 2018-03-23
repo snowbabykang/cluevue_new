@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: "login",
+  name: "register",
   data() {
     return {};
   }

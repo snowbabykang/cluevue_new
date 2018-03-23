@@ -129,7 +129,7 @@ export default {
   data () {
     return {
         message:false,
-       //username:JSON.parse(localStorage.getItem('userinfo')).username,
+        username:JSON.parse(localStorage.getItem('userinfo')).login_name,
         openuser:false,
         setingstate:false,
         bglist:this.confindata.bglist
@@ -145,7 +145,7 @@ export default {
       loginout:function(){
         this.$ajax.post('/api/logout',{}).then((res)=>{
              localStorage.setItem('userinfo',null);
-            this.$router.push("/loginpage/login")
+            this.$router.push("/loginpage")
         })
          
       },
