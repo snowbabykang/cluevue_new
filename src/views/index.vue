@@ -5,6 +5,7 @@
    <div class="wrap-fluid">
         <div class="container-fluid paper-wrap bevel tlbr">
           <router-view/>
+         
         </div>
       </div>
   </div>

@@ -294,8 +294,8 @@ export default {
            var data=[];
            for(let i=0;i<Files;i++){
                let fileName=Files[i].rew.type.split('/');
-                data[i]={};
-                data[i].attachment_type=
+                // data[i]={};
+                // data[i].attachment_type=
            }
         },
         handleRemove(file, fileList) {

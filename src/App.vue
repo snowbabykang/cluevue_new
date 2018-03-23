@@ -40,4 +40,7 @@ ul.topnav ul .is-active , .el-menu-item .is-active, .el-menu-item:focus, .el-men
 .button-bg10{overflow: visible; background: url("assets/img/bg11.jpg") center center no-repeat fixed;}
 .button-bg11{overflow: visible; background: url("assets/img/bg12.jpg") center center no-repeat fixed;}
 .button-bg12{overflow: visible; background: url("assets/img/bg13.jpg") repeat;}
+#app {
+  background-size: 100% auto
+}
 </style>

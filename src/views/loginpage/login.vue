@@ -44,6 +44,7 @@ export default {
         localStorage.setItem('userinfo',JSON.stringify(res.data));
         this.$router.push("/")
     }).catch((error)=>{
+        console.log(error)
         this.$message({
             showClose: true,
             message: "错误",
@@ -53,13 +54,13 @@ export default {
     }
   },
   created:function(){
-      //console.log(!localStorage.getItem('userinfo'))
-        if(!localStorage.getItem('userinfo')){
-            setTimeout(()=>{
-                 this.$router.push("/")
-            },3000)
+      console.log(localStorage.getItem('userinfo'))
+        // if(!localStorage.getItem('userinfo')){
+        //     setTimeout(()=>{
+        //          this.$router.push("/")
+        //     },3000)
            
-        }
+        // }
   }
 };
 </script>
