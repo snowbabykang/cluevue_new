@@ -53,8 +53,12 @@ export default {
     }
   },
   created:function(){
-        if(localStorage.getItem('userinfo')!=""){
-            this.$router.push("/")
+      //console.log(!localStorage.getItem('userinfo'))
+        if(!localStorage.getItem('userinfo')){
+            setTimeout(()=>{
+                 this.$router.push("/")
+            },3000)
+           
         }
   }
 };

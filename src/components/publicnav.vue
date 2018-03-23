@@ -19,12 +19,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-
-                    <li class="dropdown">
-
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i style="font-size:20px;" class="icon-conversation"></i><div class="noft-red">23</div></a>
-
-
+                    <li class="dropdown" :class="{'open':message}">
+                        <a class="dropdown-toggle" @click="messagopen"><i style="font-size:20px;" class="icon-conversation"></i><div class="noft-red">23</div></a>
                         <ul style="margin: 11px 0 0 9px;" role="menu" class="dropdown-menu dropdown-wrap">
                             <li>
                                 <a href="#">
@@ -61,86 +57,23 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i style="font-size:19px;" class="icon-warning tooltitle"></i><div class="noft-green">5</div></a>
-                        <ul style="margin: 12px 0 0 0;" role="menu" class="dropdown-menu dropdown-wrap">
-                            <li>
-                                <a href="#">
-                                    <span style="background:#DF2135" class="noft-icon maki-bus"></span><i>From Station</i>  <b>01B</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <span style="background:#AB6DB0" class="noft-icon maki-ferry"></span><i>Departing at</i>  <b>9:00 AM</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <span style="background:#FFA200" class="noft-icon maki-aboveground-rail"></span><i>Delay for</i>  <b>09 Min</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <span style="background:#86C440" class="noft-icon maki-airport"></span><i>Take of</i>  <b>08:30 AM</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <span style="background:#0DB8DF" class="noft-icon maki-bicycle"></span><i>Take of</i>  <b>08:30 AM</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div>See All Notification</div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i data-toggle="tooltip" data-placement="bottom" title="Help" style="font-size:20px;" class="icon-help tooltitle"></i></a>
-                    </li>
+                    <li><router-link to="/clue">线索管理</router-link></li>
+                    <li><router-link to="/clue">登记发放</router-link></li>
+                    <li><router-link to="/clue">文书管理</router-link></li>
+                    <li><router-link to="/clue">数据统计</router-link></li>
 
                 </ul>
-                <div id="nt-title-container" class="navbar-left running-text visible-lg">
-                    <ul class="date-top">
-                        <li class="entypo-calendar" style="margin-right:5px"></li>
-                        <li id="Date"></li>
-
-
-                    </ul>
-
-                    <ul id="digital-clock" class="digital">
-                        <li class="entypo-clock" style="margin-right:5px"></li>
-                        <li class="hour"></li>
-                        <li>:</li>
-                        <li class="min"></li>
-                        <li>:</li>
-                        <li class="sec"></li>
-                        <li class="meridiem"></li>
-                    </ul>
-                    <ul id="nt-title">
-                        <li><i class="wi-day-lightning"></i>&#160;&#160;Berlin&#160;
-                            <b>85</b><i class="wi-fahrenheit"></i>&#160;; 15km/h
-                        </li>
-                       
-
-                    </ul>
-                </div>
-
+       
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
-                    <li>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">Hi, Dave Mattew <b class="caret"></b>
+                    <li :class="{'open':openuser}">
+                        <a class="dropdown-toggle" @click="openuserinfo">
+                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">{{username}}，你好<b class="caret"></b>
                         </a>
-                        <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
+                        <ul style="margin-top:14px;" class="dropdown-setting dropdown-menu" >
                             <li>
-                                <a href="#">
-                                    <span class="entypo-user"></span>&#160;&#160;My Profile</a>
+                                <a @click="loginout"><span class="entypo-user"></span>&#160;&#160;退出登录</a>
                             </li>   
-                            <li>
+                            <!-- <li>
                                 <a href="#">
                                     <span class="entypo-vcard"></span>&#160;&#160;Account Setting</a>
                             </li>
@@ -152,17 +85,16 @@
                             <li>
                                 <a href="http://themeforest.net/item/apricot-navigation-admin-dashboard-template/7664475?WT.ac=category_item&WT.z_author=themesmile">
                                     <span class="entypo-basket"></span>&#160;&#160; Purchase</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
-                    <li>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <li :class="{'open':setingstate}">
+                        <a data-toggle="dropdown" class="dropdown-toggle" @click="seting">
                             <span class="icon-gear"></span>&#160;&#160;Setting</a>
                         <ul role="menu" class="dropdown-setting dropdown-menu">
-
                             <li class="theme-bg">
-                                <div id="button-bg"></div>
-                                <div id="button-bg2"></div>
+                                <div v-for="key in bglist" :key="key" :id="key" @click="chagebg(key)"></div>
+                                <!-- <div id="button-bg2"></div>
                                 <div id="button-bg3"></div>
                                 <div id="button-bg5"></div>
                                 <div id="button-bg6"></div>
@@ -172,7 +104,7 @@
                                 <div id="button-bg10"></div>
                                 <div id="button-bg11"></div>
                                 <div id="button-bg12"></div>
-                                <div id="button-bg13"></div>
+                                <div id="button-bg13"></div> -->
                             </li>
                         </ul>
                     </li>
@@ -196,12 +128,44 @@ export default {
   name: 'publicnav',
   data () {
     return {
-     
+        message:false,
+       //username:JSON.parse(localStorage.getItem('userinfo')).username,
+        openuser:false,
+        setingstate:false,
+        bglist:this.confindata.bglist
     }
+  },
+  methods:{
+      messagopen:function(){
+          this.message = !this.message
+      },
+      openuserinfo:function(){
+          this.openuser = !this.openuser
+      },
+      loginout:function(){
+        this.$ajax.post('/api/logout',{}).then((res)=>{
+             localStorage.setItem('userinfo',null);
+            this.$router.push("/loginpage/login")
+        })
+         
+      },
+      seting:function(){
+          this.setingstate =! this.setingstate
+      },
+      chagebg:function(name){
+          console.log(this)
+        this.$store.commit('changebg',name)
+      }
+  },
+  created:function(){
+
   }
 }
 </script>
 
 
-<style>
+<style scoped>
+.navbar{
+    margin-top: 0px !important
+}
 </style>

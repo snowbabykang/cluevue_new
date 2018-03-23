@@ -215,5 +215,11 @@ a {
     background: transparent;
     line-height: 30px;
 }
+#logo {
+    top: -21px
+}
+#toggle {
+    top: 5px
+}
 </style>
 
