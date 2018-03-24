@@ -1,8 +1,41 @@
 <template>
-<div class="demo-block">
-    <h4>录入线索</h4>
-    <hr/>
-    <div>
+
+<div>
+ 
+      <div id="paper-top">
+        <div class="col-lg-3">
+          <h2 class="tittle-content-header">
+            <i class="icon-window"></i>
+            <span>录入线索</span>
+          </h2>
+        </div>
+        <div class="col-sm-7">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="tittle-middle-header">
+
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <span class="tittle-alert entypo-info-circled"></span>
+                               请在此处录入线索
+                                <strong>{{searchback}}</strong>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+      </div>
+
+    
+        <div class="col-md-12">
+                 <breadcrumb></breadcrumb>
+        </div>
+     
+      
+   
+   
+      <div class="col-md-12">
+                <div>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
             <el-row>
                 <el-col :span="8">
@@ -171,200 +204,230 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <hr/>
+            
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
             </el-form-item>
         </el-form>
     </div>
 
+          </div>
+    
+
+
+
+
+
+    
+
 </div>
 </template>
 <script>
 export default {
-    name: 'menuslider',
-    data() {
-        return {
-            img: [],
-            audio: [],
-            word: [],
-            excel: [],
-            qita: [],
-            ruleForm: {
-                'source': '',
-                'number': '',
-                'reflected_name': '',
-                'company': '',
-                'post': '',
-                'level': '',
-                'entry_time': '',
-                'closed_time': '',
-                'disposal_type': '',
-                'supervisor': 1,
-                'remind_days': '',
-                'clue_next': '',
-                'clue_state': '',
-                'main_content': '',
-                'department_opinion': '',
-                'leader_approval': '',
-                'remark': ''
-            },
-            rules: {
-                source: [{
-                        required: true,
-                        message: '必填',
-                        trigger: 'blur'
-                    },
-                    {
-                        min: 3,
-                        max: 5,
-                        message: '长度在 3 到 5 个字符',
-                        trigger: 'blur'
-                    }
-                ],
-                number: [{
-                        required: true,
-                        message: '必填',
-                        trigger: 'blur'
-                    },
-                    {
-                        min: 8,
-                        max: 8,
-                        message: '长度为8',
-                        trigger: 'blur'
-                    }
-                ],
-                reflected_name: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                company: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                post: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                level: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                entry_time: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                main_content: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                disposal_type: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                closed_time: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                remind_days: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                clue_next: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }]
-            }
-        };
+  name: "menuslider",
+  data() {
+    return {
+      img: [],
+      audio: [],
+      word: [],
+      excel: [],
+      qita: [],
+      ruleForm: {
+        source: "",
+        number: "",
+        reflected_name: "",
+        company: "",
+        post: "",
+        level: "",
+        entry_time: "",
+        closed_time: "",
+        disposal_type: "",
+        supervisor: 1,
+        remind_days: "",
+        clue_next: "",
+        clue_state: "",
+        main_content: "",
+        department_opinion: "",
+        leader_approval: "",
+        remark: ""
+      },
+      rules: {
+        source: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          },
+          {
+            min: 3,
+            max: 5,
+            message: "长度在 3 到 5 个字符",
+            trigger: "blur"
+          }
+        ],
+        number: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          },
+          {
+            min: 8,
+            max: 8,
+            message: "长度为8",
+            trigger: "blur"
+          }
+        ],
+        reflected_name: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        company: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        post: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        level: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        entry_time: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        main_content: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        disposal_type: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        closed_time: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        remind_days: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ],
+        clue_next: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur"
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    submitUpload(i) {
+      console.log(this.$refs[i].uploadFiles, 3213123);
+      var Files = this.$refs[i].uploadFiles;
+      var data = [];
+      for (let i = 0; i < Files; i++) {
+        let fileName = Files[i].rew.type.split("/");
+        // data[i]={};
+        // data[i].attachment_type=
+      }
     },
-    methods: {
-        submitUpload(i) {
-            console.log(this.$refs[i].uploadFiles,3213123);
-           var Files=this.$refs[i].uploadFiles;
-           var data=[];
-           for(let i=0;i<Files;i++){
-               let fileName=Files[i].rew.type.split('/');
-                // data[i]={};
-                // data[i].attachment_type=
-           }
-        },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePreview(file) {
-            console.log(file);
-        },
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let data = {
-                        clue: {
-                            'source': '',
-                            'number': '',
-                            'reflected_name': '',
-                            'company': '',
-                            'post': '',
-                            'level': '',
-                            'entry_time': '',
-                            'closed_time': '',
-                            'disposal_type': '',
-                            'supervisor': 1,
-                            'remind_days': '',
-                            'clue_next': '',
-                            'clue_state': ''
-                        },
-                        clue_detail: {
-                            'main_content': '',
-                            'department_opinion': '',
-                            'leader_approval': '',
-                            'remark': ''
-                        }
-
-                    }
-                    for (let i in data.clue) {
-                        data.clue[i] = this.ruleForm[i];
-                    }
-                    for (let i in data.clue_detail) {
-                        data.clue[i] = this.ruleForm[i];
-                    }
-                    console.log(data)
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          let data = {
+            clue: {
+              source: "",
+              number: "",
+              reflected_name: "",
+              company: "",
+              post: "",
+              level: "",
+              entry_time: "",
+              closed_time: "",
+              disposal_type: "",
+              supervisor: 1,
+              remind_days: "",
+              clue_next: "",
+              clue_state: ""
+            },
+            clue_detail: {
+              main_content: "",
+              department_opinion: "",
+              leader_approval: "",
+              remark: ""
+            }
+          };
+          for (let i in data.clue) {
+            data.clue[i] = this.ruleForm[i];
+          }
+          for (let i in data.clue_detail) {
+            data.clue[i] = this.ruleForm[i];
+          }
+          console.log(data);
+        } else {
+          console.log("error submit!!");
+          return false;
         }
+      });
     }
-}
+  }
+};
 </script>
 
 
 <style scoped>
 hr {
-    border-color: #9b9595;
+  border-color: #9b9595;
 }
 
 .demo-block {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(202, 197, 197);
-    border-image: initial;
-    border-radius: 5px;
-    transition: 0.2s;
-    background: #fff;
-    width: 90%;
-    color: #606266;
-    margin: 10px auto 0;
-    padding: 10px 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(202, 197, 197);
+  border-image: initial;
+  border-radius: 5px;
+  transition: 0.2s;
+  background: #fff;
+  width: 90%;
+  color: #606266;
+  margin: 10px auto 0;
+  padding: 10px 15px;
 }
 </style>

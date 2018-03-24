@@ -7,30 +7,30 @@ import findpassword from '@/views/loginpage/findpassword'
 import loginpage from '@/views/loginpage/loginpage'
 import cluelist from '@/views/clue/cluelist'
 import clueadd from '@/views/clue/clueadd'
+import timeout from '@/views/timeout/index'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
-      name: 'index',
-      component: index
-    },
-    {
-      path: '/clue',
-      name: 'clue',
+      name: '首页',
       component: index,
-      children:[
-        {
-          path: '/',
-          name: 'cluelist',
+      redirect:'/clue',
+      children: [{
+          path: 'clue',
+          name: '线索列表',
           component: cluelist
         },
         {
           path: 'clueadd',
-          name: 'clueadd',
+          name: '添加线索',
           component: clueadd
+        },
+        {
+          path: 'timeout',
+          name: '超期提醒',
+          component: timeout
         }
       ]
     },
@@ -38,8 +38,7 @@ export default new Router({
       path: '/loginpage',
       name: 'loginpage',
       component: loginpage,
-      children:[
-        {
+      children: [{
           path: '',
           name: 'login',
           component: login

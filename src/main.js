@@ -11,6 +11,8 @@ import axios from 'axios'
 import publicnav from './components/publicnav'
 import menuslider from './components/menu'
 import publicsearch from './components/publicsearch'
+import tableModel from './components/tableModel'
+import breadcrumb from './components/breadcrumb'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
 import './assets/css/signin.css'
@@ -26,12 +28,30 @@ const store = new Vuex.Store({
   // 定义状态
   state: {
     userToken: '',
-    classname:"button-bg"
+    classname:"button-bg",
+    breadListState:[
+      {name:'首页',path:'/'}
+    ]
   },
   mutations:{
     changebg(state,name){
       state.classname = name
-    } 
+    },
+    breadListMutations(getters,list){
+      getters.breadListState=list;
+      sessionStorage.setItem('breadListStorage',list);
+    },
+    breadListStateAdd(state,obj){
+      state.breadListState.push(obj);
+    },
+    breadListStateRemove(state,num){
+      state.breadListState.splice(num,state.breadListState.length-num);
+    }
+  },
+  getters:{
+    breadListState(){
+      return JSON.parse(sessionStorage.getItem('breadListStorage')) || [];
+    }
   }
 })
 Vue.use(ElementUI);
@@ -39,7 +59,7 @@ Vue.use(ElementUI);
 // axios.defaults.headers.common['Authorization'] = "aaa";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const $axios = axios.create({
-  baseURL: 'http://clue.api.test',
+  baseURL: 'http://www.yfqcy.cn',
   timeout: 5000,
   headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -58,7 +78,6 @@ const $axios = axios.create({
   }],
   transformResponse: [function (data) {
     // 对 data 进行任意转换处理
-    console.log(data)
     if(!JSON.parse(data).success){
       console.log("错误")
       Vue.prototype.$message({
@@ -77,9 +96,11 @@ Vue.prototype.confindata = config
 Vue.component('public-nav', publicnav);
 Vue.component('menuslider', menuslider);
 Vue.component('publicsearch', publicsearch);
+Vue.component('tableModel', tableModel);
+Vue.component('breadcrumb', breadcrumb);
 /* eslint-disable no-new */
 router.beforeEach((to,from,next)=>{
-  console.log(to,!!localStorage.getItem('userinfo'))
+  //console.log(to,!!localStorage.getItem('userinfo'))
   next()   
   
   

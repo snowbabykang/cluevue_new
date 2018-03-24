@@ -41,6 +41,14 @@ ul.topnav ul .is-active , .el-menu-item .is-active, .el-menu-item:focus, .el-men
 .button-bg11{overflow: visible; background: url("assets/img/bg12.jpg") center center no-repeat fixed;}
 .button-bg12{overflow: visible; background: url("assets/img/bg13.jpg") repeat;}
 #app {
-  background-size: 100% auto
+  background-size: 100% auto;
+  height: 100%;
+}
+html, body, #sb-site{
+  height: 100%;
+}
+.wrap-fluid{
+  height: calc(100% - 65px);
+  overflow-y: auto
 }
 </style>
