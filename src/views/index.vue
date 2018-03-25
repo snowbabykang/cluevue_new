@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'index',
+  name: '首页',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -25,5 +25,8 @@ export default {
 <style scoped>
 .wrap-fluid{
   margin-left:250px
+}
+.paper-wrap {
+  min-height:100%
 }
 </style>

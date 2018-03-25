@@ -1368,7 +1368,6 @@ ul.topnav li a {
     font-size: 13px;
     line-height: 25px;
     list-style: none outside none;
-    padding: 10px 10px 10px 30px;
     text-decoration: none;
     text-transform: capitalize;
 }
@@ -1425,32 +1424,7 @@ ul.topnav li a {
     bottom: -20px;
     top: auto;
 }
-ul.topnav li a:hover {
-    background-color:rgba(0, 0, 0, 0.2);
-    /* #252d3b */
-    color: white!important;
-    text-shadow: none;
-    border-left: 2px solid #ffffff;
-    padding-left: 28px;
-    position: relative;
-}
-ul.topnav li a:hover:after {
-    border-bottom:6px solid #ffffff;
-    border-left:8px solid transparent;
-    border-right:8px solid transparent;
-    width:0;
-    height:0;
-    position: absolute;
-    top:19px;
-    left: -6px;
-    content:"";
-    display:block;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    tranform: rotate(90deg);
-}
+
 ul.topnav ul {
     margin: 0;
     padding: 0;
@@ -1473,20 +1447,14 @@ ul.topnav ul li a {
 }
 ul.topnav ul li a i {
 }
-ul.topnav ul li a:hover {
-    background-color: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
-    color: #FFFFFF!important;
-}
+
 ul.topnav ul ul li a {
     color: #444;
     padding-left: 40px;
     background: #252d3b;
     transition: all 0.2s ease 0s;
 }
-ul.topnav ul ul li a:hover {
-    background-color: #D3CEB8;
-    color: #675C7C;
-}
+
 ul.topnav h4 {
     float: right !important;
     margin-top: -2px;
@@ -1695,7 +1663,7 @@ ul.topnav h4 {
     width: 100%;
     background:none repeat scroll 0 0 rgba(0, 0, 0, 0.02);
 }
-#breadcrumb li {
+#breadcrumb li, #breadcrumb .linkWay>span{
     list-style-type:none;
     float:left;
     padding-left:10px;

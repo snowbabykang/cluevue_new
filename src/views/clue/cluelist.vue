@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">  
+      
       <div id="paper-top">
         <div class="col-lg-3">
           <h2 class="tittle-content-header">
@@ -15,8 +15,8 @@
                             <div class="alert">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                                 <span class="tittle-alert entypo-info-circled"></span>
-                                Welcome back,&nbsp;
-                                <strong>Dave mattew!</strong>&nbsp;&nbsp;Your last sig in at Yesterday, 16:54 PM
+                                当前查询条件,&nbsp;
+                                <strong>{{searchback}}</strong>
                             </div>
 
 
@@ -24,9 +24,10 @@
 
                     </div>
       </div>
-    </div> 
-    <div class="row">
-      <ul id="breadcrumb">
+     
+    
+      <breadcrumb></breadcrumb>
+      <!-- <ul id="breadcrumb">
         <li>
           <span class="entypo-home"></span>
         </li>
@@ -38,9 +39,9 @@
         </li>
         <li><a href="#" title="Sample page 1">线索列表</a>
         </li>
-      </ul>
-    </div>
-    <div class="row">
+      </ul> -->
+   
+    
       <div class="col-md-12">
         <publicsearch modeltitle="快速查询">    
           <el-input class="col-md-3" v-model="cluefrom" placeholder="输入线索来源"></el-input>
@@ -48,43 +49,91 @@
           <el-button type="primary" style="margin-left:15px">高级筛选</el-button>
         </publicsearch>
       </div>
-    </div>
-    <div class="row">
+    
+    
       <div class="col-md-12">
         <div style="padding:15px">
             <el-tabs type="card">
-            <el-tab-pane label="问题线索">用户管理</el-tab-pane>
-            <el-tab-pane label="案件管理">案件管理</el-tab-pane>
-            <el-tab-pane label="公文管理">公文管理</el-tab-pane>
+            <el-tab-pane label="问题线索">
+                <tableModel v-bind:tabtitle="askmodel"/>
+            </el-tab-pane>
+            <el-tab-pane label="案件管理">
+              <tableModel tabtitle=""/>
+            </el-tab-pane>
+            <el-tab-pane label="公文管理">
+              <tableModel tabtitle=""/>
+            </el-tab-pane>
           </el-tabs>
         </div>
           
       </div>
-    </div>
+    
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      cluefrom:''
+      cluefrom: "",
+      askmodel: [
+        {
+          name: "序号",
+          en: "num"
+        },
+        {
+          name: "线索来源",
+          en: "num"
+        },
+        {
+          name: "编号",
+          en: "num"
+        },
+        {
+          name: "被反映人",
+          en: "num"
+        },
+        {
+          name: "单位",
+          en: "num"
+        },
+        {
+          name: "职位",
+          en: "num"
+        },
+        {
+          name: "级别",
+          en: "num"
+        },
+        {
+          name: "状态",
+          en: "num"
+        }
+      ]
     };
   },
-  methods:{
-    searchdata:function(){
-      console.log(this.cluefrom)
-    },
-    getlist:function(data={}){
-      this.$ajax.post("").then
+  computed: {
+    searchback: function() {
+      return this.cluefrom;
     }
   },
-  created:{
-    //this.getlist()
+  methods: {
+    searchdata: function() {
+      console.log(this.cluefrom);
+    },
+    getlist: function(data = {}) {
+      this.$ajax.post("").then;
+    }
   }
+  // created:{
+  //   //this.getlist()
+  // },
+  // mounted(){
+
+  // }
 };
 </script>
 <style scoped>
-  .el-tabs__nav-wrap {
-    background-color: #fff
-  }
+.el-tabs__nav-wrap {
+  background-color: #fff;
+}
 </style>
