@@ -424,7 +424,7 @@ export default {
                     // audio__: [],
                     // word__: [],
                     // excel__: [],
-                    // file__: [],
+                    // file__: [],3213213
                     data.clue_attachments = [
                         ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__
                     ];
