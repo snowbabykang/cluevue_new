@@ -51,4 +51,7 @@ html, body, #sb-site{
   height: calc(100% - 65px);
   overflow-y: auto
 }
+.ml-lg{
+  margin-left: 15px
+}
 </style>

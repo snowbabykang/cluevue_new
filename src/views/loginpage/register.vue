@@ -16,9 +16,16 @@
                                 <input type="password" id="inputPassword" class="form-control">
                             </div>
                             
-                            <!-- <button class="btn btn btn-primary pull-right" type="submit">
-                                登 录
-                            </button> -->
+                           <div class="or-box">
+            <center><span class="text-center login-with"><router-link :to="{ path:'/loginpage' }">登录</router-link>or注册</span></center>
+           </div>            
+            <div class="row-block">
+                <div class="row">
+                <div class="col-md-12 row-block">
+                    <button @click="userlogin" class="btn btn-primary btn-block">登录</button>
+                </div>
+            </div>
+        </div> 
                         </form>
 </template>
 <script>

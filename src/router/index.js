@@ -8,6 +8,8 @@ import loginpage from '@/views/loginpage/loginpage'
 import cluelist from '@/views/clue/cluelist'
 import clueadd from '@/views/clue/clueadd'
 import timeout from '@/views/timeout/index'
+import pagerwork from '@/views/pagerwork/index'
+import regnumber from '@/views/pagerwork/index'
 
 Vue.use(Router)
 
@@ -31,6 +33,16 @@ export default new Router({
           path: 'timeout',
           name: '超期提醒',
           component: timeout
+        },
+        {
+          path: 'pagerwork',
+          name: '文书管理',
+          component: pagerwork
+        },
+        {
+          path: 'regnumber',
+          name: '登记管理',
+          component: regnumber
         }
       ]
     },
@@ -44,12 +56,12 @@ export default new Router({
           component: login
         },
         {
-          path: 'register',
+          path: '/register',
           name: 'register',
           component: register
         },
         {
-          path: 'findpassword',
+          path: '/findpassword',
           name: 'findpassword',
           component: findpassword
         }

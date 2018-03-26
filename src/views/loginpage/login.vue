@@ -15,7 +15,7 @@
             <router-link class="forgotLnk pull-right" :to="{ path: 'findpassword' }">忘记密码？</router-link>
         </div>
         <div class="or-box">
-            <center><span class="text-center login-with"><router-link :to="{ path: 'login' }">登录</router-link> or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
+            <center><span class="text-center login-with">登录or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
            </div>            
             <div class="row-block">
                 <div class="row">

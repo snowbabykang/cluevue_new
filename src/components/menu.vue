@@ -54,12 +54,21 @@
         </el-menu-item>
         <el-menu-item index="5">
              <template slot="title" class="tooltip-tip ajax-load">
-               <router-link to="/timeout">
-                <i class="icon-feed"></i>案件文书&文登号登记
+               <router-link to="/pagerwork">
+                <i class="icon-feed"></i>案件文书
                 </router-link>
                </template>
              
         </el-menu-item>
+        <el-menu-item index="6">
+             <template slot="title" class="tooltip-tip ajax-load">
+               <router-link to="/regnumber">
+                <i class="icon-feed"></i>登号登记
+                </router-link>
+               </template>
+             
+        </el-menu-item>
+        
         </el-menu>
     </div>
 </div>

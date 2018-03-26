@@ -1,14 +1,27 @@
 <template>
 <div class="heimodel">
   <el-table
-    :data="tableData3"
-    height="250"
+    :data="tableData"
+    height="560"
     border
     style="width: 100%">
     <el-table-column v-for="(item, key) in tabtitle" :key="key"
       v-bind:prop="item.en"
       v-bind:label="item.name">
       {{item.name}}
+    </el-table-column>
+    <el-table-column v-if="this.otherconfig=='ts_ackmodel'"
+      prop="tag"
+      label="标签"
+      width="100"
+      :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      :filter-method="filterTag"
+      filter-placement="bottom-end">
+      <template slot-scope="scope">
+        <el-tag
+          :type="scope.row.tag === '家' ? 'primary' : 'success'"
+          close-transition>{{scope.row.tag}}</el-tag>
+      </template>
     </el-table-column>
   </el-table>
    <el-pagination
@@ -28,38 +41,10 @@
     data() {
       return { 
         currentPage4: 4,
-        tableData3: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+        tableData: [{},{}]
       }
     },
-    props:['tabtitle'],
+    props:['tabtitle',"posturl","otherconfig"],
     methods: {
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -68,11 +53,16 @@
         console.log(`当前页: ${val}`);
       }
     },
+    
     created(){
-        //console.log(this.tabtitle)
+        console.log(this.otherconfig)
     },
     mounted(){
-        //console.log(this.$el.clientHeight)
+      var data = {keyword:"zhangsan"}
+      console.log(this.posturl)
+      this.$ajax.post(this.posturl,data).then((res)=>{
+        console.log(res)
+      })
     }
   }
 </script>
