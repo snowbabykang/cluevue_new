@@ -183,6 +183,7 @@
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
                                     </el-upload>
                                 </el-tab-pane>
+                                <div></div>
                                 <el-tab-pane label="其他">
                                     <el-upload :before-remove="removeFile5" :on-success="upSuccessFile" :data="file_" :before-upload="beforeUp" class="upload-demo" ref="file" :multiple="true" :action="url" :on-preview="handlePreview" :file-list="file" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
