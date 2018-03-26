@@ -116,7 +116,7 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="上级交办" prop="supervisor">
-                            <el-switch v-model="ruleForm.supervisor"></el-switch>
+                            <el-switch v-model="ruleForm.supervisor" :active-value="1" inactive-value="0"></el-switch>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -266,7 +266,7 @@ export default {
                 'entry_time': '',
                 'closed_time': '',
                 'disposal_type': '',
-                'supervisor': true,
+                'supervisor': 0,
                 'remind_days': '',
                 'clue_next': '',
                 'clue_state': '',
@@ -401,7 +401,7 @@ export default {
                             'entry_time': '',
                             'closed_time': '',
                             'disposal_type': '',
-                            'supervisor': 1,
+                            'supervisor': '',
                             'remind_days': '',
                             'clue_next': '',
                             'clue_state': ''
