@@ -18,6 +18,7 @@ import './assets/css/loader-style.css'
 import './assets/css/signin.css'
 import './assets/css/style.css'
 import './assets/css/bootstrap.css'
+import './assets/js/footable/css/footable.standalone.css'
 
 
 Vue.config.productionTip = false;
@@ -90,7 +91,8 @@ Vue.use(ElementUI);
 // axios.defaults.headers.common['Authorization'] = "aaa";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const $axios = axios.create({
-  baseURL: 'http://www.yfqcy.cn',
+  //baseURL: 'http://www.yfqcy.cn',
+  baseURL: 'http://clue.api.test',
   timeout: 5000,
   headers: {
       'Content-Type': 'application/x-www-form-urlencoded'

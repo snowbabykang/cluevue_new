@@ -18,7 +18,6 @@ export default new Router({
       path: '/',
       name: '首页',
       component: index,
-      redirect:'/clue',
       children: [{
           path: 'clue',
           name: '线索列表',
