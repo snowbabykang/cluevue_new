@@ -97,8 +97,31 @@
 
 			<div class="col-md-12">
 				<div style="padding:15px">
+					
 						<el-tabs type="card">
 						<el-tab-pane label="问题线索">
+						<table class="table-striped footable-res footable metro-blue" style="width:100%">
+							<thead>
+								<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th data-hide="phone,tablet">Job Title</th>
+								<th data-hide="phone,tablet">DOB</th>
+								<th data-hide="phone">Status</th>
+								</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>Lauri</td>
+								<td>Hyland</td>
+								<td>Blackjack Supervisor</td>
+								<td data-value="500874333932">15 Nov 1985</td>
+								<td data-value="3">
+								<span class="status-metro status-suspended" title="Suspended">Suspended</span>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 							<el-table :data="tableData" border style="width: 100%" v-on:sort-change="tablecha">
 								<el-table-column
 									type="index"
@@ -116,22 +139,26 @@
 								</el-table-column>
 								<el-table-column
 								prop="reflected_name"
-								sortable='custom'
-								label="被反映人">
+								label="被反映人"
+								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
+      							:filter-method="filterHandler">
 								</el-table-column>
 								<el-table-column
 								prop="company"
-								sortable='custom'
+								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
+      							:filter-method="filterHandler"
 								label="单位">
 								</el-table-column>
 								<el-table-column
 								prop="post"
-								sortable='custom'
+								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
+      							:filter-method="filterHandler"
 								label="职位">
 								</el-table-column>
 								<el-table-column
 								prop="level"
-								sortable='custom'
+								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
+      							:filter-method="filterHandler"
 								label="级别">
 								</el-table-column>
 								<el-table-column
@@ -233,6 +260,9 @@ export default {
 			this.postdata.orders.column = e.prop
 			this.postdata.orders.order = e.order=="descending"?'0':'1'
 			this.getdata()
+		},
+		filterHandler(value, row, column) {
+			console.log(value, row, column)
 		},
 		searchdata: function() {
 			this.getdata()
