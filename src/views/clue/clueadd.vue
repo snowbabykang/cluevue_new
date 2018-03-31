@@ -217,11 +217,13 @@ export default {
                     this.$ajax.post('/api/clue/check_clue_number/', {
                         number: value
                     }).then((res) => {
-                        if (res.data.result) {
+                        if (!res.data.result) {
                             callback();
                         } else {
                             callback(new Error('编号已存在，请重新录入'));
                         }
+                    },()=>{
+                         callback(new Error('服务器错误'));
                     })
                 }
 
@@ -284,8 +286,8 @@ export default {
                     },
                     {
                         min: 3,
-                        max: 5,
-                        message: '长度在 3 到 5 个字符',
+                        max: 10,
+                        message: '长度在 3 到 10 个字符',
                         trigger: 'blur'
                     }
                 ],
