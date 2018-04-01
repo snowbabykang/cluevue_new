@@ -18,6 +18,7 @@ export default new Router({
       path: '/',
       name: '首页',
       component: index,
+      query:{breadNum:1},
       children: [{
           path: 'clue',
           name: '线索列表',
