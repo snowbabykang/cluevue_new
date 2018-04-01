@@ -207,6 +207,11 @@
 <script>
 export default {
     name: 'menuslider',
+    created(){
+        this.$ajax.post('/api/clue/view_clue',this.$route.query).then((res)=>{
+
+		})
+    },
     data() {
         var checkAge = (rule, value, callback) => {
             console.log(value, value.length)
