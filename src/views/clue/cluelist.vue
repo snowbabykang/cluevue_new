@@ -24,7 +24,7 @@
 						<div class="col-md-12">
 							<div class="block pull-left" v-show="showmore">
 									<label>请选择时间</label>
-									<el-date-picker
+									<el-date-picker size="small"
 									v-model="datatime"
 									type="daterange"
 									align="right"
@@ -37,8 +37,8 @@
 							</div>
 							<div class="block pull-left ml-lg"  v-show="showmore">
 								<label>线索来源</label>
-								<el-select v-model="topdata.source" clearable placeholder="请选择线索来源">
-								<el-option
+								<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
+								<el-option 
 									v-for="item in options"
 									:key="item.value"
 									:label="item.label"
@@ -47,8 +47,8 @@
 							</el-select>
 							</div>
 							<div class="block pull-left ml-lg"  v-show="showmore">
-								<label>职位</label>
-								<el-select v-model="topdata.post" clearable placeholder="请选择职位">
+								<label>职位</label> 
+								<el-select size="small" v-model="topdata.post" clearable placeholder="请选择职位">
 								<el-option
 									v-for="item in options"
 									:key="item.value"
@@ -59,7 +59,7 @@
 							</div>
 							<div class="block pull-left ml-lg"  v-show="showmore">
 								<label>级别</label>
-								<el-select v-model="topdata.level" clearable placeholder="请选择级别">
+								<el-select size="small" v-model="topdata.level" clearable placeholder="请选择级别">
 								<el-option
 									v-for="item in options"
 									:key="item.value"
@@ -70,7 +70,7 @@
 							</div>
 							<div class="block pull-left ml-lg"  v-show="showmore">
 								<label>单位</label>
-								<el-select v-model="topdata.company" clearable placeholder="请选择">
+								<el-select size="small" v-model="topdata.company" clearable placeholder="请选择">
 									<el-option
 										v-for="item in options"
 										:key="item.value"
@@ -81,11 +81,11 @@
 							</div>
 							<div class="block pull-left ml-lg form-group">
 
-								<el-input v-model="postdata.keyword" placeholder="输入线索来源"></el-input>
+								<el-input size="small" v-model="postdata.keyword" placeholder="输入线索来源"></el-input>
 							</div>
 							<div class="block pull-left ml-lg">
-									<el-button type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
-									<el-button type="primary" style="margin-left:15px" @click="topsearch">高级筛选</el-button>
+									<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
+									<el-button size="small" type="primary" style="margin-left:15px" @click="topsearch">高级筛选</el-button>
 							</div>
 						</div>
 					</div>
