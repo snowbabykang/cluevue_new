@@ -24,7 +24,7 @@
             <div class="col-md-12">
               <div class="block pull-left">
                   <label>请选择时间</label>
-                  <el-date-picker
+                  <el-date-picker size="small"
                   v-model="value7"
                   type="daterange"
                   align="right"
@@ -37,7 +37,7 @@
               </div>
               <div class="block pull-left ml-lg">
                 <label>发文类型</label>
-                <el-select v-model="document_type" clearable placeholder="请选择发文类型">
+                <el-select size="small" v-model="document_type" clearable placeholder="请选择发文类型">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -47,13 +47,13 @@
               </el-select>
               </div>
               <div class="block pull-left ml-lg form-group">      
-                <el-input v-model="document_user" placeholder="输入发件人"></el-input>
+                <el-input size="small" v-model="document_user" placeholder="输入发件人"></el-input>
               </div>
               <div class="block pull-left ml-lg">
-                  <el-button type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
-                  <el-button type="primary" style="margin-left:15px" @click="topsearch">新增</el-button>
-                  <el-button type="primary" style="margin-left:15px" @click="topsearch">打印</el-button>
-                  <el-button type="primary" style="margin-left:15px" @click="topsearch">导出excel</el-button>
+                  <el-button type="primary" size="small" @click="searchdata" style="margin-left:15px">查询</el-button>
+                  <el-button type="primary" size="small" style="margin-left:15px" @click="topsearch">新增</el-button>
+                  <el-button type="primary" size="small" style="margin-left:15px" @click="topsearch">打印</el-button>
+                  <el-button type="primary" size="small" style="margin-left:15px" @click="topsearch">导出excel</el-button>
               </div>
             </div>
           </div>
