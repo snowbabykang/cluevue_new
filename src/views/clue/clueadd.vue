@@ -14,7 +14,7 @@
                 <div class="alert">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <span class="tittle-alert entypo-info-circled"></span> 请在此处录入线索
-                    <strong>{{searchback}}</strong>
+
                 </div>
 
 
@@ -22,12 +22,14 @@
 
         </div>
     </div>
-    <div class="col-md-12">
-        <breadcrumb></breadcrumb>
+    <div class="row">
+        <div class="col-md-12">
+            <breadcrumb></breadcrumb>
+        </div>
     </div>
+
     <div class="demo-block">
-        <h4>录入线索</h4>
-        <hr/>
+
         <div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
@@ -190,13 +192,24 @@
                                         <div slot="tip" class="el-upload__tip">只能不超过500kb</div>
                                     </el-upload>
                                 </el-tab-pane>
+
                             </el-tabs>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <hr/>
+                <el-row>
+                    <el-col :span="8">
+                        <el-form-item label="已上传文件">
+                            <el-tag :key="tag" v-for="tag in upFileEnd" closable :disable-transitions="false" @close="handleClose(tag)">
+                                {{tag}}
+                            </el-tag>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <hr/>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -207,10 +220,14 @@
 <script>
 export default {
     name: 'menuslider',
-    created(){
-        this.$ajax.post('/api/clue/view_clue',this.$route.query).then((res)=>{
-
-		})
+    created() {
+        this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
+            this.ruleForm = { ...res.data.clue,
+                ...res.data.clue_detail
+            };
+            // this.upFileEnd = res.data.clue_attachments;
+            this.upFileEnd=['标签一', '标签二', '标签三'];
+        })
     },
     data() {
         var checkAge = (rule, value, callback) => {
@@ -227,17 +244,18 @@ export default {
                         } else {
                             callback(new Error('编号已存在，请重新录入'));
                         }
-                    },()=>{
-                         callback(new Error('服务器错误'));
+                    }, () => {
+                        callback(new Error('服务器错误'));
                     })
                 }
 
-            }else{
+            } else {
                 callback(new Error('请录入8位编号！'));
             }
         };
         return {
             loading: false,
+            upFileEnd: [],
             url: 'http://www.yfqcy.cn/api/clue/clue_upload/',
             img_: {
                 attachment_type: 'img'
@@ -478,6 +496,9 @@ export default {
 
 
 <style scoped>
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
 hr {
     border-color: #9b9595;
 }
