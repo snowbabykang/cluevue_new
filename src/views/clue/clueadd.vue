@@ -14,20 +14,22 @@
                 <div class="alert">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <span class="tittle-alert entypo-info-circled"></span> 请在此处录入线索
-                    <strong>{{searchback}}</strong>
+                    
                 </div>
 
 
             </div>
 
         </div>
-    </div>
-    <div class="col-md-12">
+    </div>  
+    <div class="row">
+        <div class="col-md-12">
         <breadcrumb></breadcrumb>
     </div>
+    </div>
+    
     <div class="demo-block">
-        <h4>录入线索</h4>
-        <hr/>
+        
         <div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
