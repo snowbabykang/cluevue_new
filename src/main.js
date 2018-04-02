@@ -30,33 +30,33 @@ console.log(localStorage.getItem('userinfo'))
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userToken: JSON.parse(localStorage.getItem('userinfo')).token || '',
-    classname:"button-bg",
-    breadListState:[
-      {name:'首页',path:'/'}
+    userToken: (localStorage.getItem('userinfo') && JSON.parse(localStorage.getItem('userinfo')).token) || '',
+    classname: "button-bg",
+    breadListState: [
+      { name: '首页', path: '/' }
     ]
   },
-  mutations:{
-    changebg(state,name){
+  mutations: {
+    changebg(state, name) {
       state.classname = name
     },
-    breadListMutations(getters,list){
-      getters.breadListState=list;
-      sessionStorage.setItem('breadListStorage',list);
+    breadListMutations(getters, list) {
+      getters.breadListState = list;
+      sessionStorage.setItem('breadListStorage', list);
     },
-    breadListStateAdd(state,obj){
+    breadListStateAdd(state, obj) {
       state.breadListState.push(obj);
     },
-    breadListStateRemove(state,num){
-      state.breadListState.splice(num,state.breadListState.length-num);
+    breadListStateRemove(state, num) {
+      state.breadListState.splice(num, state.breadListState.length - num);
     },
-    settoken(state,data){
+    settoken(state, data) {
       console.log(data)
       state.userToken = data
     }
   },
-  getters:{
-    breadListState(){
+  getters: {
+    breadListState() {
       return JSON.parse(sessionStorage.getItem('breadListStorage')) || [];
     }
   }
@@ -70,33 +70,33 @@ const $axios = axios.create({
   baseURL: 'http://clue.api.test',
   timeout: 5000,
   headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded'
   },
   transformRequest: [function (data) {
     // 对 data 进行任意转换处理
-    console.log(JSON.parse(localStorage.getItem('userinfo'))==null)
-    if(JSON.parse(localStorage.getItem('userinfo'))==null){
+    console.log(JSON.parse(localStorage.getItem('userinfo')) == null)
+    if (JSON.parse(localStorage.getItem('userinfo')) == null) {
       return JSON.stringify(data);
-    }else{
-      var postdata = {data:data,token:JSON.parse(localStorage.getItem('userinfo')).token,type:1}
+    } else {
+      var postdata = { data: data, token: JSON.parse(localStorage.getItem('userinfo')).token, type: 1 }
       return JSON.stringify(postdata);
-      
+
     }
-    
+
   }],
   transformResponse: [function (data) {
     // 对 data 进行任意转换处理
-    if(!JSON.parse(data).success){
+    if (!JSON.parse(data).success) {
       console.log("错误")
       Vue.prototype.$message({
         showClose: true,
         message: data,
         type: 'error'
       })
-    }else{
+    } else {
       return JSON.parse(data).data;
     }
-    
+
   }],
 });
 Vue.prototype.$ajax = $axios
@@ -107,25 +107,25 @@ Vue.component('publicsearch', publicsearch);
 Vue.component('tableModel', tableModel);
 Vue.component('breadcrumb', breadcrumb);
 /* eslint-disable no-new */
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
   //console.log(to,!!localStorage.getItem('userinfo'))
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (store.state.userToken) {  // 通过vuex state获取当前的token是否存在
-        next();
+      next();
     }
     else {
-        next({
-            path: '/loginpage',
-            query: {redirect: '/'}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-        })
+      next({
+        path: '/loginpage',
+        query: { redirect: '/' }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
     }
-}
-else {
+  }
+  else {
     next();
-}
+  }
 
-  
-  
+
+
 })
 new Vue({
   el: '#app',

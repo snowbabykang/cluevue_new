@@ -201,8 +201,8 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="已上传文件">
-                            <el-tag :key="tag" v-for="tag in upFileEnd" closable :disable-transitions="false" @close="handleClose(tag)">
-                                {{tag}}
+                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index)">
+                                {{tag.filename}}
                             </el-tag>
                         </el-form-item>
                     </el-col>
@@ -221,12 +221,12 @@
 export default {
     name: 'menuslider',
     created() {
+        if(!this.$route.query.clue_id){ return false}
         this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
             this.ruleForm = { ...res.data.clue,
                 ...res.data.clue_detail
             };
-            // this.upFileEnd = res.data.clue_attachments;
-            this.upFileEnd=['标签一', '标签二', '标签三'];
+            this.upFileEnd = res.data.clue_attachments;
         })
     },
     data() {
@@ -256,7 +256,7 @@ export default {
         return {
             loading: false,
             upFileEnd: [],
-            url: 'http://www.yfqcy.cn/api/clue/clue_upload/',
+            url: 'http://clue.api.test/api/clue/clue_upload/',
             img_: {
                 attachment_type: 'img'
             },
@@ -381,6 +381,9 @@ export default {
         };
     },
     methods: {
+        handleClose(index){
+            this.upFileEnd.splice(index,1);
+        },
         removeFile1(file, fileList) {
             this.img__.splice(fileList.indexOf(file), 1)
         },
@@ -452,11 +455,10 @@ export default {
                     // excel__: [],
                     // file__: [],3213213
                     data.clue_attachments = [
-                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__
+                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__,...this.upFileEnd
                     ];
                     var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
                         clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
-                    console.log(data);
                     this.loading = true;
                     this.$ajax.post('/api/clue/save_clue/', data).then((res) => {
                         this.loading = false;
