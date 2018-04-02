@@ -16,8 +16,11 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      name: '首页',
+      name: 'index',
       component: index,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
       children: [{
           path: 'clue',
           name: '线索列表',

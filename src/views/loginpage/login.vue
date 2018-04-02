@@ -42,6 +42,7 @@ export default {
           password: this.password
     }).then((res)=>{
         localStorage.setItem('userinfo',JSON.stringify(res.data));
+        this.$store.commit("settoken",res.data.token)
         this.$router.push("/")
     }).catch((error)=>{
         console.log(error)
