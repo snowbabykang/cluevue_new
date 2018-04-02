@@ -417,6 +417,7 @@ export default {
             this.$refs['ruleForm'].resetFields();
         },
         submitForm(formName) {
+            console.log(this.img__,12312323)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let data = {
