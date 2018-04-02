@@ -221,6 +221,7 @@
 export default {
     name: 'menuslider',
     created() {
+        if(!this.$route.query.clue_id){ return false}
         this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
             this.ruleForm = { ...res.data.clue,
                 ...res.data.clue_detail
@@ -414,6 +415,7 @@ export default {
             this.$refs['ruleForm'].resetFields();
         },
         submitForm(formName) {
+            console.log(this.img__,12312323)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let data = {
@@ -456,7 +458,6 @@ export default {
                     ];
                     var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
                         clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
-                    console.log(data);
                     this.loading = true;
                     this.$ajax.post('/api/clue/save_clue/', data).then((res) => {
                         this.loading = false;
