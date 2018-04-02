@@ -26,11 +26,11 @@ import './assets/js/footable/css/footable.standalone.css'
 Vue.config.productionTip = false;
 
 Vue.use(Vuex)
-
+console.log(localStorage.getItem('userinfo'))
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userToken: '',
+    userToken: JSON.parse(localStorage.getItem('userinfo')).token || '',
     classname:"button-bg",
     breadListState:[
       {name:'首页',path:'/'}
@@ -49,6 +49,10 @@ const store = new Vuex.Store({
     },
     breadListStateRemove(state,num){
       state.breadListState.splice(num,state.breadListState.length-num);
+    },
+    settoken(state,data){
+      console.log(data)
+      state.userToken = data
     }
   },
   getters:{
@@ -105,7 +109,21 @@ Vue.component('breadcrumb', breadcrumb);
 /* eslint-disable no-new */
 router.beforeEach((to,from,next)=>{
   //console.log(to,!!localStorage.getItem('userinfo'))
-  next()   
+  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+    if (store.state.userToken) {  // 通过vuex state获取当前的token是否存在
+        next();
+    }
+    else {
+        next({
+            path: '/loginpage',
+            query: {redirect: '/'}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+        })
+    }
+}
+else {
+    next();
+}
+
   
   
 })

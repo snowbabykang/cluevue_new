@@ -506,7 +506,7 @@ export default {
 			this.getdata()
 		},
 		edit(id){
-			this.$router.push({ path: 'clueadd', query: { plan:id }})
+			this.$router.push({ path: 'clueadd', query: { clue_id:id }})
 		},
 		tablecha:function(e){
 			console.log(e,1111)
