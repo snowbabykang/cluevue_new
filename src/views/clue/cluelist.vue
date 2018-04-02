@@ -103,75 +103,65 @@
 						<table class="table-striped footable-res footable metro-blue" style="width:100%">
 							<thead>
 								<tr>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th data-hide="phone,tablet">Job Title</th>
-								<th data-hide="phone,tablet">DOB</th>
-								<th data-hide="phone">Status</th>
+								<th>序号</th>
+								<th>线索来源</th>
+								<th 
+                                    class="footable-sortable footable-last-column "
+                                    :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'"
+                                    @click="ordersdata('number')">
+                                    编号
+                                    <span class="footable-sort-indicator"></span>
+                                </th>
+								<th
+                                    class="footable-sortable footable-last-column"
+                                    :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'"
+                                    @click="ordersdata('reflected_name')">
+                                    被反映人
+                                    <span class="footable-sort-indicator"></span></th>
+                                <th
+                                    class="footable-sortable footable-last-column"
+                                    :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'"
+                                     @click="ordersdata('company')">
+                                     单位
+                                     <span class="footable-sort-indicator"></span></th>
+								<th
+                                    class="footable-sortable footable-last-column"
+                                    :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'"
+                                    @click="ordersdata('post')">
+                                    职位
+                                    <span class="footable-sort-indicator"></span>
+                                </th>
+                                <th
+                                    class="footable-sortable footable-last-column"
+                                    :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'"
+                                    @click="ordersdata('level')">
+                                    级别
+                                    <span class="footable-sort-indicator"></span>
+                                </th>
+                                <th>状态</th>
+								<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>Lauri</td>
-								<td>Hyland</td>
-								<td>Blackjack Supervisor</td>
-								<td data-value="500874333932">15 Nov 1985</td>
-								<td data-value="3">
-								<span class="status-metro status-suspended" title="Suspended">Suspended</span>
+							<tr v-for="(item,index) in tableData" :key="index">
+								<td>{{index+1}}</td>
+								<td>{{item.source}}</td>
+								<td>{{item.number}}</td>
+								<td>{{item.reflected_name}}</td>
+                                <td>{{item.company}}</td>
+                                <td>{{item.post}}</td>
+                                <td>{{item.level}}</td>
+                                <td>
+                                    <span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'以办':'未办'}}</span>
+                                </td>
+								<td>
+									<el-button type="primary" @click="edit(item.clue_id)">编辑</el-button>
+									<el-button type="primary">查看</el-button>
 								</td>
 							</tr>
 							</tbody>
 						</table>
-							<el-table :data="tableData" border style="width: 100%" v-on:sort-change="tablecha">
-								<el-table-column
-									type="index"
-									label="序号"
-									width="60">
-									</el-table-column>
-								<el-table-column
-								prop="source"
-								label="线索来源">
-								</el-table-column>
-								<el-table-column
-								prop="number"
-								label="编号"
-								width="180">
-								</el-table-column>
-								<el-table-column
-								prop="reflected_name"
-								label="被反映人"
-								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
-      							:filter-method="filterHandler">
-								</el-table-column>
-								<el-table-column
-								prop="company"
-								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
-      							:filter-method="filterHandler"
-								label="单位">
-								</el-table-column>
-								<el-table-column
-								prop="post"
-								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
-      							:filter-method="filterHandler"
-								label="职位">
-								</el-table-column>
-								<el-table-column
-								prop="level"
-								:filters="[{text: '升序', value: '0'}, {text: '降序', value: '1'}]"
-      							:filter-method="filterHandler"
-								label="级别">
-								</el-table-column>
-								<el-table-column
-									prop="clue_state"
-									label="状态"
-									width="100">
-									<template slot-scope="scope">
-										<el-tag
-										:type="scope.row.clue_state == '0' ? 'primary' : 'success'"
-										close-transition>{{scope.row.clue_state=='0'?'以办':'未办'}}</el-tag>
-									</template>
-									</el-table-column>
-							</el-table>
+							
 							<el-pagination
 								@size-change="handleSizeChange"
 								@current-change="handleCurrentChange"
@@ -210,15 +200,15 @@ export default {
 		return {
 			cluefrom: "",
 			postdata:{
-				keyword:'zhangsan',
+				keyword:'mahuan',
 				source:'',
 				company:'',
 				post:'',
 				level:'',
 				company:'',
-				orders:{},
+				orders:[{column:'number',order:1},{column:'reflected_name',order:1},{column:'company',order:1},{column:'post',order:1},{column:'level',order:1}],
 				index:1,
-				size:1
+                size:1
 			},
 			tableData: [],
 			datatime:'',
@@ -255,21 +245,29 @@ export default {
 		}
 	},
 	methods: {
+		edit(id){
+			this.$router.push({ path: 'clueadd', query: { clue_id:id }})
+		},
 		tablecha:function(e){
 			console.log(e,1111)
 			this.postdata.orders.column = e.prop
 			this.postdata.orders.order = e.order=="descending"?'0':'1'
 			this.getdata()
 		},
-		filterHandler(value, row, column) {
-			console.log(value, row, column)
-		},
+		
 		searchdata: function() {
 			this.getdata()
 		},
-		getlist: function(data = {}) {
-		 // this.$ajax.post("").then;
-		},
+		ordersdata:function(key){
+            
+            this.postdata.orders.forEach((e,k,arr)=>{
+                if(e.column==key){
+                   e.order = (e.order=="1")?'0':'1'
+                }
+            })
+            this.getdata()
+            console.log(JSON.stringify(this.postdata.orders))
+        },
 		topsearch:function(){
 			this.showmore = !this.showmore;
 		},
@@ -277,11 +275,10 @@ export default {
 			console.log(`每页 ${val} 条`);
 			this.postdata.size = val
 			this.getdata()
-
 		},
 		handleCurrentChange(val) {
 			console.log(`当前页: ${val}`);
-			++this.postdata.index;
+			this.postdata.index = val;
 			this.getdata()
 		},
 		getdata(){

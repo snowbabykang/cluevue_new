@@ -18,6 +18,8 @@ import './assets/css/loader-style.css'
 import './assets/css/signin.css'
 import './assets/css/style.css'
 import './assets/css/bootstrap.css'
+import './assets/js/footable/css/footable.core.css'
+import './assets/js/footable/css/footable-demos.css'
 import './assets/js/footable/css/footable.standalone.css'
 
 
