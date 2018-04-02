@@ -35,14 +35,15 @@
 									:picker-options="pickerOptions2">
 								</el-date-picker>
 							</div>
+							
 							<div class="block pull-left ml-lg"  v-show="showmore">
 								<label>线索来源</label>
 								<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
 								<el-option 
-									v-for="item in options"
-									:key="item.value"
-									:label="item.label"
-									:value="item.value">
+									v-for="item in dicdata.source.data"
+									:key="item.id"
+									:label="item.title"
+									:value="item.id">
 								</el-option>
 							</el-select>
 							</div>
@@ -50,10 +51,10 @@
 								<label>职位</label> 
 								<el-select size="small" v-model="topdata.post" clearable placeholder="请选择职位">
 								<el-option
-									v-for="item in options"
-									:key="item.value"
-									:label="item.label"
-									:value="item.value">
+									v-for="item in dicdata.rank.data"
+									:key="item.id"
+									:label="item.title"
+									:value="item.id">
 								</el-option>
 							</el-select>
 							</div>
@@ -61,10 +62,10 @@
 								<label>级别</label>
 								<el-select size="small" v-model="topdata.level" clearable placeholder="请选择级别">
 								<el-option
-									v-for="item in options"
-									:key="item.value"
-									:label="item.label"
-									:value="item.value">
+									v-for="item in dicdata.rank2.data"
+									:key="item.id"
+									:label="item.title"
+									:value="item.id">
 								</el-option>
 							</el-select>
 							</div>
@@ -226,26 +227,7 @@ export default {
 			tableData: [],
 			datatime:'',
 			options: [
-				{
-					value: "选项1",
-					label: "黄金糕"
-				},
-				{
-					value: "选项2",
-					label: "双皮奶"
-				},
-				{
-					value: "选项3",
-					label: "蚵仔煎"
-				},
-				{
-					value: "选项4",
-					label: "龙须面"
-				},
-				{
-					value: "选项5",
-					label: "北京烤鸭"
-				}
+			
 			],
 
 
@@ -483,7 +465,11 @@ export default {
 	computed: {
 		searchback: function() {
 			return this.cluefrom;
-		}	
+		},
+		dicdata:function(){
+			console.log(this.$store.state.dicdata)
+			return this.$store.state.dicdata
+		}
 	},
 	watch:{
 		datatime:function(){

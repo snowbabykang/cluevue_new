@@ -18,6 +18,23 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created(){
+    var getdata =()=>{
+       this.$ajax.post("/api/dic/getdic",{})
+       .then((res)=>{
+          console.log(res)
+          this.$store.commit("setdic",res.data)
+      }).catch((error)=>{
+          console.log(error)
+          this.$message({
+          showClose: true,
+          message: "错误",
+          type: 'error'
+      });
+    })
+    }
+    getdata()
   }
 }
 </script>

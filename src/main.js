@@ -34,7 +34,8 @@ const store = new Vuex.Store({
     classname:"button-bg",
     breadListState:[
       {name:'首页',path:'/'}
-    ]
+    ],
+    dicdata:{}
   },
   mutations:{
     changebg(state,name){
@@ -53,6 +54,9 @@ const store = new Vuex.Store({
     settoken(state,data){
       console.log(data)
       state.userToken = data
+    },
+    setdic:function(state,data){
+      state.dicdata = data
     }
   },
   getters:{
