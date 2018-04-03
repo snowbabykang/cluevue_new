@@ -11,6 +11,12 @@ export default {
     classname:function(){
       return this.$store.state.classname
     }
+  },
+  created(){
+    console.log(localStorage.getItem('userinfo'))
+    if(localStorage.getItem('userinfo')!=null){
+      this.$store.commit("settoken",JSON.parse(localStorage.getItem('userinfo')).token)
+    }
   }
 }
 </script>

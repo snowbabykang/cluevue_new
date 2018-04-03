@@ -212,7 +212,7 @@ export default {
 				keyword:'mahuan',
 				orders:[{column:'number',order:1},{column:'reflected_name',order:1},{column:'company',order:1},{column:'post',order:1},{column:'level',order:1}],
 				index:1,
-                size:1
+      	size:1
 			},
 			topdata:{
 				entry_start_time:'',
@@ -534,9 +534,16 @@ export default {
 				pdata = Object.assign(this.postdata,this.topdata);
 				urls = '/api/clue/clue_advanced_search'
 			}else{
-				pdata = this.postdata;
+				pdata = Object.assign(this.postdata,{});
 				urls = '/api/clue/clue_keyword_search'
 			}
+      var arrtep = []
+      for (var i = 0;i<pdata.orders.length;i++){
+        if(pdata.orders[i].order==0){
+          arrtep.push(pdata.orders[i])
+        }
+      }
+      //pdata.orders = arrtep
 			this.$ajax.post(urls,pdata).then((res)=>{
 				this.tableData = res.data.data;
 				this.current_page = res.data.current_page;

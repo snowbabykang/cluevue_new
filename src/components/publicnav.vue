@@ -155,10 +155,11 @@ export default {
       chagebg:function(name){
           console.log(this)
         this.$store.commit('changebg',name)
-      }
+      },
+      
   },
   created:function(){
-
+     
   }
 }
 </script>

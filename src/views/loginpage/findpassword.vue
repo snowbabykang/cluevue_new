@@ -16,9 +16,9 @@
                                 <input type="password" v-model="newPasswordtwo" id="inputPassword" class="form-control">
                             </div>
                             
-                             <div class="or-box">
+                             <!-- <div class="or-box">
             <center><span class="text-center login-with"><router-link :to="{ path:'/loginpage' }">登录</router-link> or <router-link :to="{ path: 'register' }">注册</router-link></span></center>
-           </div>            
+           </div>             -->
             <div class="row-block">
                 <div class="row">
                 <div class="col-md-12 row-block">

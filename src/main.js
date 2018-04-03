@@ -26,11 +26,12 @@ import './assets/js/footable/css/footable.standalone.css'
 Vue.config.productionTip = false;
 
 Vue.use(Vuex)
-console.log(localStorage.getItem('userinfo'))
+
+
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userToken: JSON.parse(localStorage.getItem('userinfo')).token || '',
+    userToken:null,
     classname:"button-bg",
     breadListState:[
       {name:'首页',path:'/'}
@@ -61,6 +62,7 @@ const store = new Vuex.Store({
   },
   getters:{
     breadListState(){
+      console.log("aaa")
       return JSON.parse(sessionStorage.getItem('breadListStorage')) || [];
     }
   }

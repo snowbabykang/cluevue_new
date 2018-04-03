@@ -823,9 +823,7 @@ input[type="search"]:focus {
     box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
     width: 130px;
 }
-input: -moz-placeholder {
-    color: #999999;
-}
+
 #demo-b input[type="search"] {
     color: rgba(0, 0, 0, 0);
     cursor: pointer;
@@ -842,9 +840,7 @@ input: -moz-placeholder {
     padding-left: 32px;
     width: 130px;
 }
-#demo-b input: -moz-placeholder {
-    color: rgba(0, 0, 0, 0);
-}
+
 .search-hover {
     display: block;
     position: absolute;
@@ -2630,7 +2626,6 @@ b#speed {
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(45deg, transparent 20px, $color-green 20px), linear-gradient(135deg, transparent 20px, $color-green 20px), linear-gradient(225deg, transparent 20px, $color-green 20px), linear-gradient(315deg, transparent 20px, $color-green 20px);
     background-position: bottom left, top left, top right, bottom right;
     background-size: 50% 50%;
     background-repeat: no-repeat;
