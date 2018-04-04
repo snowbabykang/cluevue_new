@@ -2,7 +2,7 @@
 <div id="skin-select" :class="{'active':isCollapse}">
   <div>
         <div id="logo">
-         <h1>着急赚钱 <span>v1.2</span></h1>
+         <h1>线索管理<span>v1.2</span></h1>
         </div>
         <a  id="toggle">
             <span class="entypo-menu" @click="showorh"></span>
@@ -15,7 +15,7 @@
         <el-menu class="topnav menu-left-nest" default-active="1-1-1"  @open="handleOpen" @close="handleClose" :collapse="isCollapse">
         <li>    
             <b style="border-left:0px solid!important;" class="title-menu-left" v-show="!isCollapse">
-                <span class="">线索管理</span>
+                <span class="">管理菜单</span>
                 <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
             </b>
         </li>
@@ -27,16 +27,21 @@
             </template>
             <el-menu-item-group class="heipad">
                <el-menu-item class="clearsty" index="1-1"><router-link :to="{path:'clueadd',query:{breadNum:1}}"> 录入线索</router-link></el-menu-item>
-                <el-menu-item class="clearsty" index="1-2"><router-link :to="{path:'clue',query:{breadNum:1}}">线索列表</router-link></el-menu-item>
+                <el-menu-item class="clearsty" index="1-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">线索列表</router-link></el-menu-item>
             </el-menu-item-group>   
         </el-submenu>
-        <el-menu-item index="2">
+        <el-submenu index="2">
              <template slot="title" class="tooltip-tip ajax-load">
-               <router-link to="/">
-                  <i class="icon-feed"></i>数据统计
-               </router-link>
+               <a>
+                <i class="icon-feed"></i>数据统计
+              </a>
             </template>
-        </el-menu-item>
+            <el-menu-item-group class="heipad">
+              <el-menu-item class="clearsty" index="2-1"><router-link :to="{path:'clueadd',query:{breadNum:1}}">案件数量趋势</router-link></el-menu-item>
+              <el-menu-item class="clearsty" index="2-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">各职级案件比例</router-link></el-menu-item>
+              <el-menu-item class="clearsty" index="2-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">未结案比例</router-link></el-menu-item>
+            </el-menu-item-group>  
+       </el-submenu>
          <el-menu-item index="3">
              <template slot="title" class="tooltip-tip ajax-load">
                 <router-link :to="{path:'timeout',query:{breadNum:1}}">
@@ -47,7 +52,7 @@
         </el-menu-item>
         <el-menu-item index="4">
             <template slot="title" class="tooltip-tip ajax-load">
-               <router-link to="/timeout">
+               <router-link to="/distribution">
                 <i class="icon-feed"></i>登记发放
               </router-link>
             </template>    

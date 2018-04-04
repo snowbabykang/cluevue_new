@@ -17,17 +17,7 @@
 			</div>
 		</div>
 	</div>
-	<breadcrumb></breadcrumb>
-	<div class="col-md-12">
-		<publicsearch modeltitle="快速查询">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="block pull-left" v-show="showmore">
-						<label>请选择时间</label>
-						<el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-						</el-date-picker>
-					</div>
-				</div>
+	
 			<breadcrumb></breadcrumb>
 			<div class="col-md-12">
 				<publicsearch modeltitle="快速查询">
