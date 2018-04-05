@@ -30,71 +30,76 @@ export default new Router({
     meta: {
       requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
     },
-    children:[
-        {
-            path: 'cluelist',
-            name: '线索列表',
-            component: cluelist
-          },
-          {
-            path: 'clueadd',
-            name: '添加线索',
-            component: clueadd
-        },
-        {
-          path: 'timeout',
-          name: '超期提醒',
-          component: timeout
-        },
-        {
-          path: 'distribution',
-          name: '登记发放',
-          component: distribution
-        },
-        {
-          path: 'pagerwork',
-          name: '文书管理',
-          component: pagerwork
-        },
-        {
-          path: 'problemregister',
-          name: '问题线索处置情况登记表',
-          component: problemregister
-        },
-        {
-          path: 'filngregister',
-          name: '立案案件登记表',
-          component: filngregister
-        },
-        {
-          path: 'regnumber',
-          name: '案件数量趋势',
-          component: trend
-        },
-        {
-          path: 'regnumber',
-          name: '案件数量趋势',
-          component: proportion
-        },
-        {
-          path: 'regnumber',
-          name: '案件数量趋势',
-          component: unproportion
-        }
-      ]
-    },
-    {
-      path: '/findpassword',
-      name: 'findpassword',
-      component: findpassword
-    }, {
-      path: '/register',
-      name: 'register',
-      component: register
-    },{
-      path: '/loginpage',
-      name: 'login',
-      component: loginpage
-    }
+    children: [
+      {
+        path: 'cluelist',
+        name: '线索列表',
+        component: cluelist
+      },
+      {
+        path: 'clueadd',
+        name: '添加线索',
+        component: clueadd
+      },
+      {
+        path: 'clueedit',
+        name: '修改线索',
+        component: clueedit
+      },
+      {
+        path: 'timeout',
+        name: '超期提醒',
+        component: timeout
+      },
+      {
+        path: 'distribution',
+        name: '登记发放',
+        component: distribution
+      },
+      {
+        path: 'pagerwork',
+        name: '文书管理',
+        component: pagerwork
+      },
+      {
+        path: 'problemregister',
+        name: '问题线索处置情况登记表',
+        component: problemregister
+      },
+      {
+        path: 'filngregister',
+        name: '立案案件登记表',
+        component: filngregister
+      },
+      {
+        path: 'regnumber',
+        name: '案件数量趋势',
+        component: trend
+      },
+      {
+        path: 'regnumber',
+        name: '案件数量趋势',
+        component: proportion
+      },
+      {
+        path: 'regnumber',
+        name: '案件数量趋势',
+        component: unproportion
+      }
+    ]
+  },
+  {
+    path: '/findpassword',
+    name: 'findpassword',
+    component: findpassword
+  }, {
+    path: '/register',
+    name: 'register',
+    component: register
+  }, {
+    path: '/loginpage',
+    name: 'login',
+    component: loginpage
+  }
   ]
 })

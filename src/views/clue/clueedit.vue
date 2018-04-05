@@ -480,6 +480,8 @@ export default {
                                 message: '恭喜你，保存成功！',
                                 type: 'success'
                             });
+                            this.$router.go(-1);
+
                         } else {
                             this.$message.error('错了哦，保存失败');
                         }
@@ -491,6 +493,7 @@ export default {
                         message: '警告哦，请检查输入是否有误！',
                         type: 'warning'
                     });
+                    
                     return false;
                 }
             });
