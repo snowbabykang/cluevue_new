@@ -42,6 +42,11 @@ export default new Router({
             component: clueadd
         },
         {
+          path: 'clueedit',
+          name: '修改线索',
+          component: clueedit
+        },
+        {
           path: 'timeout',
           name: '超期提醒',
           component: timeout
@@ -106,4 +111,5 @@ export default new Router({
         }
       ]}
     ]
-})
+  }
+)

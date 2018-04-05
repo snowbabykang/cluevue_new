@@ -17,78 +17,54 @@
 			</div>
 		</div>
 	</div>
-	
-			<breadcrumb></breadcrumb>
-			<div class="col-md-12">
-				<publicsearch modeltitle="快速查询">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="block pull-left" v-show="showmore">
-									<label>请选择时间</label>
-									<el-date-picker size="small"
-									v-model="datatime"
-									type="daterange"
-									align="right"
-									unlink-panels
-									range-separator="至"
-									start-placeholder="开始日期"
-									end-placeholder="结束日期"
-									:picker-options="pickerOptions2">
-								</el-date-picker>
-							</div>
-							
-							<div class="block pull-left ml-lg"  v-show="showmore">
-								<label>线索来源</label>
-								<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
-								<el-option 
-									v-for="item in dicdata.source.data"
-									:key="item.id"
-									:label="item.title"
-									:value="item.id">
-								</el-option>
-							</el-select>
-							</div>
-							<div class="block pull-left ml-lg"  v-show="showmore">
-								<label>职位</label> 
-								<el-select size="small" v-model="topdata.post" clearable placeholder="请选择职位">
-								<el-option
-									v-for="item in dicdata.rank.data"
-									:key="item.id"
-									:label="item.title"
-									:value="item.id">
-								</el-option>
-							</el-select>
-							</div>
-							<div class="block pull-left ml-lg"  v-show="showmore">
-								<label>级别</label>
-								<el-select size="small" v-model="topdata.level" clearable placeholder="请选择级别">
-								<el-option
-									v-for="item in dicdata.rank2.data"
-									:key="item.id"
-									:label="item.title"
-									:value="item.id">
-								</el-option>
-							</el-select>
-							</div>
-							<div class="block pull-left ml-lg"  v-show="showmore">
-								<label>单位</label>
-								<el-select size="small" v-model="topdata.company" clearable placeholder="请选择">
-									<el-option
-										v-for="item in  dicdata.rank2.data"
-										:key="item.id"
-										:label="item.title"
-										:value="item.id">
-									</el-option>
-								</el-select>
-							</div>
-							<div class="block pull-left ml-lg form-group">
+
+	<breadcrumb></breadcrumb>
+	<div class="col-md-12">
+		<publicsearch modeltitle="快速查询">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block pull-left" v-show="showmore">
+						<label>请选择时间</label>
+						<el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
+						</el-date-picker>
+					</div>
+
+					<div class="block pull-left ml-lg" v-show="showmore">
+						<label>线索来源</label>
+						<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
+							</el-option>
+						</el-select>
+					</div>
+					<div class="block pull-left ml-lg" v-show="showmore">
+						<label>职位</label>
+						<el-select size="small" v-model="topdata.post" clearable placeholder="请选择职位">
+							<el-option v-for="item in dicdata.rank.data" :key="item.id" :label="item.title" :value="item.id">
+							</el-option>
+						</el-select>
+					</div>
+					<div class="block pull-left ml-lg" v-show="showmore">
+						<label>级别</label>
+						<el-select size="small" v-model="topdata.level" clearable placeholder="请选择级别">
+							<el-option v-for="item in dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.id">
+							</el-option>
+						</el-select>
+					</div>
+					<div class="block pull-left ml-lg" v-show="showmore">
+						<label>单位</label>
+						<el-select size="small" v-model="topdata.company" clearable placeholder="请选择">
+							<el-option v-for="item in  dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.id">
+							</el-option>
+						</el-select>
+					</div>
+					<div class="block pull-left ml-lg form-group">
 
 						<el-input size="small" v-model="postdata.keyword" placeholder="输入线索来源"></el-input>
 					</div>
 					<div class="block pull-left ml-lg">
 						<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
 						<el-button size="small" type="primary" style="margin-left:15px" @click="topsearch">高级筛选</el-button>
-						<el-button size="small" type="primary" style="margin-left:15px" @click="clearsearch"  v-show="showmore">清除筛选</el-button>
+						<el-button size="small" type="primary" style="margin-left:15px" @click="clearsearch" v-show="showmore">清除筛选</el-button>
 					</div>
 				</div>
 			</div>
@@ -101,65 +77,65 @@
 	<div class="col-md-12">
 		<div style="padding:15px">
 
-					<table class="table-striped footable-res footable metro-blue" style="width:100%">
-						<thead>
-							<tr>
-								<th>序号</th>
-								<th>线索来源</th>
-								<th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">
-									编号
-									<span class="footable-sort-indicator"></span>
-								</th>
-								<th class="footable-sortable footable-last-column" :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('reflected_name')">
-									被反映人
-									<span class="footable-sort-indicator"></span></th>
-								<th class="footable-sortable footable-last-column" :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('company')">
-									单位
-									<span class="footable-sort-indicator"></span></th>
-								<th class="footable-sortable footable-last-column" :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" width="250">
-									<div class="block" style="display:inline-block; margin-bottom:0">
-										<span class="demonstration">职位</span>
-										<el-cascader size="mini" :options="selectoptions" v-model="topdata.whereIn" @change="handleChange">
-										</el-cascader>
-									</div>
-									<span class="footable-sort-indicator" @click="ordersdata('post')"></span>
-								</th>
-								<th class="footable-sortable footable-last-column" :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('level')">
-									级别
-									<span class="footable-sort-indicator"></span>
-								</th>
-								<th  class="footable-sortable footable-last-column" :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('clue_state')">
-									状态
-									<span class="footable-sort-indicator"></span>
-								</th>
+			<table class="table-striped footable-res footable metro-blue" style="width:100%">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>线索来源</th>
+						<th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">
+							编号
+							<span class="footable-sort-indicator"></span>
+						</th>
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('reflected_name')">
+							被反映人
+							<span class="footable-sort-indicator"></span></th>
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('company')">
+							单位
+							<span class="footable-sort-indicator"></span></th>
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" width="250">
+							<div class="block" style="display:inline-block; margin-bottom:0">
+								<span class="demonstration">职位</span>
+								<el-cascader size="mini" :options="selectoptions" v-model="topdata.whereIn" @change="handleChange">
+								</el-cascader>
+							</div>
+							<span class="footable-sort-indicator" @click="ordersdata('post')"></span>
+						</th>
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('level')">
+							级别
+							<span class="footable-sort-indicator"></span>
+						</th>
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('clue_state')">
+							状态
+							<span class="footable-sort-indicator"></span>
+						</th>
 
-								<th width="160">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in tableData" :key="index">
-								<td>{{index+1}}</td>
-								<td>{{item.source}}</td>
-								<td>{{item.number}}</td>
-								<td>{{item.reflected_name}}</td>
-								<td>{{item.company}}</td>
-								<td>{{item.post}}</td>
-								<td>{{item.level}}</td>
-								<td>
-									<span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'已办':'未办'}}</span>
-								</td>
-								<td>
-									<el-button size="mini" type="primary" @click="edit(item.clue_id)">编辑</el-button>
-									<el-button size="mini" type="primary">查看</el-button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+						<th width="160">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,index) in tableData" :key="index">
+						<td>{{index+1}}</td>
+						<td>{{item.source}}</td>
+						<td>{{item.number}}</td>
+						<td>{{item.reflected_name}}</td>
+						<td>{{item.company}}</td>
+						<td>{{item.post}}</td>
+						<td>{{item.level}}</td>
+						<td>
+							<span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'已办':'未办'}}</span>
+						</td>
+						<td>
+							<el-button size="mini" type="primary" @click="edit(item.clue_id)">编辑</el-button>
+							<el-button size="mini" type="primary">查看</el-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[5, 10, 20, 50]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
-					</el-pagination>
-				
-			
+			<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[5, 10, 20, 50]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
+			</el-pagination>
+
+
 		</div>
 
 	</div>
@@ -188,8 +164,8 @@ export default {
 				}, {
 					column: 'level',
 					order: 1
-				},{
-					column:'clue_state',
+				}, {
+					column: 'clue_state',
 					order: 1
 				}],
 				index: 1,
@@ -206,9 +182,9 @@ export default {
 			},
 			selectedOptions: [],
 			tableData: [],
-			datatime:'',
+			datatime: '',
 			options: [
-			
+
 			],
 
 
@@ -408,7 +384,7 @@ export default {
 				}]
 			}],
 			showmore: false,
-			current_page:1,
+			current_page: 1,
 			totaldata: 1,
 			pickerOptions2: {
 				shortcuts: [{
@@ -446,7 +422,7 @@ export default {
 		searchback: function() {
 			return this.cluefrom;
 		},
-		dicdata:function(){
+		dicdata: function() {
 			return this.$store.state.dicdata
 		}
 	},
@@ -454,7 +430,7 @@ export default {
 		datatime: function() {
 			if (this.datatime == null) {
 				this.topdata.entry_start_time = '',
-				this.topdata.entry_end_time = ''
+					this.topdata.entry_end_time = ''
 			} else {
 				let startTime = new Date(this.datatime[0])
 				let endTime = new Date(this.datatime[1]);
@@ -467,12 +443,12 @@ export default {
 		handleChange(value) {
 			this.getdata()
 		},
-		clearsearch(){
-			for(var i in this.topdata){
-				if(typeof(this.topdata[i])=='string' || typeof(this.topdata[i])=='number'){
-					this.topdata[i]=''
-				}else{
-					this.topdata[i]=[]
+		clearsearch() {
+			for (var i in this.topdata) {
+				if (typeof(this.topdata[i]) == 'string' || typeof(this.topdata[i]) == 'number') {
+					this.topdata[i] = ''
+				} else {
+					this.topdata[i] = []
 				}
 			}
 		},
@@ -521,22 +497,22 @@ export default {
 			if (this.showmore) {
 				pdata = Object.assign(this.postdata, this.topdata);
 				urls = '/api/clue/clue_advanced_search'
-			}else{
-				pdata = Object.assign(this.postdata,{});
+			} else {
+				pdata = Object.assign(this.postdata, {});
 				urls = '/api/clue/clue_keyword_search'
 			}
-    	var arrtep = []
-    	for (var i in pdata.orders){
-        	if(pdata.orders[i].order==0){
-        		arrtep.push(pdata.orders[i])
-        	}
-		  }
-		var tempdata = this.cloneobj(pdata);
-		tempdata.orders = arrtep
-		this.$ajax.post(urls,tempdata).then((res)=>{
-			this.tableData = res.data.data;
-			this.current_page = res.data.current_page;
-			this.totaldata = res.data.total;
+			var arrtep = []
+			for (var i in pdata.orders) {
+				if (pdata.orders[i].order == 0) {
+					arrtep.push(pdata.orders[i])
+				}
+			}
+			var tempdata = this.cloneobj(pdata);
+			tempdata.orders = arrtep
+			this.$ajax.post(urls, tempdata).then((res) => {
+				this.tableData = res.data.data;
+				this.current_page = res.data.current_page;
+				this.totaldata = res.data.total;
 			})
 		}
 	},
@@ -561,7 +537,8 @@ export default {
 .block {
 	margin-bottom: 15px
 }
-.footable{
+
+.footable {
 	border-left: none
 }
 </style>
