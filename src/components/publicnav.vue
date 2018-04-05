@@ -144,7 +144,7 @@ export default {
       },
       loginout:function(){
         this.$ajax.post('/api/logout',{}).then((res)=>{
-             localStorage.setItem('userinfo',null);
+            localStorage.removeItem('userinfo');
             this.$router.push("/loginpage")
         })
          

@@ -10,10 +10,10 @@
 		<div class="col-sm-7">
 			<div class="devider-vertical visible-lg"></div>
 			<div class="tittle-middle-header">
-				<div class="alert">
-					<button type="button" class="close" data-dismiss="alert">×</button>
+				<!-- <div class="alert">
+					<button type="button" class="close">×</button>
 					<span class="tittle-alert entypo-info-circled"></span>当前查询条件,&nbsp;<strong>{{searchback}}</strong>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -74,10 +74,10 @@
 								<label>单位</label>
 								<el-select size="small" v-model="topdata.company" clearable placeholder="请选择">
 									<el-option
-										v-for="item in options"
-										:key="item.value"
-										:label="item.label"
-										:value="item.value">
+										v-for="item in  dicdata.rank2.data"
+										:key="item.id"
+										:label="item.title"
+										:value="item.id">
 									</el-option>
 								</el-select>
 							</div>
@@ -88,6 +88,7 @@
 					<div class="block pull-left ml-lg">
 						<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
 						<el-button size="small" type="primary" style="margin-left:15px" @click="topsearch">高级筛选</el-button>
+						<el-button size="small" type="primary" style="margin-left:15px" @click="clearsearch"  v-show="showmore">清除筛选</el-button>
 					</div>
 				</div>
 			</div>
@@ -100,8 +101,6 @@
 	<div class="col-md-12">
 		<div style="padding:15px">
 
-			<el-tabs type="card">
-				<el-tab-pane label="问题线索">
 					<table class="table-striped footable-res footable metro-blue" style="width:100%">
 						<thead>
 							<tr>
@@ -129,7 +128,11 @@
 									级别
 									<span class="footable-sort-indicator"></span>
 								</th>
-								<th>状态</th>
+								<th  class="footable-sortable footable-last-column" :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('clue_state')">
+									状态
+									<span class="footable-sort-indicator"></span>
+								</th>
+
 								<th width="160">操作</th>
 							</tr>
 						</thead>
@@ -143,7 +146,7 @@
 								<td>{{item.post}}</td>
 								<td>{{item.level}}</td>
 								<td>
-									<span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'以办':'未办'}}</span>
+									<span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'已办':'未办'}}</span>
 								</td>
 								<td>
 									<el-button size="mini" type="primary" @click="edit(item.clue_id)">编辑</el-button>
@@ -153,25 +156,10 @@
 						</tbody>
 					</table>
 
-					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[1, 5, 10, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
+					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[5, 10, 20, 50]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
 					</el-pagination>
-				</el-tab-pane>
-				<!-- <el-tab-pane label="案件管理">
-							<el-tabs tab-position="left" style="height:600px;">
-								<el-tab-pane label="线索部分">
-									
-								</el-tab-pane>
-									<el-tab-pane label="立案部分">
-										
-									</el-tab-pane>
-								</el-tabs>
-
-
-						</el-tab-pane> -->
-				<el-tab-pane label="公文管理">
-
-				</el-tab-pane>
-			</el-tabs>
+				
+			
 		</div>
 
 	</div>
@@ -184,7 +172,7 @@ export default {
 		return {
 			cluefrom: "",
 			postdata: {
-				keyword: 'mahuan',
+				keyword: '',
 				orders: [{
 					column: 'number',
 					order: 1
@@ -199,6 +187,9 @@ export default {
 					order: 1
 				}, {
 					column: 'level',
+					order: 1
+				},{
+					column:'clue_state',
 					order: 1
 				}],
 				index: 1,
@@ -417,7 +408,7 @@ export default {
 				}]
 			}],
 			showmore: false,
-			current_page: 1,
+			current_page:1,
 			totaldata: 1,
 			pickerOptions2: {
 				shortcuts: [{
@@ -456,7 +447,6 @@ export default {
 			return this.cluefrom;
 		},
 		dicdata:function(){
-			console.log(this.$store.state.dicdata)
 			return this.$store.state.dicdata
 		}
 	},
@@ -464,21 +454,27 @@ export default {
 		datatime: function() {
 			if (this.datatime == null) {
 				this.topdata.entry_start_time = '',
-					this.topdata.entry_end_time = ''
+				this.topdata.entry_end_time = ''
 			} else {
 				let startTime = new Date(this.datatime[0])
 				let endTime = new Date(this.datatime[1]);
 				this.topdata.entry_start_time = startTime.getFullYear() + '-' + (startTime.getMonth() + 1) + '-' + startTime.getDate()
 				this.topdata.entry_end_time = endTime.getFullYear() + '-' + (endTime.getMonth() + 1) + '-' + endTime.getDate()
 			}
-
-
-
 		}
 	},
 	methods: {
 		handleChange(value) {
 			this.getdata()
+		},
+		clearsearch(){
+			for(var i in this.topdata){
+				if(typeof(this.topdata[i])=='string' || typeof(this.topdata[i])=='number'){
+					this.topdata[i]=''
+				}else{
+					this.topdata[i]=[]
+				}
+			}
 		},
 		edit(id) {
 			this.$router.push({
@@ -489,7 +485,6 @@ export default {
 			})
 		},
 		tablecha: function(e) {
-			console.log(e, 1111)
 			this.postdata.orders.column = e.prop
 			this.postdata.orders.order = e.order == "descending" ? '0' : '1'
 			this.getdata()
@@ -499,25 +494,24 @@ export default {
 			this.getdata()
 		},
 		ordersdata: function(key) {
-
 			this.postdata.orders.forEach((e, k, arr) => {
 				if (e.column == key) {
 					e.order = (e.order == "1") ? '0' : '1'
 				}
 			})
 			this.getdata()
-			console.log(JSON.stringify(this.postdata.orders))
+
 		},
 		topsearch: function() {
 			this.showmore = !this.showmore;
 		},
 		handleSizeChange(val) {
-			console.log(`每页 ${val} 条`);
+			//consoleconsole.log(`每页 ${val} 条`);
 			this.postdata.size = val
 			this.getdata()
 		},
 		handleCurrentChange(val) {
-			console.log(`当前页: ${val}`);
+			//console.log(`当前页: ${val}`);
 			this.postdata.index = val;
 			this.getdata()
 		},
@@ -531,17 +525,18 @@ export default {
 				pdata = Object.assign(this.postdata,{});
 				urls = '/api/clue/clue_keyword_search'
 			}
-      var arrtep = []
-      for (var i = 0;i<pdata.orders.length;i++){
-        if(pdata.orders[i].order==0){
-          arrtep.push(pdata.orders[i])
-        }
-      }
-      //pdata.orders = arrtep
-			this.$ajax.post(urls,pdata).then((res)=>{
-				this.tableData = res.data.data;
-				this.current_page = res.data.current_page;
-				this.totaldata = res.data.total;
+    	var arrtep = []
+    	for (var i in pdata.orders){
+        	if(pdata.orders[i].order==0){
+        		arrtep.push(pdata.orders[i])
+        	}
+		  }
+		var tempdata = this.cloneobj(pdata);
+		tempdata.orders = arrtep
+		this.$ajax.post(urls,tempdata).then((res)=>{
+			this.tableData = res.data.data;
+			this.current_page = res.data.current_page;
+			this.totaldata = res.data.total;
 			})
 		}
 	},
@@ -565,5 +560,8 @@ export default {
 
 .block {
 	margin-bottom: 15px
+}
+.footable{
+	border-left: none
 }
 </style>

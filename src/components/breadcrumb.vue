@@ -16,7 +16,6 @@
 export default{
         created() {
             this.getBreadcrumb();
-            console.log(this.breadList)
         },
         data() {
             return {

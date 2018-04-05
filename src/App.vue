@@ -13,8 +13,7 @@ export default {
     }
   },
   created(){
-    console.log(localStorage.getItem('userinfo'))
-    if(localStorage.getItem('userinfo')!=null){
+    if(!!localStorage.getItem('userinfo')){
       this.$store.commit("settoken",JSON.parse(localStorage.getItem('userinfo')).token)
     }
   }

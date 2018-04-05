@@ -12,6 +12,13 @@ import pagerwork from '@/views/pagerwork/index'
 import regnumber from '@/views/pagerwork/index'
 import distribution from '@/views/distribution/index'
 
+import problemregister from '@/views/problemregister/index'
+
+import filngregister from '@/views/filngregister/index'
+
+import trend from '@/views/regnumber/trend'
+import proportion from '@/views/regnumber/proportion'
+import unproportion from '@/views/regnumber/unproportion'
 Vue.use(Router)
 
 export default new Router({
@@ -32,8 +39,7 @@ export default new Router({
             path: 'clueadd',
             name: '添加线索',
             component: clueadd
-      },
-       
+        },
         {
           path: 'timeout',
           name: '超期提醒',
@@ -50,9 +56,29 @@ export default new Router({
           component: pagerwork
         },
         {
+          path: 'problemregister',
+          name: '问题线索处置情况登记表',
+          component: problemregister
+        },
+        {
+          path: 'filngregister',
+          name: '立案案件登记表',
+          component: filngregister
+        },
+        {
           path: 'regnumber',
-          name: '登记管理',
-          component: regnumber
+          name: '案件数量趋势',
+          component: trend
+        },
+        {
+          path: 'regnumber',
+          name: '案件数量趋势',
+          component: proportion
+        },
+        {
+          path: 'regnumber',
+          name: '案件数量趋势',
+          component: unproportion
         }
       ]
     },

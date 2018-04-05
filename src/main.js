@@ -13,6 +13,7 @@ import menuslider from './components/menu'
 import publicsearch from './components/publicsearch'
 import tableModel from './components/tableModel'
 import breadcrumb from './components/breadcrumb'
+import utils from './utils'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
 import './assets/css/signin.css'
@@ -26,15 +27,15 @@ import './assets/js/footable/css/footable.standalone.css'
 Vue.config.productionTip = false;
 
 Vue.use(Vuex)
-
+Vue.use(utils)
 
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userToken: (localStorage.getItem('userinfo') && JSON.parse(localStorage.getItem('userinfo')).token) || '',
+    userToken:undefined,
     classname: "button-bg",
     breadListState: [
-      { name: '首页', path: '/' }
+      { name: '首页', path: '/' } 
     ],
     dicdata:{}
   },
@@ -79,7 +80,6 @@ const $axios = axios.create({
   },
   transformRequest: [function (data) {
     // 对 data 进行任意转换处理
-    console.log(JSON.parse(localStorage.getItem('userinfo')) == null)
     if (JSON.parse(localStorage.getItem('userinfo')) == null) {
       return JSON.stringify(data);
     } else {

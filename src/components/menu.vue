@@ -4,9 +4,9 @@
         <div id="logo">
          <h1>线索管理<span>v1.2</span></h1>
         </div>
-        <a  id="toggle">
+        <!-- <a  id="toggle">
             <span class="entypo-menu" @click="showorh"></span>
-        </a>
+        </a> -->
     </div>
 
     <div class="skin-part">
@@ -16,7 +16,7 @@
         <li>    
             <b style="border-left:0px solid!important;" class="title-menu-left" v-show="!isCollapse">
                 <span class="">管理菜单</span>
-                <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
+               
             </b>
         </li>
         <el-submenu index="1">
@@ -60,7 +60,7 @@
         <el-menu-item index="5">
              <template slot="title" class="tooltip-tip ajax-load">
                <router-link to="/pagerwork">
-                <i class="icon-feed"></i>案件文书
+                <i class="icon-feed"></i>文书管理
                 </router-link>
                </template>
              
@@ -68,12 +68,27 @@
         <el-menu-item index="6">
              <template slot="title" class="tooltip-tip ajax-load">
                <router-link to="/regnumber">
+                <i class="icon-feed"></i>问题线索处置情况登记表
+                </router-link>
+               </template>
+             
+        </el-menu-item>
+        <el-menu-item index="7">
+             <template slot="title" class="tooltip-tip ajax-load">
+               <router-link to="/regnumber">
+                <i class="icon-feed"></i>立案案件登记表
+                </router-link>
+               </template>
+             
+        </el-menu-item>
+         <el-menu-item index="8">
+             <template slot="title" class="tooltip-tip ajax-load">
+               <router-link to="/regnumber">
                 <i class="icon-feed"></i>登号登记
                 </router-link>
                </template>
              
         </el-menu-item>
-        
         </el-menu>
     </div>
 </div>
@@ -99,7 +114,11 @@ export default {
     showorh() {
       this.isCollapse = !this.isCollapse;
     }
+  },
+  mounted(){
+    console.log(this.$router.options.routes[0].children)
   }
+  
 };
 </script>
 
