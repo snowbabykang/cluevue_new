@@ -67,34 +67,43 @@ export default new Router({
           component: filngregister
         },
         {
-          path: 'regnumber',
+          path: 'trend',
           name: '案件数量趋势',
           component: trend
         },
         {
-          path: 'regnumber',
-          name: '案件数量趋势',
+          path: 'proportion',
+          name: '各职级案件比例',
           component: proportion
         },
         {
-          path: 'regnumber',
-          name: '案件数量趋势',
+          path: 'unproportion',
+          name: '未结案比例',
           component: unproportion
         }
       ]
     },
     {
-      path: '/findpassword',
-      name: 'findpassword',
-      component: findpassword
-    }, {
-      path: '/register',
-      name: 'register',
-      component: register
-    },{
-      path: '/loginpage',
-      name: 'login',
-      component: loginpage
-    }
-  ]
+      path: '/',
+      name: 'index',
+      component: loginpage,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
+      children:[
+        {
+          path: '/findpassword',
+          name: 'findpassword',
+          component: findpassword
+        }, {
+          path: '/register',
+          name: 'register',
+          component: register
+        },{
+          path: '/loginpage',
+          name: 'login',
+          component: login
+        }
+      ]}
+    ]
 })

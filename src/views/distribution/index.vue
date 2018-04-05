@@ -45,7 +45,11 @@
                             </div>
                             <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
+                                <el-button size="small" type="primary" @click="dismodelopen" style="margin-left:15px">添加</el-button>
+                                <el-button size="small" type="primary" style="margin-left:15px">打印</el-button>
+                                <el-button size="small" type="primary" style="margin-left:15px">导出EXCEL</el-button>
                             </div>
+
                         </div>
                     </div>
                 </publicsearch>
@@ -56,45 +60,67 @@
                         <table class="table-striped footable-res footable metro-blue" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>发文日期</th>
-                                    <th>发文字号</th>
-                                    <th>文件标题</th>
-                                    <th>发文人</th>
-                                    <th>发文单位</th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_date')">
+                                        编号
+                                        <span class="footable-sort-indicator"></span>    
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_code')">
+                                        被反映人
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_title')">
+                                        工作单位及职务
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_user')">
+                                        反应的主要问题
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_unit')">
+                                        领导批示
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
                                     <th>备注</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item,index) in datalist" :key="index">
-                                    <td>{{item.source}}</td>
-                                    <td>{{item.number}}</td>
-                                    <td>{{item.reflected_name}}</td>
-                                    <td>{{item.closed_time}}</td>
-                                    <td>距离结案日期还有 <span class="status-metro status-suspended">{{item.remind_days}}</span> 天</td>
-                                    <td>{{item.number}}</td>
+                                <tr v-for="(item,index) in tableData" :key="index">
+                                    <td>{{item.document_date}}</td>
+                                    <td>{{item.document_code}}</td>
+                                    <td>{{item.document_title}}</td>
+                                    <td>{{item.document_user}}</td>
+                                    <td>{{item.document_unit}}</td>
+                                    <td>{{item.memo}}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
                         </el-pagination>
                     </div>
-    
                 </div>
         </div>
-    
+        <el-dialog title="新增发文登记" :visible.sync="showmodel" width="800px" :modal-append-to-body="false">
+            <distributionaddmodel v-on:closemodel="closeprop"></distributionaddmodel>
+                <!-- <span slot="footer" class="dialog-footer">
+                <el-button size="small" @click="showmodel = false">取 消</el-button>
+                <el-button size="small" type="primary" @click="showmodel = false">确 定</el-button>
+                </span> -->
+        </el-dialog>
     </div>
 </template>
 
 <script>
+   
     export default {
         data() {
             return {
+                showmodel: false,
                 cluefrom: '',
                 index: 1,
                 size: 10,
                 current_page: 1,
                 totaldata: 1,
-                datalist: [],
+                tableData: [],
                 datatime:'',
                 source:'',
                 postdata:{
@@ -102,7 +128,7 @@
                     endDate:'', //发文字号
                     document_type:'', //姓名
                     document_user:'',//发文人
-                    orders:[{column:'',order:''}], 
+                    orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
                     print:0
                 },
@@ -148,14 +174,59 @@
                 return this.$store.state.dicdata
             }
         },
+        watch: {
+            datatime: function() {
+                if (this.datatime == null) {
+                    this.postdata.beginDate = '',
+                    this.postdata.endDate = ''
+                } else {
+                    let startTime = new Date(this.datatime[0])
+                    let endTime = new Date(this.datatime[1]);
+                    this.postdata.beginDate = startTime.getFullYear() + '-' + (startTime.getMonth() + 1) + '-' + startTime.getDate()
+                    this.postdata.endDate = endTime.getFullYear() + '-' + (endTime.getMonth() + 1) + '-' + endTime.getDate()
+                }
+		    }
+	    },
         methods: {
+            dismodelopen(){
+                this.showmodel = true
+            },
+            closeprop(){
+                this.showmodel = false;
+                this.getdata()
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                .then(_ => {
+                    done();
+                })
+                .catch(_ => {});
+            },
+
             searchdata: function() {
-                console.log(this.cluefrom)
+                this.getdata()
+            },
+            ordersdata: function(key) {
+                this.postdata.orders.forEach((e, k, arr) => {
+                    if (e.column == key) {
+                        e.order = (e.order == 1) ? 0 : 1
+                    }
+                })
+                this.getdata()
             },
             getdata: function(data = {}) {
-                this.$ajax.post("/api/document/list", this.postdata).then((res) => {
-                    this.datalist = res.data.data,
-                    this.totaldata = res.data.total
+                var arrtep = [];
+                let pdata = this.cloneobj(this.postdata);
+                for (var i in pdata.orders){
+                    if(pdata.orders[i].order==0){
+                        arrtep.push(pdata.orders[i])
+                    }
+                }
+                pdata.orders = arrtep
+                this.$ajax.post("/api/document/list", pdata).then((res) => {
+                    this.tableData = res.data.data;
+                    this.current_page = res.data.current_page;
+                    this.totaldata = res.data.total;
                 })
             },
             handleSizeChange(val) {
@@ -168,9 +239,12 @@
                 this.index = val;
                 this.getdata()
             },
+            adddoc(){
+                console.log("添加")
+            }
         },
         created() {
-            this.getdata()
+            this.getdata();
         }
     };
 </script>

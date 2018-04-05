@@ -37,9 +37,9 @@
               </a>
             </template>
             <el-menu-item-group class="heipad">
-              <el-menu-item class="clearsty" index="2-1"><router-link :to="{path:'clueadd',query:{breadNum:1}}">案件数量趋势</router-link></el-menu-item>
-              <el-menu-item class="clearsty" index="2-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">各职级案件比例</router-link></el-menu-item>
-              <el-menu-item class="clearsty" index="2-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">未结案比例</router-link></el-menu-item>
+              <el-menu-item class="clearsty" index="2-1"><router-link :to="{path:'trend',query:{breadNum:1}}">案件数量趋势</router-link></el-menu-item>
+              <el-menu-item class="clearsty" index="2-2"><router-link :to="{path:'proportion',query:{breadNum:1}}">各职级案件比例</router-link></el-menu-item>
+              <el-menu-item class="clearsty" index="2-3"><router-link :to="{path:'unproportion',query:{breadNum:1}}">未结案比例</router-link></el-menu-item>
             </el-menu-item-group>  
        </el-submenu>
          <el-menu-item index="3">
