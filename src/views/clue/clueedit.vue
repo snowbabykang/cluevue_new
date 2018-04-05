@@ -221,6 +221,13 @@
 export default {
     name: 'menuslider',
     created() {
+        if(!this.$route.query.clue_id){ return false}
+        this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
+            this.ruleForm = { ...res.data.clue,
+                ...res.data.clue_detail
+            };
+            this.upFileEnd = res.data.clue_attachments;
+        })
     },
     data() {
         var checkAge = (rule, value, callback) => {
@@ -231,6 +238,7 @@ export default {
                 } else {
                     this.$ajax.post('/api/clue/check_clue_number/', {
                         number: value,
+                        clue_id:this.$route.query.clue_id
                     }).then((res) => {
                         if (!res.data.result) {
                             callback();
@@ -427,7 +435,8 @@ export default {
                             'supervisor': '',
                             'remind_days': '',
                             'clue_next': '',
-                            'clue_state': ''
+                            'clue_state': '',
+                             clue_id:this.$route.query.clue_id
                         },
                         clue_detail: {
                             'main_content': '',

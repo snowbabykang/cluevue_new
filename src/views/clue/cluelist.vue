@@ -482,7 +482,7 @@ export default {
 		},
 		edit(id) {
 			this.$router.push({
-				path: 'clueadd',
+				path: 'clueedit',
 				query: {
 					clue_id: id
 				}
