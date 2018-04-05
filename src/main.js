@@ -31,20 +31,12 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // 定义状态
   state: {
-<<<<<<< HEAD
-    userToken:null,
-    classname:"button-bg",
-    breadListState:[
-      {name:'首页',path:'/'}
-    ],
-    dicdata:{}
-=======
     userToken: (localStorage.getItem('userinfo') && JSON.parse(localStorage.getItem('userinfo')).token) || '',
     classname: "button-bg",
     breadListState: [
       { name: '首页', path: '/' }
-    ]
->>>>>>> f228cb3dcb67c5fbd52daad5340c3ce3c530357d
+    ],
+    dicdata:{}
   },
   mutations: {
     changebg(state, name) {
@@ -68,14 +60,8 @@ const store = new Vuex.Store({
       state.dicdata = data
     }
   },
-<<<<<<< HEAD
-  getters:{
-    breadListState(){
-      console.log("aaa")
-=======
   getters: {
     breadListState() {
->>>>>>> f228cb3dcb67c5fbd52daad5340c3ce3c530357d
       return JSON.parse(sessionStorage.getItem('breadListStorage')) || [];
     }
   }

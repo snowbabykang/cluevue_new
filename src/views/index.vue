@@ -23,7 +23,6 @@ export default {
     var getdata =()=>{
        this.$ajax.post("/api/dic/getdic",{})
        .then((res)=>{
-          console.log(res)
           this.$store.commit("setdic",res.data)
       }).catch((error)=>{
           console.log(error)

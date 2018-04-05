@@ -10,6 +10,7 @@ import clueadd from '@/views/clue/clueadd'
 import timeout from '@/views/timeout/index'
 import pagerwork from '@/views/pagerwork/index'
 import regnumber from '@/views/pagerwork/index'
+import distribution from '@/views/distribution/index'
 
 Vue.use(Router)
 
@@ -21,20 +22,27 @@ export default new Router({
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
-      children: [{
-          path: 'clue',
-          name: '线索列表',
-          component: cluelist
-        },
+      children: [
         {
-          path: 'clueadd',
-          name: '添加线索',
-          component: clueadd
-        },
+            path: 'cluelist',
+            name: '线索列表',
+            component: cluelist
+          },
+          {
+            path: 'clueadd',
+            name: '添加线索',
+            component: clueadd
+      },
+       
         {
           path: 'timeout',
           name: '超期提醒',
           component: timeout
+        },
+        {
+          path: 'distribution',
+          name: '登记发放',
+          component: distribution
         },
         {
           path: 'pagerwork',
