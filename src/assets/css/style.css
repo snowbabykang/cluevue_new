@@ -986,13 +986,10 @@ input[type="search"]:focus {
     width: 130px;
 }
 
-<<<<<<< HEAD
-=======
 input:-moz-placeholder {
     color: #999999;
 }
 
->>>>>>> f228cb3dcb67c5fbd52daad5340c3ce3c530357d
 #demo-b input[type="search"] {
     color: rgba(0, 0, 0, 0);
     cursor: pointer;
@@ -1012,13 +1009,10 @@ input:-moz-placeholder {
     width: 130px;
 }
 
-<<<<<<< HEAD
-=======
 #demo-b input:-moz-placeholder {
     color: rgba(0, 0, 0, 0);
 }
 
->>>>>>> f228cb3dcb67c5fbd52daad5340c3ce3c530357d
 .search-hover {
     display: block;
     position: absolute;
@@ -3125,10 +3119,7 @@ b#speed {
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
-<<<<<<< HEAD
-=======
     background: linear-gradient(45deg, transparent 20px, green 20px), linear-gradient(135deg, transparent 20px, green 20px), linear-gradient(225deg, transparent 20px, green 20px), linear-gradient(315deg, transparent 20px, green 20px);
->>>>>>> f228cb3dcb67c5fbd52daad5340c3ce3c530357d
     background-position: bottom left, top left, top right, bottom right;
     background-size: 50% 50%;
     background-repeat: no-repeat;
