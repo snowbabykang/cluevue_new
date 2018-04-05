@@ -35,7 +35,10 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                            <el-input v-model="ruleForm.source"></el-input>
+                            <el-select v-model="ruleForm.source" clearable placeholder="请选择线索来源">
+                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -45,10 +48,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="16">
+                    <el-col :span="15">
                         <el-form-item label="被反映人姓名" prop="reflected_name">
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
+                    </el-col>
+                    <el-col :span="1" v-show="!Togg">
+                        跳转
                     </el-col>
                 </el-row>
                 <el-row>
@@ -113,7 +119,10 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="处置类型" prop="disposal_type">
-                            <el-input v-model="ruleForm.disposal_type"></el-input>
+                            <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
+                                <el-option v-for="item in dicdata.chuzhi.data" :key="item.id" :label="item.title" :value="item.id">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -135,7 +144,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="5">
+                    <el-col :span="8">
                         <el-form-item label="去向" prop="clue_next" required>
                             <el-select v-model="ruleForm.clue_next" placeholder="请选择活动区域">
                                 <el-option label="区域一" value="shanghai"></el-option>
@@ -143,7 +152,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="8">
                         <el-form-item label="线索状态" prop="clue_state" required>
                             <el-select v-model="ruleForm.clue_state" placeholder="请选择活动区域">
                                 <el-option label="区域一" value="shanghai"></el-option>
@@ -218,9 +227,13 @@
 </div>
 </template>
 <script>
+import {
+    mapState
+} from 'vuex'
 export default {
     name: 'menuslider',
     created() {
+        console.log(this.$store.state.dicdata, 312312)
     },
     data() {
         var checkAge = (rule, value, callback) => {
@@ -246,7 +259,25 @@ export default {
                 callback(new Error('请录入8位编号！'));
             }
         };
+        var checkName = (rule, value, callback) => {
+            if (!!value) {
+                this.$ajax.post('/api/clue/get_reflected_name_clue', {
+                    reflected_name: value,
+                }).then((res) => {
+                    let data=res.data;
+                    if(data.document.length||data.clue.length||data.case.case_clue.length||data.case.case_filing.length){
+                        this.Togg=true;
+                    }else{
+                        this.Togg=false;
+                    }
+                    callback();
+                }, () => {
+                    callback();
+                })
+            }
+        }
         return {
+            Togg:false,
             loading: false,
             upFileEnd: [],
             url: 'http://clue.api.test/api/clue/clue_upload/',
@@ -316,10 +347,15 @@ export default {
                     trigger: 'blur'
                 }, ],
                 reflected_name: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
+                        validator: checkName,
+                        trigger: 'blur'
+                    },
+                    {
+                        required: true,
+                        message: '必填',
+                        trigger: 'blur'
+                    }
+                ],
                 company: [{
                     required: true,
                     message: '必填',
@@ -374,8 +410,8 @@ export default {
         };
     },
     methods: {
-        handleClose(index){
-            this.upFileEnd.splice(index,1);
+        handleClose(index) {
+            this.upFileEnd.splice(index, 1);
         },
         removeFile1(file, fileList) {
             this.img__.splice(fileList.indexOf(file), 1)
@@ -410,7 +446,7 @@ export default {
             this.$refs['ruleForm'].resetFields();
         },
         submitForm(formName) {
-            console.log(this.img__,12312323)
+            console.log(this.img__, 12312323)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let data = {
@@ -449,7 +485,7 @@ export default {
                     // excel__: [],
                     // file__: [],3213213
                     data.clue_attachments = [
-                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__,...this.upFileEnd
+                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__, ...this.upFileEnd
                     ];
                     var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
                         clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
@@ -486,15 +522,21 @@ export default {
                 }
             });
         }
+    },
+    computed: {
+        dicdata: function() {
+            return this.$store.state.dicdata
+        }
     }
 }
 </script>
 
 
 <style scoped>
-  .el-tag + .el-tag {
+.el-tag+.el-tag {
     margin-left: 10px;
-  }
+}
+
 hr {
     border-color: #9b9595;
 }
