@@ -8,11 +8,13 @@ import config from "./assets/config"
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
+import echarts from 'echarts'
 import publicnav from './components/publicnav'
 import menuslider from './components/menu'
 import publicsearch from './components/publicsearch'
 import breadcrumb from './components/breadcrumb'
 import utils from './utils'
+
 
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
