@@ -8,6 +8,7 @@ import loginpage from '@/views/loginpage/loginpage'
 import cluelist from '@/views/clue/cluelist'
 import clueadd from '@/views/clue/clueadd'
 import clueedit from '@/views/clue/clueedit'
+import clueview from '@/views/clue/clueview'
 import timeout from '@/views/timeout/index'
 import pagerwork from '@/views/pagerwork/index'
 import regnumber from '@/views/pagerwork/index'
@@ -45,6 +46,11 @@ export default new Router({
           path: 'clueedit',
           name: '修改线索',
           component: clueedit
+        },
+        {
+          path: 'clueview',
+          name: '查看线索',
+          component: clueview
         },
         {
           path: 'timeout',

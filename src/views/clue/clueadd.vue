@@ -207,16 +207,6 @@
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row>
-                    <el-col :span="8">
-                        <el-form-item label="已上传文件">
-                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index)">
-                                {{tag.filename}}
-                            </el-tag>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <hr/>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
                 </el-form-item>
@@ -285,13 +275,13 @@ export default {
                 attachment_type: 'img'
             },
             audio_: {
-                attachment_type: 'img'
+                attachment_type: 'audio'
             },
             word_: {
                 attachment_type: 'word'
             },
             excel_: {
-                attachment_type: 'word'
+                attachment_type: 'excel'
             },
             file_: {
                 attachment_type: 'file'

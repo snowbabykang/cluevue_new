@@ -126,7 +126,7 @@
 						</td>
 						<td>
 							<el-button size="mini" type="primary" @click="edit(item.clue_id)">编辑</el-button>
-							<el-button size="mini" type="primary">查看</el-button>
+							<el-button size="mini" type="primary" @click="view(item.clue_id)">查看</el-button>
 						</td>
 					</tr>
 				</tbody>
@@ -455,6 +455,14 @@ export default {
 		edit(id) {
 			this.$router.push({
 				path: 'clueedit',
+				query: {
+					clue_id: id
+				}
+			})
+		},
+		view(id) {
+			this.$router.push({
+				path: 'clueview',
 				query: {
 					clue_id: id
 				}

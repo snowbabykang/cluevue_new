@@ -81,7 +81,7 @@ const $axios = axios.create({
   },
   transformRequest: [function (data) {
     // 对 data 进行任意转换处理
-    if (JSON.parse(localStorage.getItem('userinfo')) == null) {
+    if (localStorage.getItem('userinfo') == "undefined") {
       return JSON.stringify(data);
     } else {
       var postdata = { data: data, token: JSON.parse(localStorage.getItem('userinfo')).token, type: 1 }
