@@ -34,8 +34,20 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
                     <el-col :span="8">
+                        <el-form-item label="结案日期" prop="source">
+                            {{ruleForm.closed_time}}
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="" prop="number">
+                            距结案日期还有 <span style="color:red;font-weight:bold">{{newdata}}</span> 天
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                            <el-select v-model="ruleForm.source" clearable placeholder="请选择线索来源">
+                            <el-select :disabled="true" v-model="ruleForm.source" placeholder="请选择线索来源">
                                 <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
                                 </el-option>
                             </el-select>
@@ -43,64 +55,47 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="编号" prop="number">
-                            <el-input type="number" v-model="ruleForm.number"></el-input>
+                            {{ruleForm.number}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="被反映人姓名" prop="reflected_name">
-                            <el-input v-model="ruleForm.reflected_name"></el-input>
+                        <el-form-item label="被反映人姓名">
+                            {{ruleForm.reflected_name}}
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="8">
+                        <el-form-item label="职务">
+                            {{ruleForm.post}}
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="级别">
+                            {{ruleForm.level}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="单位" prop="company">
-                            <el-input v-model="ruleForm.company"></el-input>
+                        <el-form-item label="主要内容">
+                            {{ruleForm.main_content}}
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
-                    <el-col :span="8">
-                        <el-form-item label="职务" prop="post">
-                            <el-input v-model="ruleForm.post"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="8">
-                        <el-form-item label="级别" prop="level">
-                            <el-input v-model="ruleForm.level"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="8">
-                        <el-form-item label="录入时间" prop="entry_time">
-                            <el-date-picker value-format="yyyy-MM-dd" type="date" placeholder="选择日期" v-model="ruleForm.entry_time" style="width: 100%;"></el-date-picker>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <hr/>
-                <el-row>
-                    <el-col :span="16">
-                        <el-form-item label="主要内容" prop="main_content">
-                            <el-input type="textarea" v-model="ruleForm.main_content" :rows="5"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <hr/>
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="部门意见">
-                            <el-input type="textarea" v-model="ruleForm.department_opinion" :rows="5"></el-input>
+                            {{ruleForm.department_opinion}}
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <hr/>
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="领导批示">
-                            <el-input type="textarea" v-model="ruleForm.leader_approval" :rows="5"></el-input>
+                            {{ruleForm.leader_approval}}
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -108,50 +103,50 @@
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="备注">
-                            <el-input v-model="ruleForm.remark"></el-input>
+                            {{ruleForm.remark}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <hr/>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="处置类型" prop="disposal_type">
-                            <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
+                        <el-form-item label="处置类型">
+                            <el-select v-model="ruleForm.disposal_type" :disabled="true" placeholder="请选择处置类型">
                                 <el-option v-for="item in dicdata.chuzhi.data" :key="item.id" :label="item.title" :value="item.id">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="上级交办" prop="supervisor">
-                            <el-switch v-model="ruleForm.supervisor" :active-value="1" inactive-value="0"></el-switch>
+                        <el-form-item label="上级交办">
+                            <el-switch v-model="ruleForm.supervisor" :disabled="true" :active-value="1" inactive-value="0"></el-switch>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="办结期限" prop="closed_time" required>
-                            <el-date-picker value-format="yyyy-MM-dd" type="date" placeholder="选择日期" v-model="ruleForm.closed_time" style="width: 100%;"></el-date-picker>
+                        <el-form-item label="办结期限">
+                            {{ruleForm.closed_time}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="提醒天数" prop="remind_days" required>
-                            <el-input v-model="ruleForm.remind_days"></el-input>
+                        <el-form-item label="提醒天数">
+                            {{ruleForm.remind_days}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="5">
-                        <el-form-item label="去向" prop="clue_next" required>
-                            <el-select v-model="ruleForm.clue_next" placeholder="请选择活动区域">
+                        <el-form-item label="去向">
+                            <el-select :disabled="true" v-model="ruleForm.clue_next" placeholder="请选择活动区域">
                                 <el-option label="区域一" value="shanghai"></el-option>
                                 <el-option label="区域二" value="beijing"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="5">
-                        <el-form-item label="线索状态" prop="clue_state" required>
-                            <el-select v-model="ruleForm.clue_state" placeholder="请选择活动区域">
+                        <el-form-item label="线索状态">
+                            <el-select :disabled="true" v-model="ruleForm.clue_state" placeholder="请选择活动区域">
                                 <el-option label="区域一" value="shanghai"></el-option>
                                 <el-option label="区域二" value="beijing"></el-option>
                             </el-select>
@@ -160,54 +155,13 @@
                 </el-row>
                 <el-row>
                     <el-col :span="16">
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="16">
-                        <el-form-item label="上传附件">
-                            <el-tabs tab-position="left" style="height: 200px;">
-                                <el-tab-pane label="图片">
-                                    <el-upload :before-remove="removeFile1" :on-success="upSuccessFile" :data="img_" class="upload-demo" ref="img" accept="image/*" :action="url" :on-preview="handlePreview" :file-list="img" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
-                                        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                                    </el-upload>
-                                </el-tab-pane>
-                                <el-tab-pane label="音频">
-                                    <el-upload :before-remove="removeFile2" :on-success="upSuccessFile" :data="audio_" class="upload-demo" ref="audio" accept="audio/*" :action="url" :on-preview="handlePreview" :file-list="audio" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
-                                        <div slot="tip" class="el-upload__tip">只能上传音频文件，且不超过500kb</div>
-                                    </el-upload>
-                                </el-tab-pane>
-                                <el-tab-pane label="word">
-                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word" accept="application/msword" :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
-                                        <div slot="tip" class="el-upload__tip">只能上传word文件，且不超过500kb</div>
-                                    </el-upload>
-                                </el-tab-pane>
-                                <el-tab-pane label="excel">
-                                    <el-upload :before-remove="removeFile4" :on-success="upSuccessFile" :data="excel_" class="upload-demo" ref="excel" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" :action="url" :on-preview="handlePreview"
-                                        :file-list="excel" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
-                                        <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
-                                    </el-upload>
-                                </el-tab-pane>
-                                <div></div>
-                                <el-tab-pane label="其他">
-                                    <el-upload :before-remove="removeFile5" :on-success="upSuccessFile" :data="file_" :before-upload="beforeUp" class="upload-demo" ref="file" :multiple="true" :action="url" :on-preview="handlePreview" :file-list="file" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
-                                        <div slot="tip" class="el-upload__tip">只能不超过500kb</div>
-                                    </el-upload>
-                                </el-tab-pane>
-
-                            </el-tabs>
-                        </el-form-item>
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row>
+                <el-row class="jihao">
                     <el-col :span="24">
                         <el-form-item label="已上传文件">
-                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index)">
+                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" :disable-transitions="false" @close="handleClose(index)">
                                 {{tag.filename}}
                             </el-tag>
                         </el-form-item>
@@ -215,8 +169,9 @@
                 </el-row>
                 <hr/>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+                    <el-button type="primary" @click="daochu()">导出</el-button>
                 </el-form-item>
+                <a id='down' ref="down" :href="downF" target="_blank">3123</a>
             </el-form>
         </div>
 
@@ -227,40 +182,21 @@
 export default {
     name: 'menuslider',
     created() {
-        if(!this.$route.query.clue_id){ return false}
+        if (!this.$route.query.clue_id) {
+            return false
+        }
         this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
             this.ruleForm = { ...res.data.clue,
                 ...res.data.clue_detail
             };
             this.upFileEnd = res.data.clue_attachments;
+            this.newdata = Math.ceil((new Date(this.ruleForm.closed_time) - this.newdata) / 1000 / 60 / 60 / 24);
         })
     },
     data() {
-        var checkAge = (rule, value, callback) => {
-            console.log(value, value.length)
-            if (!!value) {
-                if (value.length != 8) {
-                    callback(new Error('请录入8位编号！'));
-                } else {
-                    this.$ajax.post('/api/clue/check_clue_number/', {
-                        number: value,
-                        clue_id:this.$route.query.clue_id
-                    }).then((res) => {
-                        if (!res.data.result) {
-                            callback();
-                        } else {
-                            callback(new Error('编号已存在，请重新录入'));
-                        }
-                    }, () => {
-                        callback(new Error('服务器错误'));
-                    })
-                }
-
-            } else {
-                callback(new Error('请录入8位编号！'));
-            }
-        };
         return {
+            downF:'',
+            newdata: new Date(),
             loading: false,
             upFileEnd: [],
             url: 'http://clue.api.test/api/clue/clue_upload/',
@@ -307,89 +243,22 @@ export default {
                 'department_opinion': '',
                 'leader_approval': '',
                 'remark': ''
-            },
-            rules: {
-                source: [{
-                        required: true,
-                        message: '必填',
-                        trigger: 'blur'
-                    },
-                    {
-                        min: 3,
-                        max: 10,
-                        message: '长度在 3 到 10 个字符',
-                        trigger: 'blur'
-                    }
-                ],
-                number: [{
-                    validator: checkAge,
-                    trigger: 'blur'
-                }, {
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }, ],
-                reflected_name: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                company: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                post: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                level: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                entry_time: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                main_content: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                disposal_type: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                closed_time: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                remind_days: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                clue_next: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
-                clue_state: [{
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
             }
         };
     },
     methods: {
-        handleClose(index){
-            this.upFileEnd.splice(index,1);
+        daochu() {
+            
+            this.$ajax.post('/api/clue/export_word', this.$route.query).then((res) => {
+                this.downF='http://clue.api.test/'+res.data.file_path;
+               this.open();
+            })
+        },
+        open(){
+             window.open(this.downF);
+        },
+        handleClose(index) {
+            this.upFileEnd.splice(index, 1);
         },
         removeFile1(file, fileList) {
             this.img__.splice(fileList.indexOf(file), 1)
@@ -424,7 +293,7 @@ export default {
             this.$refs['ruleForm'].resetFields();
         },
         submitForm(formName) {
-            console.log(this.img__,12312323)
+            console.log(this.img__, 12312323)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let data = {
@@ -442,7 +311,7 @@ export default {
                             'remind_days': '',
                             'clue_next': '',
                             'clue_state': '',
-                             clue_id:this.$route.query.clue_id
+                            clue_id: this.$route.query.clue_id
                         },
                         clue_detail: {
                             'main_content': '',
@@ -464,7 +333,7 @@ export default {
                     // excel__: [],
                     // file__: [],3213213
                     data.clue_attachments = [
-                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__,...this.upFileEnd
+                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__, ...this.upFileEnd
                     ];
                     var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
                         clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
@@ -499,7 +368,7 @@ export default {
                         message: '警告哦，请检查输入是否有误！',
                         type: 'warning'
                     });
-                    
+
                     return false;
                 }
             });
@@ -515,9 +384,22 @@ export default {
 
 
 <style scoped>
-  .el-tag + .el-tag {
+.jihao .el-tag {
+    background-color: rgba(64, 158, 255, .1);
+    padding: 0 10px;
+    height: 25px;
+    line-height: 23px;
+    font-size: 12px;
+    color: #409EFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid rgba(64, 158, 255, .2);
+}
+
+.el-tag+.el-tag {
     margin-left: 10px;
-  }
+}
+
 hr {
     border-color: #9b9595;
 }
