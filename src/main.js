@@ -16,6 +16,7 @@ import breadcrumb from './components/breadcrumb'
 import utils from './utils'
 
 
+
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
 import './assets/css/signin.css'
@@ -105,6 +106,7 @@ const $axios = axios.create({
 });
 Vue.prototype.$ajax = $axios
 Vue.prototype.confindata = config
+Vue.prototype.$echarts = echarts
 Vue.component('public-nav', publicnav);
 Vue.component('menuslider', menuslider);
 Vue.component('publicsearch', publicsearch);

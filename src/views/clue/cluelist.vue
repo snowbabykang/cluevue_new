@@ -23,50 +23,61 @@
 		<publicsearch modeltitle="快速查询">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="block pull-left" v-show="showmore">
+					<el-form :inline="true" :model="topdata" class="demo-form-inline" >
+					<el-form-item label="请选择时间" v-show="showmore">
+						<el-col :span="11">
+						<el-date-picker size="small"  type="date" placeholder="选择日期" v-model="topdata.entry_start_time" style="width: 100%;"></el-date-picker>
+						</el-col>
+						<el-col class="line" style="text-aline:center" :span="2">-</el-col>
+						<el-col :span="11">
+						<el-date-picker size="small"  type="date" placeholder="选择日期" v-model="topdata.entry_end_time" style="width: 100%;"></el-date-picker>
+						</el-col>
+					</el-form-item>	
+					<!-- <div class="block pull-left" v-show="showmore">
 						<label>请选择时间</label>
 						<el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
 						</el-date-picker>
-					</div>
-
-					<div class="block pull-left ml-lg" v-show="showmore">
+					</div> -->
+					<el-form-item label="线索来源" v-show="showmore">
+						<el-select size="small" v-model="topdata.source" placeholder="请选择线索来源">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.code">
+							</el-option>
+						</el-select>
+					</el-form-item>
+					<!-- <div class="block pull-left ml-lg" v-show="showmore">
 						<label>线索来源</label>
 						<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
-							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.code">
 							</el-option>
 						</el-select>
-					</div>
-					<div class="block pull-left ml-lg" v-show="showmore">
-						<label>职位</label>
-						<el-select size="small" v-model="topdata.post" clearable placeholder="请选择职位">
-							<el-option v-for="item in dicdata.rank.data" :key="item.id" :label="item.title" :value="item.id">
-							</el-option>
-						</el-select>
-					</div>
-					<div class="block pull-left ml-lg" v-show="showmore">
-						<label>级别</label>
-						<el-select size="small" v-model="topdata.level" clearable placeholder="请选择级别">
-							<el-option v-for="item in dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.id">
-							</el-option>
-						</el-select>
-					</div>
-					<div class="block pull-left ml-lg" v-show="showmore">
-						<label>单位</label>
-						<el-select size="small" v-model="topdata.company" clearable placeholder="请选择">
-							<el-option v-for="item in  dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.id">
-							</el-option>
-						</el-select>
-					</div>
-					<div class="block pull-left ml-lg form-group">
+					</div> -->					
+					<el-form-item label="职位" v-show="showmore">
+						<el-input  size="small" v-model="topdata.post" placeholder="请输入职位"></el-input>
+					</el-form-item>
 
-						<el-input size="small" v-model="postdata.keyword" placeholder="输入线索来源"></el-input>
-					</div>
-					<div class="block pull-left ml-lg">
+					<el-form-item label="级别" v-show="showmore">
+						<el-select size="small" v-model="topdata.level" placeholder="请选择级别">
+							<el-option v-for="item in dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.code">
+							</el-option>
+						</el-select>
+					</el-form-item>
+
+					<el-form-item label="单位" v-show="showmore">
+						<el-input  size="small" v-model="topdata.company" placeholder="请输入单位"></el-input>
+					</el-form-item>
+					
+					<el-form-item label="线索来源">
+						<el-input  size="small" v-model="topdata.keyword" placeholder="请输入线索来源"></el-input>
+					</el-form-item>
+					
+					<el-form-item>
 						<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
 						<el-button size="small" type="primary" style="margin-left:15px" @click="topsearch">高级筛选</el-button>
 						<el-button size="small" type="primary" style="margin-left:15px" @click="clearsearch" v-show="showmore">清除筛选</el-button>
-					</div>
+					</el-form-item>
+					</el-form>
 				</div>
+				
 			</div>
 
 

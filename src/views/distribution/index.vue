@@ -47,7 +47,7 @@
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 <el-button size="small" type="primary" @click="dismodelopen" style="margin-left:15px">添加</el-button>
                                 <el-button size="small" type="primary" style="margin-left:15px">打印</el-button>
-                                <el-button size="small" type="primary" style="margin-left:15px">导出EXCEL</el-button>
+                                <el-button size="small" type="primary" @click="output" style="margin-left:15px" >导出EXCEL</el-button>
                             </div>
 
                         </div>
@@ -188,6 +188,9 @@
 		    }
 	    },
         methods: {
+            output(){
+                console.log('')
+            },
             dismodelopen(){
                 this.showmodel = true
             },
