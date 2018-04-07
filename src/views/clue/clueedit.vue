@@ -48,10 +48,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="16">
+                    <el-col :span="15">
                         <el-form-item label="被反映人姓名" prop="reflected_name">
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
+                    </el-col>
+                    <el-col :span="1" v-show="Togg">
+                        <i @click="dialogTableVisible = true" class="size el-icon-circle-check" title="跳转到列表"></i>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -117,7 +120,7 @@
                     <el-col :span="8">
                         <el-form-item label="处置类型" prop="disposal_type">
                             <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
-                                <el-option v-for="item in dicdata.chuzhi.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.disposal_type.data" :key="item.id" :label="item.title" :value="item.id">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -143,17 +146,14 @@
                 <el-row>
                     <el-col :span="5">
                         <el-form-item label="去向" prop="clue_next" required>
-                            <el-select v-model="ruleForm.clue_next" placeholder="请选择活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
+                            <el-input v-model="ruleForm.clue_next"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="5">
                         <el-form-item label="线索状态" prop="clue_state" required>
-                            <el-select v-model="ruleForm.clue_state" placeholder="请选择活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
+                            <el-select v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
+                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.id">
+                                </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -218,6 +218,10 @@
                     <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
                 </el-form-item>
             </el-form>
+            <el-dialog width="1300px" name="vv" title="详情" :visible.sync="dialogTableVisible">
+                <viewlist name="aa" :data="gridData">
+                </viewlist>
+            </el-dialog>
         </div>
 
     </div>
@@ -227,7 +231,9 @@
 export default {
     name: 'menuslider',
     created() {
-        if(!this.$route.query.clue_id){ return false}
+        if (!this.$route.query.clue_id) {
+            return false
+        }
         this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
             this.ruleForm = { ...res.data.clue,
                 ...res.data.clue_detail
@@ -244,7 +250,7 @@ export default {
                 } else {
                     this.$ajax.post('/api/clue/check_clue_number/', {
                         number: value,
-                        clue_id:this.$route.query.clue_id
+                        clue_id: this.$route.query.clue_id
                     }).then((res) => {
                         if (!res.data.result) {
                             callback();
@@ -260,7 +266,30 @@ export default {
                 callback(new Error('请录入8位编号！'));
             }
         };
+        var checkName = (rule, value, callback) => {
+            if (!!value) {
+                this.$ajax.post('/api/clue/get_reflected_name_clue', {
+                    reflected_name: value,
+                }).then((res) => {
+                    let data = res.data;
+                    this.gridData = data;
+                    if (data.document.data.length || data.clue.data.length || data.case.case_clue.data.length || data.case.case_filing.data.length) {
+                        this.Togg = true;
+                    } else {
+                        this.Togg = false;
+                    }
+                    callback();
+                }, () => {
+                    callback();
+                })
+            } else {
+                callback(new Error('必填'));
+            }
+        };
         return {
+            dialogTableVisible: false,
+            gridData: {},
+            Togg: false,
             loading: false,
             upFileEnd: [],
             url: 'http://clue.api.test/api/clue/clue_upload/',
@@ -310,17 +339,10 @@ export default {
             },
             rules: {
                 source: [{
-                        required: true,
-                        message: '必填',
-                        trigger: 'blur'
-                    },
-                    {
-                        min: 3,
-                        max: 10,
-                        message: '长度在 3 到 10 个字符',
-                        trigger: 'blur'
-                    }
-                ],
+                    required: true,
+                    message: '必填',
+                    trigger: 'blur'
+                }],
                 number: [{
                     validator: checkAge,
                     trigger: 'blur'
@@ -330,6 +352,9 @@ export default {
                     trigger: 'blur'
                 }, ],
                 reflected_name: [{
+                    validator: checkName,
+                    trigger: 'blur'
+                }, {
                     required: true,
                     message: '必填',
                     trigger: 'blur'
@@ -388,8 +413,8 @@ export default {
         };
     },
     methods: {
-        handleClose(index){
-            this.upFileEnd.splice(index,1);
+        handleClose(index) {
+            this.upFileEnd.splice(index, 1);
         },
         removeFile1(file, fileList) {
             this.img__.splice(fileList.indexOf(file), 1)
@@ -424,7 +449,6 @@ export default {
             this.$refs['ruleForm'].resetFields();
         },
         submitForm(formName) {
-            console.log(this.img__,12312323)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let data = {
@@ -442,7 +466,7 @@ export default {
                             'remind_days': '',
                             'clue_next': '',
                             'clue_state': '',
-                             clue_id:this.$route.query.clue_id
+                            clue_id: this.$route.query.clue_id
                         },
                         clue_detail: {
                             'main_content': '',
@@ -464,7 +488,7 @@ export default {
                     // excel__: [],
                     // file__: [],3213213
                     data.clue_attachments = [
-                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__,...this.upFileEnd
+                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__, ...this.upFileEnd
                     ];
                     var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
                         clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
@@ -499,7 +523,7 @@ export default {
                         message: '警告哦，请检查输入是否有误！',
                         type: 'warning'
                     });
-                    
+
                     return false;
                 }
             });
@@ -515,9 +539,24 @@ export default {
 
 
 <style scoped>
-  .el-tag + .el-tag {
+.dolog {
+    width: 1300px;
+    height: 600px;
+}
+
+.size {
+    font-size: 25px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.el-tag+.el-tag {
     margin-left: 10px;
-  }
+}
+
 hr {
     border-color: #9b9595;
 }

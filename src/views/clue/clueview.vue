@@ -138,17 +138,14 @@
                 <el-row>
                     <el-col :span="5">
                         <el-form-item label="去向">
-                            <el-select :disabled="true" v-model="ruleForm.clue_next" placeholder="请选择活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
+                            {{ruleForm.clue_next}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="5">
                         <el-form-item label="线索状态">
-                            <el-select :disabled="true" v-model="ruleForm.clue_state" placeholder="请选择活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
+                            <el-select :disabled="true" v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
+                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.id">
+                                </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -161,9 +158,7 @@
                 <el-row class="jihao">
                     <el-col :span="24">
                         <el-form-item label="已上传文件">
-                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" :disable-transitions="false" @close="handleClose(index)">
-                                {{tag.filename}}
-                            </el-tag>
+                            <el-button @click="fileClick(tag)" :key="tag.id" v-for="(tag, index) in upFileEnd">{{index+1}}. {{tag.filename}}</el-button>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -171,10 +166,14 @@
                 <el-form-item>
                     <el-button type="primary" @click="daochu()">导出</el-button>
                 </el-form-item>
-                <a id='down' ref="down" :href="downF" target="_blank">3123</a>
             </el-form>
         </div>
-
+        <el-dialog title="图片" :visible.sync="dialogTableVisible" class="mod">
+            <div style="text-align:center">
+                <img :src="srcimg">
+            </div>
+            
+        </el-dialog>
     </div>
 </div>
 </template>
@@ -195,7 +194,9 @@ export default {
     },
     data() {
         return {
-            downF:'',
+            dialogTableVisible:false,
+            srcimg:'',
+            downF: '',
             newdata: new Date(),
             loading: false,
             upFileEnd: [],
@@ -247,15 +248,23 @@ export default {
         };
     },
     methods: {
+        fileClick(item) {
+            let url='http://clue.api.test/' + item.file_path;
+            if (item.attachment_type != 'img') {
+                window.open('http://clue.api.test/' + item.file_path);
+            } else {
+                this.srcimg=url;
+                this.dialogTableVisible=true;
+            }
+        },
         daochu() {
-            
             this.$ajax.post('/api/clue/export_word', this.$route.query).then((res) => {
-                this.downF='http://clue.api.test/'+res.data.file_path;
-               this.open();
+                this.downF = 'http://clue.api.test/' + res.data.file_path;
+                this.open();
             })
         },
-        open(){
-             window.open(this.downF);
+        open() {
+            window.open(this.downF);
         },
         handleClose(index) {
             this.upFileEnd.splice(index, 1);
@@ -384,6 +393,14 @@ export default {
 
 
 <style scoped>
+.el-dialog__body{
+    text-align: center;
+}
+.el-button+.el-button,
+.el-button {
+    margin: 0 5px 5px 0;
+}
+
 .jihao .el-tag {
     background-color: rgba(64, 158, 255, .1);
     padding: 0 10px;

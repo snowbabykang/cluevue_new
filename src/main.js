@@ -25,9 +25,11 @@ import './assets/js/footable/css/footable.core.css'
 import './assets/js/footable/css/footable-demos.css'
 import './assets/js/footable/css/footable.standalone.css'
 
-
+import viewlist from './views/clue/viewlist.vue'
+import comtable from './views/clue/comtable.vue'
 Vue.config.productionTip = false;
-
+Vue.component('viewlist',viewlist);
+Vue.component('comtable',comtable);
 Vue.use(Vuex)
 Vue.use(utils)
 
