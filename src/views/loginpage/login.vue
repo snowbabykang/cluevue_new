@@ -1,16 +1,16 @@
 <template>
-    <div class="clearfix">
-        <div class="form-group">
+    <div class="clearfix centermodel">
+        <div class="form-group clearfix">
             <!--a href="#" class="pull-right label-forgot">Forgot email?</a-->
-            <label for="inputUsernameEmail">用户名</label>
+            <label for="inputUsernameEmail">用户名:</label>
             <input type="text" id="inputUsernameEmail" class="form-control" v-model="loginName" >
         </div>
-        <div class="form-group">
+        <div class="form-group  clearfix">
             <!--a href="#" class="pull-right label-forgot">Forgot password?</a-->
-            <label for="inputPassword">密码</label>
+            <label for="inputPassword">密码:</label>
             <input type="password" id="inputPassword" class="form-control" v-model="password">
         </div>
-        <div class="checkbox">
+        <div class="checkbox" v-if=flase>
             <label><input type="checkbox">记住用户名</label>
             <router-link class="forgotLnk pull-right" :to="{ path: 'findpassword' }">忘记密码？</router-link>
         </div>
@@ -20,7 +20,7 @@
             <div class="row-block">
                 <div class="row">
                 <div class="col-md-12 row-block">
-                    <button @click="userlogin" class="btn btn-primary btn-block">登录</button>
+                    <a @click="userlogin" class="btnup">登录</a>
                 </div>
             </div>
         </div> 
@@ -65,4 +65,40 @@ export default {
   }
 };
 </script>
+<style scoped>
+    .centermodel {
+        width:225px;
+        margin:46px auto;
+    }
+    .form-group{
+         margin-left: -25px;
+         width:250px
+    }
+    .form-group label {
+        float:left; 
+        width:45px;
+        color:#a1daf9;
+        line-height: 24px;
+        text-align:justify;
+        text-align-last:justify;
+       
+    }
+    .form-group input{
+        width:200px;
+        float: right;
+    }
+    .row-block {
+        margin-left: -8px
+    }
+    .btnup{
+        display: block;
+        width: 75px;
+        height: 34px;
+        margin:-4px auto 0;
+        line-height: 34px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
 

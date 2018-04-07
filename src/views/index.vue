@@ -4,8 +4,7 @@
    <menuslider></menuslider>
    <div class="wrap-fluid">
         <div class="container-fluid paper-wrap bevel tlbr">
-          <router-view/>
-         
+          <router-view></router-view>
         </div>
       </div>
   </div>
@@ -13,7 +12,7 @@
 
 <script>
 export default {
-  name: '首页',
+  name: 'index',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

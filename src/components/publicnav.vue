@@ -19,102 +19,55 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown" :class="{'open':message}">
-                        <a class="dropdown-toggle" @click="messagopen"><i style="font-size:20px;" class="icon-conversation"></i><div class="noft-red">23</div></a>
+                    <li class="dropdown" v-bind:class="openbox=='clue'?'open':''">
+                        <a class="dropdown-toggle" @click="openuserinfo('clue')">线索管理</a>
                         <ul style="margin: 11px 0 0 9px;" role="menu" class="dropdown-menu dropdown-wrap">
                             <li>
-                                <a href="#">
-                                    <img alt="" class="img-msg img-circle" src="http://api.randomuser.me/portraits/thumb/men/1.jpg">Jhon Doe <b>Just Now</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <img alt="" class="img-msg img-circle" src="http://api.randomuser.me/portraits/thumb/women/1.jpg">Jeniffer <b>3 Min Ago</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <img alt="" class="img-msg img-circle" src="http://api.randomuser.me/portraits/thumb/men/2.jpg">Dave <b>2 Hours Ago</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <img alt="" class="img-msg img-circle" src="http://api.randomuser.me/portraits/thumb/men/3.jpg"><i>Keanu</i>  <b>1 Day Ago</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <img alt="" class="img-msg img-circle" src="http://api.randomuser.me/portraits/thumb/men/4.jpg"><i>Masashi</i>  <b>2 Mounth Ago</b>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div>See All Messege</div>
+                                <router-link :to="{path:'clueadd',query:{breadNum:1}}"> 录入线索</router-link>
+                                <router-link :to="{path:'cluelist',query:{breadNum:1}}">线索列表</router-link>
                             </li>
                         </ul>
                     </li>
-                    <li><router-link to="/clue">线索管理</router-link></li>
-                    <li><router-link to="/clue">登记发放</router-link></li>
-                    <li><router-link to="/clue">文书管理</router-link></li>
-                    <li><router-link to="/clue">数据统计</router-link></li>
-
+                    <li class="dropdown" v-bind:class="openbox=='numtpu'?'open':''" v-if="false">
+                        <a class="dropdown-toggle" @click="openuserinfo('numtpu')">数据统计</a>
+                        <ul style="margin: 11px 0 0 9px;" role="menu" class="dropdown-menu dropdown-wrap">
+                            <li>
+                                <router-link :to="{path:'trend',query:{breadNum:1}}">案件数量趋势</router-link>
+                                <router-link :to="{path:'proportion',query:{breadNum:1}}">各职级案件比例</router-link>
+                                <router-link :to="{path:'unproportion',query:{breadNum:1}}">未结案比例</router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><router-link :to="{path:'timeout',query:{breadNum:1}}">超期提醒</router-link></li>
+                    <li><router-link :to="{path:'distribution',query:{breadNum:1}}">登记发放</router-link></li>
+                    <li><router-link :to="{path:'pagerwork',query:{breadNum:1}}">文书管理</router-link></li>
+                    <li><router-link :to="{path:'regnumber',query:{breadNum:1}}">问题线索处置情况登记表</router-link></li>
+                    <li><router-link :to="{path:'regnumber',query:{breadNum:1}}">立案案件登记表</router-link></li>
+                    <li v-if="false"><router-link :to="{path:'regnumber',query:{breadNum:1}}">登号登记</router-link></li>
                 </ul>
-       
+        
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
-                    <li :class="{'open':openuser}">
-                        <a class="dropdown-toggle" @click="openuserinfo">
-                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">{{username}}，你好<b class="caret"></b>
+                    <li v-bind:class="openbox=='userinfo'?'open':''">
+                        <a class="dropdown-toggle" @click="openuserinfo('userinfo')">
+                            {{username}}，你好<b class="caret"></b>
                         </a>
                         <ul style="margin-top:14px;" class="dropdown-setting dropdown-menu" >
                             <li>
                                 <a @click="loginout"><span class="entypo-user"></span>&#160;&#160;退出登录</a>
                             </li>   
-                            <!-- <li>
-                                <a href="#">
-                                    <span class="entypo-vcard"></span>&#160;&#160;Account Setting</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="entypo-lifebuoy"></span>&#160;&#160;Help</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="http://themeforest.net/item/apricot-navigation-admin-dashboard-template/7664475?WT.ac=category_item&WT.z_author=themesmile">
-                                    <span class="entypo-basket"></span>&#160;&#160; Purchase</a>
-                            </li> -->
                         </ul>
                     </li>
-                    <li :class="{'open':setingstate}">
-                        <a data-toggle="dropdown" class="dropdown-toggle" @click="seting">
-                            <span class="icon-gear"></span>&#160;&#160;Setting</a>
-                        <ul role="menu" class="dropdown-setting dropdown-menu">
+                    <li v-bind:class="openbox=='skinset'?'open':''">
+                        <a class="dropdown-toggle" @click="openuserinfo('skinset')">
+                            <span class="icon-gear"></span>&#160;&#160;皮肤</a>
+                        <ul  class="dropdown-setting dropdown-menu">
                             <li class="theme-bg">
                                 <div v-for="key in bglist" :key="key" :id="key" @click="chagebg(key)"></div>
-                                <!-- <div id="button-bg2"></div>
-                                <div id="button-bg3"></div>
-                                <div id="button-bg5"></div>
-                                <div id="button-bg6"></div>
-                                <div id="button-bg7"></div>
-                                <div id="button-bg8"></div>
-                                <div id="button-bg9"></div>
-                                <div id="button-bg10"></div>
-                                <div id="button-bg11"></div>
-                                <div id="button-bg12"></div>
-                                <div id="button-bg13"></div> -->
+                               
                             </li>
                         </ul>
                     </li>
-                    <li class="hidden-xs">
-                        <a class="toggle-left" href="#">
-                            <span style="font-size:20px;" class="entypo-list-add"></span>
-                        </a>
-                    </li>
                 </ul>
-
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -135,12 +88,21 @@ export default {
         bglist:this.confindata.bglist
     }
   },
+  computed:{
+     openbox:function(){
+        return this.$store.state.topnavhide
+     } 
+  },
   methods:{
       messagopen:function(){
           this.message = !this.message
       },
-      openuserinfo:function(){
-          this.openuser = !this.openuser
+      openuserinfo:function(e){
+          if(this.$store.state.topnavhide==e){
+               this.$store.commit("topnavhide",'');
+          }else{
+               this.$store.commit("topnavhide",e);
+          }
       },
       loginout:function(){
         this.$ajax.post('/api/logout',{}).then((res)=>{
@@ -149,11 +111,8 @@ export default {
         })
          
       },
-      seting:function(){
-          this.setingstate =! this.setingstate
-      },
+      
       chagebg:function(name){
-          console.log(this)
         this.$store.commit('changebg',name)
       },
       
@@ -168,5 +127,8 @@ export default {
 <style scoped>
 .navbar{
     margin-top: 0px !important
+}
+.dropdown-toggle {
+    cursor: pointer;
 }
 </style>

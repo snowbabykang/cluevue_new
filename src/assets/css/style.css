@@ -19,7 +19,7 @@
 }
 
 body {
-    color: #9ea7b3!important;
+    color: #555!important;
     font-family: "Open Sans", Arial, sans-serif!important;
     font-size: 13px!important;
     line-height: 20px;
@@ -916,7 +916,7 @@ img.ikon {
 #search input[type="text"] {
     background: url("../img/search-dark.png") no-repeat scroll 14px 10px #FFFFFF;
     border: 0 none;
-    color: #9EA7B3 !important;
+    color: #555 !important;
     width: 150px;
     padding: 6px 15px 6px 35px;
     -webkit-border-radius: 4px;
@@ -1945,7 +1945,7 @@ ul.topnav h4 {
 }
 
 .breadcrumb li a {
-    color: #9EA7B3 !important;
+    color: #555 !important;
     font-size: 13px;
     transition: all 0.4s ease 0s;
 }
@@ -1994,7 +1994,7 @@ ul.topnav h4 {
     background-position: right;
     padding-right: 0;
     text-decoration: none;
-    color: #9EA7B3;
+    color: #555;
 }
 
 .home {
@@ -2029,7 +2029,7 @@ ul.topnav h4 {
 }
 
 .tittle-content-header {
-    color: #9EA7B3 !important;
+    color: #555 !important;
     font-family: "Open Sans";
     font-size: 16px;
     font-weight: normal;
@@ -2198,7 +2198,7 @@ img.sidebar-icon {
 }
 
 .nest .title-alt h6 {
-    color: #9EA7B3;
+    color: #555;
     float: left;
     font-family: 'Open Sans', serif;
     font-size: 14px;
@@ -2213,7 +2213,7 @@ img.sidebar-icon {
 .nest .title-alt .titleIcon {
     background: none repeat scroll 0 0 #323a45;
     border-radius: 3px 0 0 0;
-    color: #9EA7B3;
+    color: #555;
     float: left;
     font-size: 18px;
     height: 30px;

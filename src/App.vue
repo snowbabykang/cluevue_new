@@ -33,6 +33,7 @@ ul.topnav ul{
 ul.topnav ul .is-active , .el-menu-item .is-active, .el-menu-item:focus, .el-menu-item:hover{
   background-color: rgba(255, 255, 255, .6) !important
 }
+.button-bglogin{background: url(assets/img/loginbg.jpg) no-repeat center center #3388be;background-size: 1000px auto !important;}
 .button-bg1{overflow: visible; background: url("assets/img/bg5.jpg") center center no-repeat fixed;}
 .button-bg2{overflow: visible; background: url("assets/img/bg2.jpg") center center no-repeat fixed;}
 .button-bg3{overflow: visible; background: url("assets/img/bg.jpg") center center no-repeat fixed;}
