@@ -5,17 +5,12 @@
                 <div class="col-lg-3">
                     <h2 class="tittle-content-header">
                         <i class="icon-window"></i>
-                        <span>登记发放</span>
+                        <span>文书管理</span>
                     </h2>
                 </div>
                 <div class="col-sm-7">
                     <div class="devider-vertical visible-lg"></div>
                     <div class="tittle-middle-header">
-                        <div class="alert">
-                            <button type="button" class="close">×</button>
-                            <span class="tittle-alert entypo-info-circled"></span> 当前查询条件,&nbsp;
-                            
-                        </div>
                     </div>
                 </div>
             </div>
@@ -47,7 +42,7 @@
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 <el-button size="small" type="primary" @click="dismodelopen" style="margin-left:15px">添加</el-button>
                                 <el-button size="small" type="primary" style="margin-left:15px">打印</el-button>
-                                <el-button size="small" type="primary" style="margin-left:15px">导出EXCEL</el-button>
+                                <el-button size="small" type="primary" @click="output" style="margin-left:15px">导出EXCEL</el-button>
                             </div>
 
                         </div>
@@ -189,6 +184,7 @@
 		    }
 	    },
         methods: {
+            
             dismodelopen(){
                 this.showmodel = true
             },

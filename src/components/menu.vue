@@ -2,7 +2,7 @@
 <div id="skin-select" :class="{'active':isCollapse}">
   <div>
         <div id="logo">
-         <h1>线索管理<span>v1.2</span></h1>
+         <h1>线索管理<span>v1.0</span></h1>
         </div>
         <!-- <a  id="toggle">
             <span class="entypo-menu" @click="showorh"></span>
@@ -30,7 +30,7 @@
                 <el-menu-item class="clearsty" index="1-2"><router-link :to="{path:'cluelist',query:{breadNum:1}}">线索列表</router-link></el-menu-item>
             </el-menu-item-group>   
         </el-submenu>
-        <el-submenu index="2">
+        <el-submenu index="2" v-if="false">
              <template slot="title" class="tooltip-tip ajax-load">
                <a>
                 <i class="icon-feed"></i>数据统计
@@ -81,7 +81,7 @@
                </template>
              
         </el-menu-item>
-         <el-menu-item index="8">
+         <el-menu-item index="8" v-if="false">
              <template slot="title" class="tooltip-tip ajax-load">
                <router-link to="/regnumber">
                 <i class="icon-feed"></i>登号登记
@@ -116,7 +116,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$router.options.routes[0].children)
+    //console.log(this.$router.options.routes[0].children)
   }
   
 };

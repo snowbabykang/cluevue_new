@@ -12,14 +12,6 @@
                         <div class="devider-vertical visible-lg"></div>
                         <div class="tittle-middle-header">
 
-                            <div class="alert">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <span class="tittle-alert entypo-info-circled"></span>
-                                当前查询条件,&nbsp;
-                                <strong>{{searchback}}</strong>
-                            </div>
-
-
                         </div>
 
                     </div>

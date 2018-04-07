@@ -16,6 +16,7 @@ import breadcrumb from './components/breadcrumb'
 import utils from './utils'
 
 
+
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/loader-style.css'
 import './assets/css/signin.css'
@@ -37,11 +38,13 @@ const store = new Vuex.Store({
   // 定义状态
   state: {
     userToken:undefined,
-    classname: "button-bg",
+    classname: "button-bglogin",
     breadListState: [
-      { name: '首页', path: '/' } 
+      { name: '', path: '/' } 
     ],
-    dicdata:{}
+    dicdata:{},
+    topnavhide:'',
+    baseURL:'http://clue.api.test'
   },
   mutations: {
     changebg(state, name) {
@@ -62,6 +65,9 @@ const store = new Vuex.Store({
     },
     setdic:function(state,data){
       state.dicdata = data
+    },
+    topnavhide:function(state,data){
+      state.topnavhide=data
     }
   },
   getters: {
@@ -75,15 +81,13 @@ Vue.use(ElementUI);
 // axios.defaults.headers.common['Authorization'] = "aaa";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const $axios = axios.create({
-  //baseURL: 'http://www.yfqcy.cn',
-  baseURL: 'http://clue.api.test',
+  baseURL: store.state.baseURL,
   timeout: 5000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   },
   transformRequest: [function (data) {
-    // 对 data 进行任意转换处理
-    if (localStorage.getItem('userinfo') == "undefined") {
+    if (localStorage.getItem('userinfo') == "undefined" || localStorage.getItem('userinfo') == null) {
       return JSON.stringify(data);
     } else {
       var postdata = { data: data, token: JSON.parse(localStorage.getItem('userinfo')).token, type: 1 }
@@ -107,6 +111,7 @@ const $axios = axios.create({
 });
 Vue.prototype.$ajax = $axios
 Vue.prototype.confindata = config
+Vue.prototype.$echarts = echarts
 Vue.component('public-nav', publicnav);
 Vue.component('menuslider', menuslider);
 Vue.component('publicsearch', publicsearch);
@@ -114,6 +119,7 @@ Vue.component('breadcrumb', breadcrumb);
 /* eslint-disable no-new */
 router.beforeEach((to, from, next) => {
   //console.log(to,!!localStorage.getItem('userinfo'))
+  store.commit("topnavhide",'')
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (store.state.userToken) {  // 通过vuex state获取当前的token是否存在
       next();
