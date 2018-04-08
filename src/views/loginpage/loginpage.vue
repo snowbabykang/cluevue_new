@@ -32,7 +32,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
     .forgotLnk{
         margin-top: 0px
     }

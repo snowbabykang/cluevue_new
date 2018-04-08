@@ -89,7 +89,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
                         </el-pagination>
                     </div>
                 </div>
@@ -112,8 +112,6 @@
             return {
                 showmodel: false,
                 cluefrom: '',
-                index: 1,
-                size: 10,
                 current_page: 1,
                 totaldata: 1,
                 tableData: [],
@@ -126,7 +124,9 @@
                     document_user:'',//发文人
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
-                    print:0
+                    print:0,
+                    index: 1,
+				    size: 20
                 },
                 pickerOptions2: {
 				shortcuts: [{
@@ -184,7 +184,9 @@
 		    }
 	    },
         methods: {
-            
+            output(){
+                console.log("aaa")
+            },
             dismodelopen(){
                 this.showmodel = true
             },
@@ -228,12 +230,12 @@
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-                this.size = val
+                this.postdata.size = val
                 this.getdata()
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                this.index = val;
+                this.postdata.index = val;
                 this.getdata()
             },
             adddoc(){

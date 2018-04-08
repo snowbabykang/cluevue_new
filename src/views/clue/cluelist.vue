@@ -40,7 +40,7 @@
 					</div> -->
 					<el-form-item label="线索来源" v-show="showmore">
 						<el-select size="small" v-model="topdata.source" placeholder="请选择线索来源">
-							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.code">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
 							</el-option>
 						</el-select>
 					</el-form-item>
@@ -57,7 +57,7 @@
 
 					<el-form-item label="级别" v-show="showmore">
 						<el-select size="small" v-model="topdata.level" placeholder="请选择级别">
-							<el-option v-for="item in dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.code">
+							<el-option v-for="item in dicdata.rank2.data" :key="item.id" :label="item.title" :value="item.title">
 							</el-option>
 						</el-select>
 					</el-form-item>
@@ -66,8 +66,8 @@
 						<el-input  size="small" v-model="topdata.company" placeholder="请输入单位"></el-input>
 					</el-form-item>
 					
-					<el-form-item label="线索来源">
-						<el-input  size="small" v-model="topdata.keyword" placeholder="请输入线索来源"></el-input>
+					<el-form-item label="关键字">
+						<el-input  size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
 					</el-form-item>
 					
 					<el-form-item>
@@ -133,7 +133,7 @@
 						<td>{{item.post}}</td>
 						<td>{{item.level}}</td>
 						<td>
-							<span class="status-metro" v-bind:class="item.clue_state=='0'?'status-suspended':'status-active'">{{item.clue_state=='0'?'已办':'未办'}}</span>
+							<span class="status-metro" v-bind:class="item.clue_state=='待办'?'status-suspended':'status-active'">{{item.clue_state}}</span>
 						</td>
 						<td>
 							<el-button size="mini" type="primary" @click="edit(item.clue_id)">编辑</el-button>
@@ -180,7 +180,7 @@ export default {
 					order: 1
 				}],
 				index: 1,
-				size: 1
+				size: 20
 			},
 			topdata: {
 				entry_start_time: '',
@@ -513,6 +513,13 @@ export default {
 		getdata() {
 			let pdata = {};
 			let urls = ''
+			var arrtep = []
+			for (var i in this.postdata.orders) {
+				if (this.postdata.orders[i].order == 0) {
+					arrtep.push(this.postdata.orders[i])
+				}
+			}
+
 			if (this.showmore) {
 				pdata = Object.assign(this.postdata, this.topdata);
 				urls = '/api/clue/clue_advanced_search'
@@ -520,13 +527,8 @@ export default {
 				pdata = Object.assign(this.postdata, {});
 				urls = '/api/clue/clue_keyword_search'
 			}
-			var arrtep = []
-			for (var i in pdata.orders) {
-				if (pdata.orders[i].order == 0) {
-					arrtep.push(pdata.orders[i])
-				}
-			}
-			var tempdata = this.cloneobj(pdata);
+			console.log(pdata)
+			let tempdata = this.cloneobj(pdata);
 			tempdata.orders = arrtep
 			this.$ajax.post(urls, tempdata).then((res) => {
 				this.tableData = res.data.data;

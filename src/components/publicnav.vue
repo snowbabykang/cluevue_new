@@ -38,7 +38,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><router-link :to="{path:'timeout',query:{breadNum:1}}">超期提醒</router-link></li>
+                    <li><router-link :to="{path:'timeout',query:{breadNum:1}}">超期提醒</router-link><div v-if="remindtotal!=0" class="noft-red">{{remindtotal}}</div></li>
                     <li><router-link :to="{path:'distribution',query:{breadNum:1}}">登记发放</router-link></li>
                     <li><router-link :to="{path:'pagerwork',query:{breadNum:1}}">文书管理</router-link></li>
                     <li><router-link :to="{path:'regnumber',query:{breadNum:1}}">问题线索处置情况登记表</router-link></li>
@@ -85,7 +85,8 @@ export default {
         username:JSON.parse(localStorage.getItem('userinfo')).login_name,
         openuser:false,
         setingstate:false,
-        bglist:this.confindata.bglist
+        bglist:this.confindata.bglist,
+        remindtotal:0
     }
   },
   computed:{
@@ -118,7 +119,10 @@ export default {
       
   },
   created:function(){
-     
+      this.$ajax.post('/api/clue/remindtotal',{}).then((res)=>{
+            
+            this.remindtotal = res.data.total
+        })
   }
 }
 </script>
@@ -130,5 +134,9 @@ export default {
 }
 .dropdown-toggle {
     cursor: pointer;
+}
+.noft-red {
+    left: auto;
+    right: 0px;
 }
 </style>

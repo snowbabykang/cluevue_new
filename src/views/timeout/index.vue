@@ -60,7 +60,7 @@
               @current-change="handleCurrentChange"
               :current-page="current_page"
               :page-sizes="[10, 20, 50, 100]"
-              :page-size="100"
+              :page-size="20"
               layout="total, sizes, prev, pager, next, jumper"
               :total="totaldata">
             </el-pagination>
@@ -76,7 +76,7 @@ export default {
     return {
       cluefrom:'',
       index:1,
-      size:10,
+      size:20,
       current_page:1,
       totaldata:1,
       datalist:[]
@@ -96,8 +96,8 @@ export default {
         page:this.index,
         pagesize:this.size
       }).then((res)=>{
-        this.datalist = res.data.data,
-        this.totaldata = res.data.total
+        this.datalist = res.data
+       // this.totaldata = res.data.l
       })
     },
     handleSizeChange(val) {
