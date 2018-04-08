@@ -67,6 +67,7 @@ const store = new Vuex.Store({
       state.dicdata = data
     },
     topnavhide:function(state,data){
+      console.log(data)
       state.topnavhide=data
     }
   },
@@ -120,6 +121,11 @@ Vue.component('breadcrumb', breadcrumb);
 router.beforeEach((to, from, next) => {
   //console.log(to,!!localStorage.getItem('userinfo'))
   store.commit("topnavhide",'')
+  if(to.fullPath=="/loginpage"){
+    store.commit("changebg",'button-bglogin')
+  }else{
+    store.commit("changebg",'button-bg')
+  }
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (store.state.userToken) {  // 通过vuex state获取当前的token是否存在
       next();
@@ -134,9 +140,6 @@ router.beforeEach((to, from, next) => {
   else {
     next();
   }
-
-
-
 })
 new Vue({
   el: '#app',

@@ -1,5 +1,6 @@
 <template>
     <div class="clearfix centermodel">
+        <h3>问题线索管理系统</h3>
         <div class="form-group clearfix">
             <!--a href="#" class="pull-right label-forgot">Forgot email?</a-->
             <label for="inputUsernameEmail">用户名:</label>
@@ -10,7 +11,7 @@
             <label for="inputPassword">密码:</label>
             <input type="password" id="inputPassword" class="form-control" v-model="password">
         </div>
-        <div class="checkbox" v-if=flase>
+        <div class="checkbox" v-if=false>
             <label><input type="checkbox">记住用户名</label>
             <router-link class="forgotLnk pull-right" :to="{ path: 'findpassword' }">忘记密码？</router-link>
         </div>
@@ -24,6 +25,7 @@
                 </div>
             </div>
         </div> 
+        <h4>中共承德市纪律检查委员会</h4>
     </div>
 </template>
 <script>
@@ -69,6 +71,31 @@ export default {
     .centermodel {
         width:225px;
         margin:46px auto;
+        position:relative
+    }
+    .centermodel h3{
+        position: absolute;
+        top: -160px;
+        left:-76px;
+        font-size: 36px;
+        color: #fff;
+        text-align: center;
+        width: 360px;
+        font-family: 宋体;
+        font-weight: bold
+    }
+     .centermodel h4{
+        position: absolute;
+        bottom: -130px;
+        left:-36px;
+        font-size:18px;
+        color: #fff;
+        text-align: center;
+        width: 280px;
+        background: url(../../assets/img/dh.png) no-repeat left center / 24px auto;
+        line-height: 24px;
+        font-family: 宋体;
+        font-weight: bold
     }
     .form-group{
          margin-left: -25px;

@@ -231,10 +231,8 @@
                 console.log(`当前页: ${val}`);
                 this.index = val;
                 this.getdata()
-            },
-            adddoc(){
-                console.log("添加")
             }
+           
         },
         created() {
             this.getdata();
