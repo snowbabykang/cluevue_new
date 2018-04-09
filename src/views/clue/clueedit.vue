@@ -36,7 +36,7 @@
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
                             <el-select v-model="ruleForm.source" clearable placeholder="请选择线索来源">
-                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -120,14 +120,14 @@
                     <el-col :span="8">
                         <el-form-item label="处置类型" prop="disposal_type">
                             <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
-                                <el-option v-for="item in dicdata.disposal_type.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.disposal_type.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="上级交办" prop="supervisor">
-                            <el-switch v-model="ruleForm.supervisor" :active-value="1" inactive-value="0"></el-switch>
+                            <el-switch v-model="ruleForm.supervisor" active-value="上级交办" inactive-value="否"></el-switch>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -152,7 +152,7 @@
                     <el-col :span="5">
                         <el-form-item label="线索状态" prop="clue_state" required>
                             <el-select v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
-                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -207,7 +207,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="已上传文件">
-                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index)">
+                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index,tag)">
                                 {{tag.filename}}
                             </el-tag>
                         </el-form-item>
@@ -413,8 +413,12 @@ export default {
         };
     },
     methods: {
-        handleClose(index) {
+        handleClose(index,item) {
             this.upFileEnd.splice(index, 1);
+            let data=Object.assign(this.$route.query,{file_id:item.file_id});
+             this.$ajax.post('/api/clue/delete_clue_attachments', data).then((res) => {
+
+             })
         },
         removeFile1(file, fileList) {
             this.img__.splice(fileList.indexOf(file), 1)
@@ -432,7 +436,6 @@ export default {
             this.file__.splice(fileList.indexOf(file), 1)
         },
         upSuccessFile(esponse, file, fileList) {
-            console.log(file, fileList);
             this[esponse.data.fileInfo.attachment_type + '__'].push(esponse.data.fileInfo);
         },
         beforeUp(file) {},
@@ -440,10 +443,8 @@ export default {
 
         },
         handleRemove(file, fileList) {
-            console.log(file, fileList);
         },
         handlePreview(file) {
-            console.log(file);
         },
         resetForm() {
             this.$refs['ruleForm'].resetFields();

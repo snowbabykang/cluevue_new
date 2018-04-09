@@ -36,7 +36,7 @@
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
                             <el-select v-model="ruleForm.source" clearable placeholder="请选择线索来源">
-                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -120,14 +120,14 @@
                     <el-col :span="8">
                         <el-form-item label="处置类型" prop="disposal_type">
                             <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
-                                <el-option v-for="item in dicdata.disposal_type.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.disposal_type.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="上级交办" prop="supervisor">
-                            <el-switch v-model="ruleForm.supervisor" :active-value="1" inactive-value="0"></el-switch>
+                            <el-switch v-model="ruleForm.supervisor" active-value="上级交办" inactive-value="否"></el-switch>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -152,7 +152,7 @@
                     <el-col :span="8">
                         <el-form-item label="线索状态" prop="clue_state" required>
                             <el-select v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
-                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -311,7 +311,7 @@ export default {
                 'entry_time': '',
                 'closed_time': '',
                 'disposal_type': '',
-                'supervisor': 0,
+                'supervisor': '否',
                 'remind_days': '',
                 'clue_next': '',
                 'clue_state': '',
