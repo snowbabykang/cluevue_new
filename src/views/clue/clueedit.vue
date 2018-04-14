@@ -35,10 +35,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                            <el-select v-model="ruleForm.source" clearable placeholder="请选择线索来源">
-                                <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
-                                </el-option>
-                            </el-select>
+                            <el-input type="text" v-model="ruleForm.source"  placeholder="请输入线索来源"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -72,7 +69,10 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="级别" prop="level">
-                            <el-input v-model="ruleForm.level"></el-input>
+                            <el-select v-model="ruleForm.level" clearable placeholder="请选择级别">
+                                <el-option v-for="item in dicdata.rank.data" :key="item.id" :label="item.title" :value="item.title">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
