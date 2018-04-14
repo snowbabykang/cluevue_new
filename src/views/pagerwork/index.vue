@@ -41,7 +41,7 @@
                             <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 <el-button size="small" type="primary" @click="dismodelopen" style="margin-left:15px">添加</el-button>
-                                <el-button size="small" type="primary" style="margin-left:15px">打印</el-button>
+                                <el-button size="small" type="primary" @click="printpage" style="margin-left:15px">打印</el-button>
                                 <el-button size="small" type="primary" @click="output" style="margin-left:15px">导出EXCEL</el-button>
                             </div>
 
@@ -51,7 +51,8 @@
     
             </div>
                 <div class="col-md-12">
-                    <div style="padding:15px">
+                    <div  style="padding:15px">
+                        
                         <table class="table-striped footable-res footable metro-blue" style="width:100%">
                             <thead>
                                 <tr>
@@ -89,7 +90,28 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
+                        <div  id="printtable" v-show="false">
+                            <h3 style="text-align:center" >文书管理</h3> 
+                        <table border="1" cellpadding="1" width="100%" cellspacing="0" style="text-align:center" >
+                            <tr>
+                                <th>发文日期</th>
+                                <th>发文字号</th>
+                                <th>文件标题</th>
+                                <th>发文人</th>
+                                <th>发文单位</th>
+                                <th>备注</th>
+                            </tr>
+                            <tr v-for="(item,index) in tableData" :key="index">
+                                <td>{{item.document_date}}</td>
+                                    <td>{{item.document_code}}</td>
+                                    <td>{{item.document_title}}</td>
+                                    <td>{{item.document_user}}</td>
+                                    <td>{{item.document_unit}}</td>
+                                    <td>{{item.memo}}</td>
+                            </tr>
+                        </table> 
+                        </div>
+                        <el-pagination class="not-print" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
                         </el-pagination>
                     </div>
                 </div>
@@ -185,7 +207,26 @@
 	    },
         methods: {
             output(){
-                console.log("aaa")
+                 var arrtep = [];
+                let pdata = this.cloneobj(this.postdata);
+                for (var i in pdata.orders){
+                    if(pdata.orders[i].order==0){
+                        arrtep.push(pdata.orders[i])
+                    }
+                }
+                pdata.orders = arrtep;
+                pdata.export = 1;
+                pdata.orders = []
+                console.log(this.urlArgs(pdata));
+                window.open(this.$store.state.baseURL+"/api/document/list"+this.urlArgs(pdata),'download')
+            },
+            printpage:function(){
+                let newWindow = window.open("_blank");   //打开新窗口
+                let codestr = document.getElementById("printtable").innerHTML;   //获取需要生成pdf页面的div代码
+                newWindow.document.write(codestr);   //向文档写入HTML表达式或者JavaScript代码
+                newWindow.document.close();     //关闭document的输出流, 显示选定的数据
+                newWindow.print();   //打印当前窗口
+                return true;
             },
             dismodelopen(){
                 this.showmodel = true

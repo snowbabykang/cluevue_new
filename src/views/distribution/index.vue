@@ -38,7 +38,7 @@
                             <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 
-                                <el-button size="small" type="primary" style="margin-left:15px">打印</el-button>
+                                <el-button size="small" type="primary" @click="printpage" style="margin-left:15px">打印</el-button>
                                 <el-button size="small" type="primary" @click="output" style="margin-left:15px" >导出EXCEL</el-button>
                             </div>
 
@@ -86,6 +86,29 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div  id="printtable" v-show="false">
+                            <h3 style="text-align:center" >登记发放</h3> 
+                        <table border="1" cellpadding="1" width="100%" cellspacing="0" style="text-align:center" >
+                            <tr>
+                                <th>编号</th>
+                                <th>被反映人</th>
+                                <th>工作单位及职务</th>
+                                <th>反应的主要问题</th>
+                                <th>领导批示</th>
+                                <th>备注</th>
+                            </tr>
+                            <tr v-for="(item,index) in tableData" :key="index">
+                                 <td>{{item.number}}</td>
+                                    <td>{{item.reflected_name}}</td>
+                                    <td>{{item.company}}—{{item.post}}</td>
+                                    <td>{{item.main_content}}</td>
+                                    <td>{{item.leader_approval}}</td>
+                                    <td>{{item.remark}}</td>
+                            </tr>
+                        </table> 
+                        </div>
+
                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
                         </el-pagination>
                     </div>
@@ -179,7 +202,25 @@
 	    },
         methods: {
             output(){
-                console.log('')
+                var arrtep = [];
+                let pdata = this.cloneobj(this.postdata);
+                for (var i in pdata.orders){
+                    if(pdata.orders[i].order==0){
+                        arrtep.push(pdata.orders[i])
+                    }
+                }
+                pdata.orders = arrtep;
+                pdata.export = 1;
+                pdata.orders = []
+                window.open(this.$store.state.baseURL+"/api/clue/closedlist"+this.urlArgs(pdata),'download')
+            },
+            printpage:function(){
+                let newWindow = window.open("_blank");   //打开新窗口
+                let codestr = document.getElementById("printtable").innerHTML;   //获取需要生成pdf页面的div代码
+                newWindow.document.write(codestr);   //向文档写入HTML表达式或者JavaScript代码
+                newWindow.document.close();     //关闭document的输出流, 显示选定的数据
+                newWindow.print();   //打印当前窗口
+                return true;
             },
             dismodelopen(){
                 this.showmodel = true

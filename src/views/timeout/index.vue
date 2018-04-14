@@ -19,16 +19,6 @@
     </div> 
     <div class="row">
         <breadcrumb></breadcrumb>
-      <!-- <ul id="breadcrumb">
-        <li>
-          <span class="entypo-home"></span>
-        </li>
-        <li><i class="fa fa-lg fa-angle-right"></i>
-        </li>
-        <li><a href="#" title="Sample page 1">超期提醒</a>
-        </li>
-        
-      </ul> -->
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -42,6 +32,7 @@
               <th>结案日期</th>
               <th>剩余天数</th>
               <th>消息时间</th>
+              <th>操作</th>
             </tr>
             </thead>
                 <tbody>
@@ -52,6 +43,7 @@
                       <td>{{item.closed_time}}</td>
                       <td>距离结案日期还有 <span class="status-metro status-suspended">{{item.remind_days}}</span> 天</td>
                       <td>{{item.number}}</td>
+                      <td><el-button size="mini" type="primary" @click="view(item.clue_id)">查看</el-button></td>
                   </tr>
                 </tbody>
             </table>
@@ -110,6 +102,9 @@ export default {
 			this.index = val;
 			this.getdata()
 		},
+    view(id){
+      console.log(id)
+    }
   },
   created(){
     this.getdata()

@@ -60,4 +60,9 @@ html, body, #sb-site{
 .ml-lg{
   margin-left: 15px
 }
+@media print {
+    table{
+      border: 1px solid #000
+    }
+}
 </style>

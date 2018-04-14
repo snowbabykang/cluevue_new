@@ -67,7 +67,7 @@
         </el-menu-item>
         <el-menu-item index="6">
              <template slot="title" class="tooltip-tip ajax-load">
-               <router-link to="/regnumber">
+               <router-link to="/problemregister">
                 <i class="icon-feed"></i>问题线索处置情况登记表
                 </router-link>
                </template>
@@ -75,7 +75,7 @@
         </el-menu-item>
         <el-menu-item index="7">
              <template slot="title" class="tooltip-tip ajax-load">
-               <router-link to="/regnumber">
+               <router-link to="/filngregister">
                 <i class="icon-feed"></i>立案案件登记表
                 </router-link>
                </template>

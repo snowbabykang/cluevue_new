@@ -103,7 +103,7 @@ export default {
     }
     .form-group label {
         float:left; 
-        width:45px;
+        width:50px;
         color:#a1daf9;
         line-height: 24px;
         text-align:justify;
@@ -111,7 +111,7 @@ export default {
        
     }
     .form-group input{
-        width:200px;
+        width:195px;
         float: right;
     }
     .row-block {

@@ -106,8 +106,8 @@
 						<th class="footable-sortable footable-last-column" :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" width="250">
 							<div class="block" style="display:inline-block; margin-bottom:0">
 								<span class="demonstration">职位</span>
-								<!-- <el-cascader size="mini" :options="selectoptions" v-model="topdata.whereIn" @change="handleChange">
-								</el-cascader> -->
+								<el-cascader size="mini" :options="selectoptions" v-model="topdata.whereIn" @change="handleChange">
+								</el-cascader>
 							</div>
 							<span class="footable-sort-indicator" @click="ordersdata('post')"></span>
 						</th>
@@ -542,6 +542,7 @@ export default {
 
 	// },
 	mounted() {
+		console.log(this.$store.state)
 		this.getdata()
 	}
 };

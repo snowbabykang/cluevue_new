@@ -13,6 +13,7 @@ import timeout from '@/views/timeout/index'
 import pagerwork from '@/views/pagerwork/index'
 import regnumber from '@/views/pagerwork/index'
 import distribution from '@/views/distribution/index'
+import excelin from '@/views/excelin/index'
 
 import problemregister from '@/views/problemregister/index'
 
@@ -91,6 +92,11 @@ export default new Router({
           path: 'unproportion',
           name: '未结案比例',
           component: unproportion
+        },
+        {
+          path: 'excelin',
+          name: 'excel导入',
+          component: excelin
         }
       ]
     },
