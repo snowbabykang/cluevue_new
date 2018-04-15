@@ -67,8 +67,10 @@ const store = new Vuex.Store({
       state.dicdata = data
     },
     topnavhide:function(state,data){
-      console.log(data)
       state.topnavhide=data
+    },
+    removetoken:function(state){
+      state.userToken=undefined;
     }
   },
   getters: {
@@ -126,6 +128,7 @@ router.beforeEach((to, from, next) => {
   // }else{
   //   store.commit("changebg",'button-bg')
   // }
+
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (store.state.userToken) {  // 通过vuex state获取当前的token是否存在
       next();

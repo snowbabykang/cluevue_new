@@ -109,6 +109,7 @@ export default {
       loginout:function(){
         this.$ajax.post('/api/logout',{}).then((res)=>{
             localStorage.removeItem('userinfo');
+            this.$store.commit("removetoken");
             this.$router.push("/loginpage")
         })
          

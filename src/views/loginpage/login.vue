@@ -60,15 +60,6 @@ export default {
           });
     })
     }
-  },
-  created:function(){
-      console.log(localStorage.getItem('userinfo'))
-        // if(!localStorage.getItem('userinfo')){
-        //     setTimeout(()=>{
-        //          this.$router.push("/")
-        //     },3000)
-           
-        // }
   }
 };
 </script>
