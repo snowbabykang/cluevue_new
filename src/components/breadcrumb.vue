@@ -1,14 +1,12 @@
 <template>
-    <ul id="breadcrumb" >
-        <!-- <el-breadcrumb class="linkWay" >
-            <el-breadcrumb-item v-for="item in breadList" :key="item.id"  separator="/" :to="{ path: item.path }">{{item.name}}</el-breadcrumb-item>
-        </el-breadcrumb> -->
+    <!-- <ul id="breadcrumb" >
         <li><router-link to="/" class="entypo-home"></router-link></li>
         <template v-for="item in breadList">
             <li :key="item.id"><i class="fa fa-lg fa-angle-right"></i></li>
             <li :key="item.id"><router-link :to="{path:item.path }">{{item.name}}</router-link></li>
         </template >
-    </ul>
+    </ul> -->
+    <div></div>
 </template>
 
 

@@ -147,8 +147,8 @@
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
                     print:0,
-                    index: 1,
-				    size: 20
+                    page: 1,
+				    pagesize: 20
                 },
                 pickerOptions2: {
 				shortcuts: [{
@@ -271,12 +271,12 @@
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-                this.postdata.size = val
+                this.postdata.pagesize = val
                 this.getdata()
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                this.postdata.index = val;
+                this.postdata.page = val;
                 this.getdata()
             },
             adddoc(){

@@ -7,12 +7,12 @@
             <el-col :span="6"><div class="grid-content bg-purple">性别：{{this.modelinfo. detail.gender}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">民族：{{this.modelinfo. detail.nation}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">出生年月：{{this.modelinfo. detail.birthday}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">年龄：{{this.modelinfo. detail.units_event}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">政治面貌：{{this.modelinfo. detail.political}}</div></el-col>
+            <!-- <el-col :span="6"><div class="grid-content bg-purple">年龄：{{this.modelinfo. detail.units_event}}</div></el-col> -->
+            <el-col :span="6"><div class="grid-content bg-purple">政治面貌：{{this.modelinfo. detail.political}}{{this.modelinfo. detail.political_2}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">入党时间：{{this.modelinfo. detail.join_party_time}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">学历：{{this.modelinfo. detail.education}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">工作单位：{{this.modelinfo. detail.company}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">职务：{{this.modelinfo. detail.post}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">工作单位及职务：{{this.modelinfo. detail.company}}</div></el-col>
+            <!-- <el-col :span="6"><div class="grid-content bg-purple">职务：{{this.modelinfo. detail.post}}</div></el-col> -->
             <el-col :span="6"><div class="grid-content bg-purple">职级：{{this.modelinfo. detail.level}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">干部管理权限：{{this.modelinfo. detail.cadre_auth}}</div></el-col>
             
@@ -23,10 +23,10 @@
             <el-col :span="6"><div class="grid-content bg-purple">是否行政监察对象：{{this.modelinfo. detail.supervision}}</div></el-col>
             
             <el-col :span="6"><div class="grid-content bg-purple">部门分类：{{this.modelinfo. detail.department}}</div></el-col>
-            
-            <el-col :span="6"><div class="grid-content bg-purple">企业级别：{{this.modelinfo. detail.enterprise_nature}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">岗位：{{this.modelinfo. detail.units_event}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">企业人员级别：{{this.modelinfo. detail.enterprise_level}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">企业性质：{{this.modelinfo. detail.enterprise_nature}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">企业级别：{{this.modelinfo. detail.enterprise_level}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">岗位：{{this.modelinfo. detail.station}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">企业人员级别：{{this.modelinfo. detail.enterprise_persion_level}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">一把手违纪：{{this.modelinfo. detail.leader_violate}}</div></el-col>
             
         </el-row>
@@ -37,11 +37,11 @@
                     <el-col :span="5"><div class="grid-content bg-purple">人员编码：{{this.modelinfo. sheet.user_number}}</div></el-col>
                     <el-col :span="6"><div class="grid-content bg-purple">受理时间：{{this.modelinfo. sheet.clue_accept_time}}</div></el-col>
                     <el-col :span="4"><div class="grid-content bg-purple">办理机关：{{this.modelinfo. sheet.clue_agency}}</div></el-col>
-                    <el-col :span="4"><div class="grid-content bg-purple">是否与本人合适：{{this.modelinfo. sheet.clue_verify==1?'是':'否'}}</div></el-col>
+                    <el-col :span="4"><div class="grid-content bg-purple">是否与本人合适：{{this.modelinfo. sheet.clue_verify}}</div></el-col>
                     <el-col :span="24"><div class="grid-content bg-purple">线索来源：{{this.modelinfo. sheet.clue_source}}</div></el-col>
                     <el-col :span="24"><div class="grid-content bg-purple">违纪行为：{{this.modelinfo. sheet.clue_violate}}</div></el-col>
                     <el-col :span="24"><div class="grid-content bg-purple">涉法行为：{{this.modelinfo. sheet.clue_involve_law}}</div></el-col>
-                    <el-col :span="24"><div class="grid-content bg-purple">处置方式：{{this.modelinfo. sheet.clue_disposal_type}}</div></el-col>
+                    <el-col :span="24"><div class="grid-content bg-purple">处置方式：{{this.modelinfo. sheet.clue_disposal_type}}{{this.modelinfo. sheet.clue_disposal_type_2}}</div></el-col>
                     <el-col :span="8"><div class="grid-content bg-purple">组织措施：{{this.modelinfo. sheet.clue_measures}}</div></el-col>
                     <el-col :span="8"><div class="grid-content bg-purple">收缴涉案金额：{{this.modelinfo. sheet.clue_collection_money}}</div></el-col>
                     <el-col :span="8"><div class="grid-content bg-purple">挽回经济损失：{{this.modelinfo. sheet.clue_redeem_money}}</div></el-col>

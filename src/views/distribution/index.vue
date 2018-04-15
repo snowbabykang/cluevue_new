@@ -131,8 +131,8 @@
             return {
                 showmodel: false,
                 cluefrom: '',
-                index: 1,
-                size: 10,
+                page: 1,
+                pagesize: 10,
                 current_page: 1,
                 totaldata: 1,
                 tableData: [],
@@ -265,12 +265,12 @@
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-                this.size = val
+                this.pagesize = val
                 this.getdata()
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                this.index = val;
+                this.page = val;
                 this.getdata()
             }
            

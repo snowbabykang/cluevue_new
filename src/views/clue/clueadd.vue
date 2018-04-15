@@ -11,11 +11,7 @@
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
 
-                <div class="alert">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <span class="tittle-alert entypo-info-circled"></span> 请在此处录入线索
-
-                </div>
+                
 
 
             </div>
@@ -179,7 +175,7 @@
                                     </el-upload>
                                 </el-tab-pane>
                                 <el-tab-pane label="word">
-                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word" accept="application/msword" :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
+                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word"  :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传word文件，且不超过500kb</div>
                                     </el-upload>
