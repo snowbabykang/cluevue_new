@@ -18,6 +18,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow debugger during development
+    'generator-star-spacing': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }

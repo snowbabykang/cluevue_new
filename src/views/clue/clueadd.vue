@@ -11,7 +11,7 @@
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
 
-                
+
 
 
             </div>
@@ -31,7 +31,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                            <el-input type="text" v-model="ruleForm.source"  placeholder="请输入线索来源"></el-input>
+                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -175,7 +175,7 @@
                                     </el-upload>
                                 </el-tab-pane>
                                 <el-tab-pane label="word">
-                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word"  :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
+                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word" :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传word文件，且不超过500kb</div>
                                     </el-upload>
@@ -218,9 +218,8 @@ import {
 } from 'vuex'
 export default {
     name: 'addlider',
-    created() {
-    },
     data() {
+       
         var checkAge = (rule, value, callback) => {
             console.log(value, value.length)
             if (!!value) {
@@ -251,7 +250,7 @@ export default {
                     reflected_name: value,
                 }).then((res) => {
                     let data = res.data;
-                     this.gridData = data;
+                    this.gridData = data;
                     if (data.document.data.length || data.clue.data.length || data.case.case_clue.data.length || data.case.case_filing.data.length) {
                         this.Togg = true;
                     } else {
@@ -266,8 +265,8 @@ export default {
             }
         }
         return {
-            gridData:{},
-            dialogTableVisible:false,
+            gridData: {},
+            dialogTableVisible: false,
             Togg: false,
             loading: false,
             upFileEnd: [],

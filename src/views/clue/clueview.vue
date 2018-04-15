@@ -47,7 +47,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                        {{ruleForm.source}}
+                            {{ruleForm.source}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -169,10 +169,9 @@
             </el-form>
         </div>
         <el-dialog title="图片" :visible.sync="dialogTableVisible" class="mod" width="996px">
-            <div  style="text-align:center">
+            <div style="text-align:center">
                 <img class="img-show" :src="srcimg">
             </div>
-            
         </el-dialog>
     </div>
 </div>
@@ -180,22 +179,31 @@
 <script>
 export default {
     name: 'menuslider',
+    props:['clur_id'],
     created() {
-        if (!this.$route.query.clue_id) {
-            return false
+        if (this.clue_id) {
+            this.$ajax.post('/api/clue/view_clue', {clue_id:this.clue_id}).then((res) => {
+                this.ruleForm = { ...res.data.clue,
+                    ...res.data.clue_detail
+                };
+                this.upFileEnd = res.data.clue_attachments;
+                this.newdata = Math.ceil((new Date(this.ruleForm.closed_time) - this.newdata) / 1000 / 60 / 60 / 24);
+            })
         }
-        this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
-            this.ruleForm = { ...res.data.clue,
-                ...res.data.clue_detail
-            };
-            this.upFileEnd = res.data.clue_attachments;
-            this.newdata = Math.ceil((new Date(this.ruleForm.closed_time) - this.newdata) / 1000 / 60 / 60 / 24);
-        })
+        if (this.$route.query.clue_id) {
+            this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
+                this.ruleForm = { ...res.data.clue,
+                    ...res.data.clue_detail
+                };
+                this.upFileEnd = res.data.clue_attachments;
+                this.newdata = Math.ceil((new Date(this.ruleForm.closed_time) - this.newdata) / 1000 / 60 / 60 / 24);
+            })
+        }
     },
     data() {
         return {
-            dialogTableVisible:false,
-            srcimg:'',
+            dialogTableVisible: false,
+            srcimg: '',
             downF: '',
             newdata: new Date(),
             loading: false,
@@ -236,7 +244,7 @@ export default {
                 'entry_time': '',
                 'closed_time': '',
                 'disposal_type': '',
-                'supervisor':'否',
+                'supervisor': '否',
                 'remind_days': '',
                 'clue_next': '',
                 'clue_state': '',
@@ -249,12 +257,12 @@ export default {
     },
     methods: {
         fileClick(item) {
-            let url='http://clue.api.test/' + item.file_path;
+            let url = 'http://clue.api.test/' + item.file_path;
             if (item.attachment_type != 'img') {
                 window.open('http://clue.api.test/' + item.file_path);
             } else {
-                this.srcimg=url;
-                this.dialogTableVisible=true;
+                this.srcimg = url;
+                this.dialogTableVisible = true;
             }
         },
         daochu() {
@@ -336,11 +344,6 @@ export default {
                     for (let i in data.clue_detail) {
                         data.clue_detail[i] = this.ruleForm[i];
                     }
-                    // img__: [],
-                    // audio__: [],
-                    // word__: [],
-                    // excel__: [],
-                    // file__: [],3213213
                     data.clue_attachments = [
                         ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__, ...this.upFileEnd
                     ];
@@ -393,12 +396,14 @@ export default {
 
 
 <style scoped>
-.img-show{
+.img-show {
     max-width: 100%
 }
-.el-dialog__body{
+
+.el-dialog__body {
     text-align: center;
 }
+
 .el-button+.el-button,
 .el-button {
     margin: 0 5px 5px 0;
