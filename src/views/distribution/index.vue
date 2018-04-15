@@ -28,13 +28,13 @@
                                 </el-date-picker>
                             </div>
     
-                            <div class="block pull-left ml-lg">
+                            <!-- <div class="block pull-left ml-lg">
                                 <label>承办部门</label>
                                 <el-select size="small" v-model="postdata.source" clearable placeholder="请选择承办部门">
                                     <el-option v-for="item in dicdata.specstat.data" :key="item.id" :label="item.title" :value="item.id">
                                     </el-option>
                                 </el-select>
-                            </div>
+                            </div> -->
                             <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 

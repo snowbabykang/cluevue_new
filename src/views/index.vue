@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .wrap-fluid{
-  margin-left:250px
+  margin-left:15px
 }
 .paper-wrap {
   min-height:100%

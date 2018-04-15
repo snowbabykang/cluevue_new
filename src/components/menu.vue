@@ -9,7 +9,7 @@
         </a> -->
     </div>
 
-    <div class="skin-part">
+    <div class="skin-part" v-if="false">
         <div id="tree-wrap">
         <div class="side-bar">
         <el-menu class="topnav menu-left-nest" default-active="1-1-1"  @open="handleOpen" @close="handleClose" :collapse="isCollapse">

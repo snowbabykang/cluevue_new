@@ -125,7 +125,7 @@
 							
 							<span class="footable-sort-indicator" @click="ordersdata('level')"></span>
 						</th>
-						<th class="footable-sortable footable-last-column" :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('clue_state')">
+						<th class="footable-sortable footable-last-column" :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'"  width="250" @click="ordersdata('clue_state')">
 							
 							<div class="block" style="display:inline-block; margin-bottom:0">
 								<span class="demonstration">状态</span>
