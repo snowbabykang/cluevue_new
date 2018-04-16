@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style>
+ .wc .el-form-item__label{   
+        color: #fff
+    }
 #skin-select  .el-icon-arrow-down{
     position: absolute;
     left: auto;

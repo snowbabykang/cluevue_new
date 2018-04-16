@@ -5,6 +5,7 @@
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
                 <span>录入线索</span>
+                 <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
         <div class="col-sm-7">
@@ -244,6 +245,9 @@ export default {
         };
     },
     methods: {
+        back(){
+            this.$router.go(-1)
+        },
         fileClick(item) {
             let url = 'http://clue.api.test/' + item.file_path;
             if (item.attachment_type != 'img') {

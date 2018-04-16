@@ -5,6 +5,7 @@
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
                 <span>录入线索</span>
+                <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
         <div class="col-sm-7">
@@ -404,6 +405,9 @@ export default {
         };
     },
     methods: {
+        back(){
+            this.$router.go(-1)
+        },
         handleClose(index,item) {
             this.upFileEnd.splice(index, 1);
             let data=Object.assign(this.$route.query,{file_id:item.file_id});
