@@ -102,9 +102,14 @@ export default {
 			this.index = val;
 			this.getdata()
 		},
-    view(id){
-      console.log(id)
-    }
+    view(id) {
+			this.$router.push({
+				path: 'clueview',
+				query: {
+					clue_id: id
+				}
+			})
+		},
   },
   created(){
     this.getdata()

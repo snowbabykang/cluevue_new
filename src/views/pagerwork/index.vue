@@ -27,7 +27,7 @@
                                 </el-date-picker>
                             </div>
     
-                            <div class="block pull-left ml-lg">
+                            <div class="block pull-left ml-lg" v-show="false">
                                 <label>发文类型</label>
                                 <el-select size="small" v-model="postdata.document_type" clearable placeholder="请选择发文类型">
                                     <el-option v-for="item in dicdata.specstat.data" :key="item.id" :label="item.title" :value="item.id">

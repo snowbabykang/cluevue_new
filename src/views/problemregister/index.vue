@@ -37,8 +37,8 @@
                   <tr v-for="(item,index) in datalist" :key="index">
                       <td>{{item.clue_source}}</td>
                       <td>{{item.clue_number}}</td>
-                      <td>{{item.user_number}}</td>
-                      <td>{{item.clue_agency}}</td>
+                      <td>{{item.reflected_name}}</td>
+                      <td>{{item.level}}</td>
                       <td><el-button size="mini" type="primary" @click="infoopen(item.clue_number)">查看</el-button></td>
                   </tr>
                 </tbody>
@@ -95,7 +95,7 @@ export default {
         pagesize:this.size
       }).then((res)=>{
         this.datalist = res.data.data
-       // this.totaldata = res.data.l
+       this.totaldata = res.data.total
       })
     },
     handleSizeChange(val) {

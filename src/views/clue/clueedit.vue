@@ -10,16 +10,7 @@
         <div class="col-sm-7">
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
-
-                <div class="alert">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <span class="tittle-alert entypo-info-circled"></span> 请在此处录入线索
-
-                </div>
-
-
             </div>
-
         </div>
     </div>
     <div class="row">

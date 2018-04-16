@@ -20,10 +20,11 @@
             <el-input v-model="ruleForm.document_code"></el-input>
         </el-form-item>
         <el-form-item label="发文类型" prop="document_type" >
-        <el-select v-model="ruleForm.document_type" placeholder="请选择发文类型" style="width:100%">
+          <el-input v-model="ruleForm.document_type"></el-input>
+        <!-- <el-select v-model="ruleForm.document_type" placeholder="请选择发文类型" style="width:100%">
             <el-option label="区域一" value="shanghai"></el-option>
             <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
+            </el-select> -->
         </el-form-item>
         <el-form-item label="发文单位" prop="document_unit">
             <el-input v-model="ruleForm.document_unit"></el-input>
@@ -64,7 +65,7 @@
             { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           document_type: [
-            { required: true, message: '请选择发文类型', trigger: 'change' },
+            { required: true, message: '请输入发文类型', trigger: 'change' },
             { min:5, max:20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           document_title: [

@@ -131,8 +131,6 @@
             return {
                 showmodel: false,
                 cluefrom: '',
-                page: 1,
-                pagesize: 10,
                 current_page: 1,
                 totaldata: 1,
                 tableData: [],
@@ -144,7 +142,9 @@
                     source:'', //姓名
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
-                    print:0
+                    print:0,
+                    page: 1,
+                    pagesize: 10
                 },
                 pickerOptions2: {
 				shortcuts: [{
@@ -265,12 +265,12 @@
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-                this.pagesize = val
+                this.postdata.pagesize = val
                 this.getdata()
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                this.page = val;
+                this.postdata.page = val;
                 this.getdata()
             }
            
