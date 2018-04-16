@@ -27,7 +27,7 @@
     <div class="demo-block">
 
         <div>
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+            <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="结案日期" prop="source">
@@ -67,10 +67,7 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="级别">
-                            <el-select :disabled="true" v-model="ruleForm.level" clearable placeholder="请选择级别">
-                                <el-option v-for="item in dicdata.rank.data" :key="item.id" :label="item.title" :value="item.title">
-                                </el-option>
-                            </el-select>
+                            {{ruleForm.level}}
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -107,10 +104,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="处置类型">
-                            <el-select v-model="ruleForm.disposal_type" :disabled="true" placeholder="请选择处置类型">
-                                <el-option v-for="item in dicdata.chuzhi.data" :key="item.id" :label="item.title" :value="item.title">
-                                </el-option>
-                            </el-select>
+                            {{ruleForm.disposal_type}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -139,10 +133,7 @@
                     </el-col>
                     <el-col :span="5">
                         <el-form-item label="线索状态">
-                            <el-select :disabled="true" v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
-                                <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.title">
-                                </el-option>
-                            </el-select>
+                            {{ruleForm.clue_state}}
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -175,10 +166,11 @@
 <script>
 export default {
     name: 'menuslider',
-    props:['clur_id'],
+    props:['clurid'],
     created() {
-        if (this.clue_id) {
-            this.$ajax.post('/api/clue/view_clue', {clue_id:this.clue_id}).then((res) => {
+        console.log(this.clurid,312312)
+        if (this.clurid) {
+            this.$ajax.post('/api/clue/view_clue', {clue_id:this.clurid}).then((res) => {
                 this.ruleForm = { ...res.data.clue,
                     ...res.data.clue_detail
                 };
@@ -380,11 +372,6 @@ export default {
                     return false;
                 }
             });
-        }
-    },
-    computed: {
-        dicdata: function() {
-            return this.$store.state.dicdata
         }
     }
 }

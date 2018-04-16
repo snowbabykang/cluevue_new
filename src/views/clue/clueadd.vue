@@ -47,7 +47,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="1" v-show="Togg">
-                        <i @click="dialogTableVisible = true" class="size el-icon-circle-check" title="跳转到列表"></i>
+                        <i @click="dialogTableVisible = true" class="size el-icon-warning" title="跳转到列表"></i>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -205,7 +205,7 @@
                 </el-form-item>
             </el-form>
         </div>
-        <el-dialog width="1300px" name="vv" title="详情" :visible.sync="dialogTableVisible">
+        <el-dialog :modal-append-to-body="false" width="1300px" name="vv" title="详情" :visible.sync="dialogTableVisible">
             <viewlist name="aa" :data="gridData">
             </viewlist>
         </el-dialog>
