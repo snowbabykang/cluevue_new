@@ -3,6 +3,13 @@
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <div class="row" style="margin:0px">
     <el-col :span="12">
+       <el-form-item label="发文类型" prop="document_type" >
+          <!-- <el-input v-model="ruleForm.document_type"></el-input> -->
+        <el-select v-model="ruleForm.document_type" placeholder="请选择发文类型" style="width:100%">
+            <el-option v-for="item in dicdata.document_type.data" :key="item.id" :label="item.title" :value="item.title">
+									</el-option>
+            </el-select>
+        </el-form-item>
         <el-form-item label="发文日期" required>
         <el-form-item prop="document_date">
                 <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.document_date" style="width: 100%;"></el-date-picker>
@@ -11,20 +18,14 @@
         <el-form-item label="文件标题" prop="document_title">
             <el-input v-model="ruleForm.document_title"></el-input>
         </el-form-item>
-        <el-form-item label="发文人" prop="document_user">
-            <el-input v-model="ruleForm.document_user"></el-input>
-        </el-form-item>
+       
     </el-col>
     <el-col :span="12">
         <el-form-item label="发文字号" prop="document_code">
             <el-input v-model="ruleForm.document_code"></el-input>
         </el-form-item>
-        <el-form-item label="发文类型" prop="document_type" >
-          <el-input v-model="ruleForm.document_type"></el-input>
-        <!-- <el-select v-model="ruleForm.document_type" placeholder="请选择发文类型" style="width:100%">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-            </el-select> -->
+        <el-form-item label="发文人" prop="document_user">
+            <el-input v-model="ruleForm.document_user"></el-input>
         </el-form-item>
         <el-form-item label="发文单位" prop="document_unit">
             <el-input v-model="ruleForm.document_unit"></el-input>
@@ -108,6 +109,12 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       }
+    },
+    computed:{
+      dicdata: function() {
+        return this.$store.state.dicdata
+      }
     }
+    
   }
 </script>

@@ -27,10 +27,10 @@
                                 </el-date-picker>
                             </div>
     
-                            <div class="block pull-left ml-lg" v-show="false">
+                            <div class="block pull-left ml-lg">
                                 <label>发文类型</label>
                                 <el-select size="small" v-model="postdata.document_type" clearable placeholder="请选择发文类型">
-                                    <el-option v-for="item in dicdata.specstat.data" :key="item.id" :label="item.title" :value="item.id">
+                                    <el-option v-for="item in dicdata.document_type.data" :key="item.id" :label="item.title" :value="item.title">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -254,7 +254,7 @@
                 })
                 this.getdata()
             },
-            getdata: function(data = {}) {
+            getdata: function() {
                 var arrtep = [];
                 let pdata = this.cloneobj(this.postdata);
                 for (var i in pdata.orders){
@@ -265,7 +265,7 @@
                 pdata.orders = arrtep
                 this.$ajax.post("/api/document/list", pdata).then((res) => {
                     this.tableData = res.data.data;
-                    this.current_page = res.data.current_page;
+                    //this.current_page = res.data.current_page;
                     this.totaldata = res.data.total;
                 })
             },

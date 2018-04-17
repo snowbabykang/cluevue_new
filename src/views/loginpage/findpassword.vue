@@ -16,12 +16,12 @@
         </el-form-item> -->
         <div class="form-group clearfix">
         <el-form-item label-width="75px"  size="mini"  label="新密码" prop="newPassword"  class="wc"> 
-            <el-input v-model="ruleForm.newPassword"></el-input>
+            <el-input type="password" v-model="ruleForm.newPassword"></el-input>
         </el-form-item>
         </div>
         <div class="form-group clearfix">
         <el-form-item label-width="75px"  size="mini"  label="新密码" prop="newPasswordtwo"  class="wc">
-            <el-input v-model="ruleForm.newPasswordtwo"></el-input>
+            <el-input type="password" v-model="ruleForm.newPasswordtwo"></el-input>
         </el-form-item>
          </div>
         <!-- <div class="form-group  clearfix">
@@ -81,8 +81,8 @@ export default {
 
     this.$refs[formName].validate((valid) => {
           if (valid) {
-if(this.newPassword!=newPasswordtwo){
-               this.$message({
+                if(this.ruleForm.newPassword!=this.ruleForm.newPasswordtwo){
+                 this.$message({
                 showClose: true,
                 message: "两次输入密码不一致",
                 type: 'error'
