@@ -13,7 +13,7 @@
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="view(scope.$index, scope.row,1)">查看</el-button>
-</template>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-tab-pane>
@@ -26,10 +26,10 @@
                 <el-table-column property="document_unit" label="发文单位"></el-table-column>
                 <el-table-column property="memo" label="备注"></el-table-column>
                 <el-table-column label="操作">
-<template slot-scope="scope">
-<el-button size="mini" @click="view(scope.$index, scope.row,2)">
-    查看</el-button>
-</template>
+                    <template slot-scope="scope">
+                    <el-button size="mini" @click="view(scope.$index, scope.row,2)">
+                        查看</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-tab-pane>
@@ -42,10 +42,10 @@
                 <el-table-column property="level" label="级别"></el-table-column>
                 <el-table-column property="clue_disposal_type" label="处置方式"></el-table-column>
                 <el-table-column label="操作">
-<template slot-scope="scope">
-<el-button size="mini" @click="view(scope.$index, scope.row,3)">
-    查看</el-button>
-</template>
+                    <template slot-scope="scope">
+                    <el-button size="mini" @click="view(scope.$index, scope.row,3)">
+                        查看</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-tab-pane>
@@ -57,10 +57,10 @@
                 <el-table-column property="post" label="职位"></el-table-column>
                 <el-table-column property="level" label="级别"></el-table-column>
                 <el-table-column label="操作">
-<template slot-scope="scope">
-<el-button size="mini" @click="view(scope.$index, scope.row,4)">
-    查看</el-button>
-</template>
+                    <template slot-scope="scope">
+                    <el-button size="mini" @click="view(scope.$index, scope.row,4)">
+                        查看</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-tab-pane>
@@ -69,9 +69,9 @@
         <clueview :clurid="clue_id">
         </clueview>
     </el-dialog>
-    <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg2" :modal="false">
-        <clueview :clur_id="clur_id">
-        </clueview>
+    <el-dialog width="800px" name="vv" title="详情" :visible.sync="togg2" :modal="false">
+        <infomodelb :id="id">
+        </infomodelb>
     </el-dialog>
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg3" :modal="false">
           <infomodel :modelinfo="idinfo"></infomodel>
@@ -83,61 +83,68 @@
 </template>
 
 <script>
-import clueview from './clueview'
-import infomodel from '../problemregister/info.vue'
-import infomodela from '../filngregister/info.vue'
+import clueview from "./clueview";
+import infomodel from "../problemregister/info.vue";
+import infomodela from "../filngregister/info.vue";
+import infomodelb from "../pagerwork/view.vue";
 export default {
-    name: 'viewlist_',
-    props: ['data'],
-    components: {
-        clueview,
-        infomodel,
-        infomodela
-    },
-    created() {},
-    data() {
-        return {
-            togg1: false,
-            togg2: false,
-            togg3: false,
-            togg4: false,
-            togg5: false,
-            clue_id: '',
-            infoid: '',
-            infoid_: '',
-            idinfo: '',
-            idinfo_: '',
-            activeName2: 'first'
-        }
-    },
-    methods: {
-        view(i, v, tog) {
-            this['togg' + tog] = true;
-            if (tog == 1) {
-                this.clue_id = v.clue_id;
-            }
-            if (tog == 3) {
-                this.infoid = v.clue_number
-                this.$ajax.post("/api/clue/problem_clues_list", {
-                    clue_number: v.clue_number,
-                }).then((res) => {
-                    this.idinfo = res.data
-                })
-            }
-            if (tog == 4) {
-                this.infoid_ = v.case_num;
-                this.$ajax.post("/api/cases/list", {
-                    case_num:  v.case_num,
-                }).then((res) => {
-                    this.idinfo_ = res.data
-                })
-            }
-
-
-
-        }
+  name: "viewlist_",
+  props: ["data"],
+  components: {
+    clueview,
+    infomodel,
+    infomodela,
+    infomodelb
+  },
+  created() {},
+  data() {
+    return {
+      id: "",
+      togg1: false,
+      togg2: false,
+      togg3: false,
+      togg4: false,
+      togg5: false,
+      clue_id: "",
+      infoid: "",
+      infoid_: "",
+      idinfo: "",
+      idinfo_: "",
+      activeName2: "first"
+    };
+  },
+  methods: {
+    view(i, v, tog) {
+      this["togg" + tog] = true;
+      if (tog == 1) {
+        this.clue_id = v.clue_id;
+      }
+      if (tog == 2) {
+        this.id = v.id;
+      }
+      if (tog == 3) {
+        this.infoid = v.clue_number;
+        this.$ajax
+          .post("/api/clue/problem_clues_list", {
+            clue_number: v.clue_number
+          })
+          .then(res => {
+            this.idinfo = res.data;
+          });
+      }
+      if (tog == 4) {
+        this.infoid_ = v.case_num;
+        this.$ajax
+          .post("/api/cases/list", {
+            case_num: v.case_num
+          })
+          .then(res => {
+            this.idinfo_ = res.data;
+          });
+      }
     }
-}
+  }
+};
 </script>
 
 <style scoped>
