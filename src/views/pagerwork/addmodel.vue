@@ -66,8 +66,7 @@
             { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           document_type: [
-            { required: true, message: '请输入发文类型', trigger: 'change' },
-            { min:5, max:20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
+            { required: true, message: '请选择发文类型', trigger: 'change' }
           ],
           document_title: [
             { required: true, message: '请输入文件标题', trigger: 'blur' },
@@ -100,6 +99,7 @@
                     type: 'success'
                 })
                 this.$emit('closemodel')
+                this.resetForm('ruleForm')
             })
           } else {
             return false;
@@ -108,6 +108,7 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+        this.ruleForm.memo = ''
       }
     },
     computed:{
