@@ -24,6 +24,7 @@
                 <el-table-column property="document_title" label="文件标题"></el-table-column>
                 <el-table-column property="document_user" label="发文人"></el-table-column>
                 <el-table-column property="document_unit" label="发文单位"></el-table-column>
+                <el-table-column property="document_signatory" label="领取签字人"></el-table-column>
                 <el-table-column property="memo" label="备注"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">

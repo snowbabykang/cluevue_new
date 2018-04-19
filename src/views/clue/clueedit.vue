@@ -42,8 +42,8 @@
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="1" v-show="Togg">
-                        <i @click="dialogTableVisible = true" class="size el-icon-circle-warning" title="跳转到列表"></i>
+                     <el-col :span="1" v-show="Togg">
+                        <i @click="dialogTableVisible = true" class="size el-icon-warning" title="跳转到列表"></i>
                     </el-col>
                 </el-row>
                 <el-row>
