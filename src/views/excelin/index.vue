@@ -37,9 +37,17 @@
                 <el-upload :before-remove="removeFile4" :on-success="upSuccessFile" 
                  class="upload-demo" ref="excel" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                   :action="importclue" :on-preview="handlePreview" :auto-upload="true">
-                                        <el-button slot="trigger" size="small">选取文件</el-button>
+                        <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
                                     </el-upload>
+                <el-card style="margin-top:16px" class="box-card" v-if="importfilinglist.total>0">
+                    <div slot="header" class="clearfix">
+                        <span>共{{importfilinglist.total}}条错误</span>
+                    </div>
+                    <div v-for="o in importfilinglist.data" :key="o.line" class="text item" style="margin-bottom:6px">
+                        第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
+                    </div>
+                </el-card>
              </publicsearch>
             </div>
             <div class="col-md-4" >
@@ -50,6 +58,14 @@
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
                                     </el-upload>
+                   <el-card style="margin-top:16px" class="box-card" v-if="importcasecluelist.total>0">
+                    <div slot="header" class="clearfix">
+                        <span>共{{importcasecluelist.total}}条错误</span>
+                    </div>
+                    <div v-for="o in importcasecluelist.data" :key="o.line" class="text item" style="margin-bottom:6px">
+                        第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
+                    </div>
+                </el-card>                 
              </publicsearch>
              </div>
              <div class="col-md-4" >
@@ -59,7 +75,14 @@
                   :action="importfiling" :on-preview="handlePreview" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
-                                    </el-upload>
+                    <el-card style="margin-top:16px" class="box-card" v-if="importcluelist.total>0">
+                    <div slot="header" class="clearfix">
+                        <span>共{{importcluelist.total}}条错误</span>
+                    </div>
+                    <div v-for="o in importcluelist.data" :key="o.line" class="text item" style="margin-bottom:6px">
+                        第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
+                    </div>
+                </el-card>                </el-upload>
              </publicsearch>
              </div>
               </div>
@@ -72,7 +95,10 @@ export default {
       return {
           importfiling:this.$store.state.baseURL+'/api/excel/import_filing',
           importcaseclue:this.$store.state.baseURL+'/api/excel/import_case_clue',
-          importclue:this.$store.state.baseURL+'/api/excel/import_clue'
+          importclue:this.$store.state.baseURL+'/api/excel/import_clue',
+          importfilinglist:{},
+          importcasecluelist:{},
+          importcluelist:{},
       }
   },
   methods:{
@@ -87,6 +113,7 @@ export default {
                 message: "上传成功",
                 type: 'success'
             });
+            this.importfilinglist = res.data.failedData
           }else{
               this.$message({
                 showClose: true,
