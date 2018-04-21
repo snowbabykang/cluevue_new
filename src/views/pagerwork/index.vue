@@ -76,6 +76,9 @@
                                         发文单位
                                         <span class="footable-sort-indicator"></span>
                                     </th>
+                                     <th class="footable-sortable footable-last-column ">
+                                        领取人签字
+                                    </th>
                                     <th>备注</th>
                                 </tr>
                             </thead>
@@ -86,6 +89,7 @@
                                     <td>{{item.document_title}}</td>
                                     <td>{{item.document_user}}</td>
                                     <td>{{item.document_unit}}</td>
+                                     <td>{{item.document_signatory}}</td>
                                     <td>{{item.memo}}</td>
                                 </tr>
                             </tbody>
@@ -99,6 +103,7 @@
                                 <th>文件标题</th>
                                 <th>发文人</th>
                                 <th>发文单位</th>
+                                <th>领取签字人</th>
                                 <th>备注</th>
                             </tr>
                             <tr v-for="(item,index) in tableData" :key="index">
@@ -107,6 +112,7 @@
                                     <td>{{item.document_title}}</td>
                                     <td>{{item.document_user}}</td>
                                     <td>{{item.document_unit}}</td>
+                                     <td>{{item.document_signatory}}</td>
                                     <td>{{item.memo}}</td>
                             </tr>
                         </table> 
