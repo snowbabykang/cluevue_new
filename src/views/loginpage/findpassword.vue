@@ -90,8 +90,8 @@ export default {
              return false
            }
         this.$ajax.post("/api/recover_pwd",{
-            loginName: this.loginName,
-            newPassword: this.newPassword
+            loginName: this.ruleForm.loginName,
+            newPassword: this.ruleForm.newPassword
         }).then((res)=>{
             this.$message({
                 showClose: true,
