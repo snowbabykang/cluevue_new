@@ -113,7 +113,20 @@ export default {
                 message: "上传成功",
                 type: 'success'
             });
-            this.importfilinglist = res.data.failedData
+            switch (res.data.type){
+                case 't_clue' :
+                    this.importfilinglist = res.data.failedData;
+                    break
+                case 't_case_clue' :
+                    this.importcasecluelist = res.data.failedData
+                    break
+                case 't_filing' :
+                    this.importcluelist = res.data.failedData
+                    break
+
+            }
+                
+            
           }else{
               this.$message({
                 showClose: true,
