@@ -258,8 +258,8 @@ export default {
             }
         },
         daochu() {
-            console.log(this.$route.query)
-            this.$ajax.post('/api/clue/export_word', this.$route.query).then((res) => {
+            let data={clue_id:this.clurid?this.clurid:this.$route.query.clue_id};
+            this.$ajax.post('/api/clue/export_word', data).then((res) => {
                 this.downF = 'http://clue.api.test/' + res.data.file_path;
                 this.open();
             })
