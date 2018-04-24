@@ -1,6 +1,6 @@
 <template>
 <div v-loading="loading">
-    <div id="paper-top">
+    <div id="paper-top" v-show="!clurid">
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
@@ -258,6 +258,7 @@ export default {
             }
         },
         daochu() {
+            console.log(this.$route.query)
             this.$ajax.post('/api/clue/export_word', this.$route.query).then((res) => {
                 this.downF = 'http://clue.api.test/' + res.data.file_path;
                 this.open();
