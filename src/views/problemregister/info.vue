@@ -74,7 +74,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .grid-content{
     padding: 6px 0px;
   }

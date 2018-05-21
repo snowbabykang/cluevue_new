@@ -24,14 +24,18 @@
 			<div class="row">
 				<div class="col-md-12">
 					<el-form :inline="true" :model="topdata" class="demo-form-inline" >
+                    <el-form-item label="线索来源">
+						<el-select size="small" v-model="postdata.source" placeholder="请选择线索来源">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
+							</el-option>
+						</el-select>
+					</el-form-item>
+                    <el-form-item label="关键字">
+						<el-input  size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
+					</el-form-item>
 					<el-form-item label="请选择时间" v-show="showmore">
-						<el-col :span="11">
-						<el-date-picker size="small"  type="date" placeholder="选择日期" v-model="topdata.entry_start_time" style="width: 100%;"></el-date-picker>
-						</el-col>
-						<el-col class="line" style="text-aline:center" :span="2">-</el-col>
-						<el-col :span="11">
-						<el-date-picker size="small"  type="date" placeholder="选择日期" v-model="topdata.entry_end_time" style="width: 100%;"></el-date-picker>
-						</el-col>
+						<el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
+                                </el-date-picker>
 					</el-form-item>	
 					<!-- <div class="block pull-left" v-show="showmore">
 						<label>请选择时间</label>
@@ -67,9 +71,7 @@
 						<el-input  size="small" v-model="topdata.company" placeholder="请输入单位"></el-input>
 					</el-form-item>
 					
-					<el-form-item label="关键字">
-						<el-input  size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
-					</el-form-item>
+					
 					
 					<el-form-item>
 						<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
@@ -177,7 +179,8 @@ export default {
 		return {
 			cluefrom: "",
 			postdata: {
-				keyword: '',
+                keyword: '',
+                source: '',
 				orders: [{
 					column: 'number',
 					order: 1

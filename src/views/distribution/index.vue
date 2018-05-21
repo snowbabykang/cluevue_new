@@ -23,9 +23,20 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="block pull-left">
+                                <el-form :inline="true" :model="postdata" class="demo-form-inline" >
+                                <el-form-item label="线索来源">
+                                    <el-select size="small" v-model="postdata.source" placeholder="请选择线索来源">
+                                        <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="关键字">
+                                    <el-input  size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
+                                </el-form-item>
                                 <label>请选择时间</label>
                                 <el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
                                 </el-date-picker>
+                                </el-form>
                             </div>
     
                             <!-- <div class="block pull-left ml-lg">
@@ -130,7 +141,6 @@
         data() {
             return {
                 showmodel: false,
-                cluefrom: '',
                 current_page: 1,
                 totaldata: 1,
                 tableData: [],
@@ -139,7 +149,8 @@
                 postdata:{
                     beginDate:'', //发文日期
                     endDate:'', //发文字号
-                    source:'', //姓名
+                    source: '',
+                    keyword: '',
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
                     print:0,

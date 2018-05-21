@@ -128,7 +128,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="5">
-                        <el-form-item label="去向">
+                        <el-form-item label="承办部门">
                             {{ruleForm.clue_next}}
                         </el-form-item>
                     </el-col>

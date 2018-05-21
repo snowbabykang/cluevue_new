@@ -20,6 +20,31 @@
     <div class="row">
         <breadcrumb></breadcrumb>
     </div>
+    <div class="col-md-12">
+		<publicsearch modeltitle="快速查询">
+			<div class="row">
+				<div class="col-md-12">
+					<el-form :inline="true" :model="cluefrom" class="demo-form-inline" >
+                    <el-form-item label="线索来源">
+						<el-select size="small" v-model="cluefrom.source" placeholder="请选择线索来源">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
+							</el-option>
+						</el-select>
+					</el-form-item>
+                    <el-form-item label="关键字">
+						<el-input  size="small" v-model="cluefrom.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
+					</el-form-item>
+                    <el-form-item>
+						<el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
+					</el-form-item>
+					</el-form>
+				</div>
+				
+			</div>
+
+
+		</publicsearch>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div style="padding:15px">
@@ -66,7 +91,10 @@
 export default {
   data() {
     return {
-      cluefrom:'',
+      cluefrom: {
+          source: '',
+          keyword: ''
+      },
       index:1,
       size:20,
       current_page:1,
@@ -77,19 +105,24 @@ export default {
   computed:{
     searchback:function(){
       return this.cluefrom
-    }
+    },
+    dicdata: function() {
+		return this.$store.state.dicdata
+	}
   },
   methods:{
     searchdata:function(){
-      console.log(this.cluefrom)
+        this.getdata()
     },
     getdata:function(data={}){
       this.$ajax.post("/api/clue/overdue",{
         page:this.index,
-        pagesize:this.size
+        pagesize:this.size,
+        keyword: this.cluefrom.keyword,
+        source: this.cluefrom.source
       }).then((res)=>{
-        this.datalist = res.data
-       // this.totaldata = res.data.l
+        this.datalist = res.data.data
+        this.totaldata = res.data.total
       })
     },
     handleSizeChange(val) {
