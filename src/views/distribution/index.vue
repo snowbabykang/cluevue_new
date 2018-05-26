@@ -39,13 +39,13 @@
                                 </el-form>
                             </div>
     
-                            <!-- <div class="block pull-left ml-lg">
+                            <div class="block pull-left ml-lg">
                                 <label>承办部门</label>
-                                <el-select size="small" v-model="postdata.source" clearable placeholder="请选择承办部门">
-                                    <el-option v-for="item in dicdata.specstat.data" :key="item.id" :label="item.title" :value="item.id">
+                                <el-select size="small" v-model="postdata.clue_next" clearable placeholder="请选择承办部门">
+                                    <el-option v-for="item in dicdata.clue_next.data" :key="item.id" :label="item.title" :value="item.title">
                                     </el-option>
                                 </el-select>
-                            </div> -->
+                            </div>
                             <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 
@@ -63,24 +63,40 @@
                         <table class="table-striped footable-res footable metro-blue" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_date')">
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">
                                         编号
                                         <span class="footable-sort-indicator"></span>    
                                     </th>
-                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_code')">
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('reflected_name')">
                                         被反映人
                                         <span class="footable-sort-indicator"></span>
                                     </th>
-                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_title')">
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('company')">
                                         工作单位及职务
                                         <span class="footable-sort-indicator"></span>
                                     </th>
-                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_user')">
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('main_content')">
                                         反应的主要问题
                                         <span class="footable-sort-indicator"></span>
                                     </th>
-                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('document_unit')">
-                                        领导批示
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('leader_approval')">
+                                        集体排查意见及领导批示
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('signatory')">
+                                        领取人签字
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[6].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('undertake_leader')">
+                                        承办领导
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[7].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('clue_next')">
+                                        承办部门
+                                        <span class="footable-sort-indicator"></span>
+                                    </th>
+                                    <th class="footable-sortable footable-last-column " :class="postdata.orders[8].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('progress')">
+                                        进展情况
                                         <span class="footable-sort-indicator"></span>
                                     </th>
                                     <th>备注</th>
@@ -93,6 +109,10 @@
                                     <td>{{item.company}}—{{item.post}}</td>
                                     <td>{{item.main_content}}</td>
                                     <td>{{item.leader_approval}}</td>
+                                    <td>{{item.signatory}}</td>
+                                    <td>{{item.undertake_leader}}</td>
+                                    <td>{{item.clue_next}}</td>
+                                    <td>{{item.progress}}</td>
                                     <td>{{item.remark}}</td>
                                 </tr>
                             </tbody>
@@ -145,13 +165,22 @@
                 totaldata: 1,
                 tableData: [],
                 datatime:'',
-                source:'',
                 postdata:{
                     beginDate:'', //发文日期
                     endDate:'', //发文字号
-                    source: '',
+                    source: '',//
                     keyword: '',
-                    orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
+                    clue_next: '',
+                    orders:[{column:'number',order:1},
+                            {column:'reflected_name',order:1},
+                            {column:'company',order:1},
+                            {column:'main_content',order:1},
+                            {column:'leader_approval',order:1},
+                            {column:'signatory',order:1},
+                            {column:'undertake_leader',order:1},
+                            {column:'clue_next',order:1},
+                            {column:'progress',order:1}
+                            ], 
                     export:0,
                     print:0,
                     page: 1,

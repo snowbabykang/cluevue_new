@@ -18,7 +18,7 @@
         <el-form-item label="文件标题" prop="document_title">
             <el-input v-model="ruleForm.document_title"></el-input>
         </el-form-item>
-        <el-form-item label="领取签字人" prop="document_title">
+        <el-form-item label="领取人签字" prop="document_title">
             <el-input v-model="ruleForm.document_signatory"></el-input>
         </el-form-item>
        
@@ -63,33 +63,33 @@
         },
         rules: {
           document_date: [
-            { required: true, message: '请选择日期', trigger: 'change' }
+            { required: false, message: '请选择日期', trigger: 'change' }
           ],
           document_code: [
-            { required: true, message: '请输入发文字号', trigger: 'blur' },
+            { required: false, message: '请输入发文字号', trigger: 'blur' },
             { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           document_type: [
-            { required: true, message: '请选择发文类型', trigger: 'change' }
+            { required: false, message: '请选择发文类型', trigger: 'change' }
           ],
           document_title: [
-            { required: true, message: '请输入文件标题', trigger: 'blur' },
+            { required: false, message: '请输入文件标题', trigger: 'blur' },
             { min:5, max:20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
            document_signatory: [
-            { required: true, message: '请输入领取签字人', trigger: 'blur' },
+            { required: false, message: '请输入领取签字人', trigger: 'blur' },
             { min:1, max:20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
           ],
            document_user: [
-             { required: true, message: '请输入发文人', trigger: 'blur' },
+             { required: false, message: '请输入发文人', trigger: 'blur' },
             { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
           ],
            document_unit: [
-            { required: true, message: '请输入发文单位', trigger: 'blur' },
+            { required: false, message: '请输入发文单位', trigger: 'blur' },
             { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
           ],
            memo: [
-            { required: true, message: '请输入发文字号', trigger: 'blur' },
+            { required: false, message: '请输入发文字号', trigger: 'blur' },
             { min: 5, max: 200, message: '长度在 5 到 200 个字符', trigger: 'blur' }
           ],  
         }
