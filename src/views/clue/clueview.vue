@@ -169,7 +169,6 @@ export default {
     name: 'menuslider',
     props:['clurid'],
     created() {
-        console.log(this.clurid,312312)
         if (this.clurid) {
             this.$ajax.post('/api/clue/view_clue', {clue_id:this.clurid}).then((res) => {
                 this.ruleForm = { ...res.data.clue,

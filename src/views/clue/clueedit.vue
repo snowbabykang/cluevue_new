@@ -26,8 +26,16 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="线索来源" prop="source">
-                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源"></el-input>
+                        <el-form-item label="线索来源I" prop="source_dic">
+                            <el-select v-model="ruleForm.source_dic" clearable placeholder="请输入线索来源I">
+                                <el-option v-for="item in dicdata.source_dic.data" :key="item.id" :label="item.title" :value="item.title">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="线索来源II" prop="source">
+                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源II"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -125,24 +133,27 @@
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="办结期限" prop="closed_time" required>
+                        <el-form-item label="办结期限" prop="closed_time">
                             <el-date-picker value-format="yyyy-MM-dd" type="date" placeholder="选择日期" v-model="ruleForm.closed_time" style="width: 100%;"></el-date-picker>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="提醒天数" prop="remind_days" required>
+                        <el-form-item label="提醒天数" prop="remind_days">
                             <el-input v-model="ruleForm.remind_days"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="5">
-                        <el-form-item label="承办部门" prop="clue_next" required>
-                            <el-input v-model="ruleForm.clue_next"></el-input>
+                        <el-form-item label="承办部门" prop="clue_next">
+                            <el-select v-model="ruleForm.clue_next" clearable placeholder="请选择承办部门">
+                                <el-option v-for="item in dicdata.clue_next.data" :key="item.id" :label="item.title" :value="item.title">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="5">
-                        <el-form-item label="线索状态" prop="clue_state" required>
+                        <el-form-item label="线索状态" prop="clue_state">
                             <el-select v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
                                 <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
@@ -286,7 +297,7 @@ export default {
                         }
                     );
             } else {
-                callback(new Error("必填"));
+                callback();
             }
         };
         return {
@@ -322,6 +333,7 @@ export default {
             excel: [],
             file: [],
             ruleForm: {
+                source_dic:'',
                 source: "",
                 number: "",
                 reflected_name: "",
@@ -341,11 +353,6 @@ export default {
                 remark: ""
             },
             rules: {
-                source: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
                 number: [{
                         validator: checkAge,
                         trigger: "blur"
@@ -359,63 +366,8 @@ export default {
                 reflected_name: [{
                         validator: checkName,
                         trigger: "blur"
-                    },
-                    {
-                        required: true,
-                        message: "必填",
-                        trigger: "blur"
                     }
-                ],
-                company: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                post: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                level: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                entry_time: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                main_content: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                disposal_type: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                closed_time: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                remind_days: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                clue_next: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }],
-                clue_state: [{
-                    required: true,
-                    message: "必填",
-                    trigger: "blur"
-                }]
+                ]
             }
         };
     },
@@ -464,6 +416,7 @@ export default {
                 if (valid) {
                     let data = {
                         clue: {
+                            source_dic:'',
                             source: "",
                             number: "",
                             reflected_name: "",
