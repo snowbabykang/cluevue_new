@@ -25,6 +25,8 @@
                     <el-button @click="download('/demo/clue_demo.xlsx')" type="primary">离线线索模板</el-button>
                     <el-button @click="download('/demo/case_clue_demo.xlsx')" type="primary">案件问题线索模板</el-button>
                     <el-button @click="download('/demo/filing_demo.xlsx')" type="primary">立案模板</el-button>
+                    <el-button @click="download('/demo/register_demo.xlsx')" type="primary">登记发放模板</el-button>
+                    <el-button @click="download('/demo/document_demo.xlsx')" type="primary">文书管理模板</el-button>
                 </el-row>
             </publicsearch>
         </div>
@@ -85,64 +87,109 @@
                 </el-card>                </el-upload>
              </publicsearch>
              </div>
-              </div>
+            </div>
+        </div>
+     <div class="row">
+        <div class="col-md-12" >
+             <div class="col-md-4" >
+             <publicsearch modeltitle="登记发放上传"  style="margin:0">
+                 <el-upload :before-remove="removeFile4" :on-success="upSuccessFile" 
+                  class="upload-demo" ref="excel" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                  :action="importregister" :on-preview="handlePreview" :auto-upload="true">
+                                        <el-button slot="trigger" size="small">选取文件</el-button>
+                                        <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
+                    <el-card style="margin-top:16px" class="box-card" v-if="importregisterlist.total>0">
+                    <div slot="header" class="clearfix">
+                        <span>共{{importregisterlist.total}}条错误</span>
+                    </div>
+                    <div v-for="o in importregisterlist.data" :key="o.line" class="text item" style="margin-bottom:6px">
+                        第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
+                    </div>
+                </el-card>                </el-upload>
+             </publicsearch>
+             </div>
+             <div class="col-md-4" >
+             <publicsearch modeltitle="文书上传"  style="margin:0">
+                 <el-upload :before-remove="removeFile4" :on-success="upSuccessFile" 
+                  class="upload-demo" ref="excel" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                  :action="importdocument" :on-preview="handlePreview" :auto-upload="true">
+                                        <el-button slot="trigger" size="small">选取文件</el-button>
+                                        <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
+                    <el-card style="margin-top:16px" class="box-card" v-if="importdocumentlist.total>0">
+                    <div slot="header" class="clearfix">
+                        <span>共{{importdocumentlist.total}}条错误</span>
+                    </div>
+                    <div v-for="o in importdocumentlist.data" :key="o.line" class="text item" style="margin-bottom:6px">
+                        第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
+                    </div>
+                </el-card>
+                </el-upload>
+             </publicsearch>
+             </div>
+        </div>
     </div>
     </div> 
 </template>
 <script>
 export default {
-  data(){
-      return {
-          importfiling:this.$store.state.baseURL+'/api/excel/import_filing',
-          importcaseclue:this.$store.state.baseURL+'/api/excel/import_case_clue',
-          importclue:this.$store.state.baseURL+'/api/excel/import_clue',
-          importfilinglist:{},
-          importcasecluelist:{},
-          importcluelist:{},
-      }
+  data() {
+    return {
+      importfiling: this.$store.state.baseURL + "/api/excel/import_filing",
+      importcaseclue: this.$store.state.baseURL + "/api/excel/import_case_clue",
+      importclue: this.$store.state.baseURL + "/api/excel/import_clue",
+      importregister: this.$store.state.baseURL + "/api/excel/import_register",
+      importdocument: this.$store.state.baseURL + "/api/excel/import_document",
+      importfilinglist: {},
+      importcasecluelist: {},
+      importcluelist: {},
+      importregisterlist: {},
+      importdocumentlist: {}
+    };
   },
-  methods:{
-      download:function(url){
-          window.open(this.$store.state.baseURL+url,'download')
-      },
-      upSuccessFile:function(res){
-          console.log(res)
-          if(res.success){
-              this.$message({
-                showClose: true,
-                message: "上传成功",
-                type: 'success'
-            });
-            switch (res.data.type){
-                case 't_clue' :
-                    this.importfilinglist = res.data.failedData;
-                    break
-                case 't_case_clue' :
-                    this.importcasecluelist = res.data.failedData
-                    break
-                case 't_filing' :
-                    this.importcluelist = res.data.failedData
-                    break
-
-            }
-                
-            
-          }else{
-              this.$message({
-                showClose: true,
-                message: res.errorMessage,
-                type: 'error'
-            });
-          }
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      removeFile4(file, fileList) {
-        
-        return this.$confirm(`确定移除 ${ file.name }？`);
+  methods: {
+    download: function(url) {
+      window.open(this.$store.state.baseURL + url, "download");
+    },
+    upSuccessFile: function(res) {
+      console.log(res);
+      if (res.success) {
+        this.$message({
+          showClose: true,
+          message: "上传成功",
+          type: "success"
+        });
+        switch (res.data.type) {
+          case "t_clue":
+            this.importfilinglist = res.data.failedData;
+            break;
+          case "t_case_clue":
+            this.importcasecluelist = res.data.failedData;
+            break;
+          case "t_filing":
+            this.importcluelist = res.data.failedData;
+            break;
+        case "t_register":
+            this.importregisterlist = res.data.failedData;
+            break;
+        case "t_document":
+            this.importdocumentlist = res.data.failedData;
+            break;
+        }
+      } else {
+        this.$message({
+          showClose: true,
+          message: res.errorMessage,
+          type: "error"
+        });
       }
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    removeFile4(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    }
   }
-}
+};
 </script>
 

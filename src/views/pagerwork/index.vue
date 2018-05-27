@@ -39,6 +39,9 @@
                                 <el-input size="small" v-model="postdata.document_user" placeholder="输入发件人"></el-input>
                             </div>
                             <div class="block pull-left ml-lg">
+                                <el-input size="small" v-model="postdata.keywords" placeholder="输入关键字"></el-input>
+                            </div>
+                            <div class="block pull-left ml-lg">
                                 <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
                                 <el-button size="small" type="primary" @click="dismodelopen" style="margin-left:15px">添加</el-button>
                                 <el-button size="small" type="primary" @click="printpage" style="margin-left:15px">打印</el-button>
@@ -150,6 +153,7 @@
                     endDate:'', //发文字号
                     document_type:'', //姓名
                     document_user:'',//发文人
+                    keywords: '',
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,
                     print:0,

@@ -20,29 +20,60 @@
     <div class="row">
         <breadcrumb></breadcrumb>
     </div>
+    <div class="col-md-12">
+        <publicsearch modeltitle="快速查询">
+            <div class="row">
+                <div class="col-md-12">
+                    <el-form :inline="true" :model="cluefrom" class="demo-form-inline" >
+                        <el-form-item label="请选择时间">
+                        <el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
+                                </el-date-picker>
+                    </el-form-item>	
+                    <el-form-item label="线索来源">
+                        <el-select size="small" v-model="cluefrom.source" placeholder="请选择线索来源">
+                            <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="关键字">
+                        <el-input  size="small" v-model="cluefrom.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
+                    </el-form-item>
+                    </el-form>
+                </div>
+                
+            </div>
+
+
+        </publicsearch>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div style="padding:15px">
            <table class="table-striped footable-res footable metro-blue" style="width:100%">
           <thead>
             <tr>
-              <th>线索来源</th>
-              <th>编号</th>
-              <th>被反映人</th>
-              <th>结案日期</th>
-              <th>剩余天数</th>
-              <th>消息时间</th>
+              <th class="footable-sortable footable-last-column" :class="cluefrom.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source_dic')">线索来源1<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source')">线索来源2<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">编号<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('reflected_name')">被反映人<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('closed_time')">结案日期<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('news')">剩余天数<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[6].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('days')">消息时间<span class="footable-sort-indicator"></span></th>
               <th>操作</th>
             </tr>
             </thead>
                 <tbody>
                   <tr v-for="(item,index) in datalist" :key="index">
+                      <td>{{item.source_dic}}</td>
                       <td>{{item.source}}</td>
                       <td>{{item.number}}</td>
                       <td>{{item.reflected_name}}</td>
                       <td>{{item.closed_time}}</td>
-                      <td>距离结案日期还有 <span class="status-metro status-suspended">{{item.remind_days}}</span> 天</td>
-                      <td>{{item.number}}</td>
+                      <td>距离结案日期还有 <span class="status-metro status-suspended">{{item.days}}</span> 天</td>
+                      <td>{{item.news}}</td>
                       <td><el-button size="mini" type="primary" @click="view(item.clue_id)">查看</el-button></td>
                   </tr>
                 </tbody>
@@ -66,59 +97,172 @@
 export default {
   data() {
     return {
-      cluefrom:'',
-      index:1,
-      size:20,
-      current_page:1,
-      totaldata:1,
-      datalist:[]
+      cluefrom: {
+        source: "",
+        keyword: "",
+        beginDate: "",
+        endDate: "",
+        orders: [
+          {
+            column: "source_dic",
+            order: 1
+          },
+          {
+            column: "source",
+            order: 1
+          },
+          {
+            column: "number",
+            order: 1
+          },
+          {
+            column: "reflected_name",
+            order: 1
+          },
+          {
+            column: "closed_time",
+            order: 1
+          },
+          {
+            column: "news",
+            order: 1
+          },
+          {
+            column: "days",
+            order: 1
+          }
+        ]
+      },
+      index: 1,
+      size: 20,
+      current_page: 1,
+      totaldata: 1,
+      datatime: "",
+      datalist: [],
+      pickerOptions2: {
+        shortcuts: [
+          {
+            text: "最近一周",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", [start, end]);
+            }
+          },
+          {
+            text: "最近一个月",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit("pick", [start, end]);
+            }
+          },
+          {
+            text: "最近三个月",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit("pick", [start, end]);
+            }
+          }
+        ]
+      }
     };
   },
-  computed:{
-    searchback:function(){
-      return this.cluefrom
+  computed: {
+    searchback: function() {
+      return this.cluefrom;
+    },
+    dicdata: function() {
+      return this.$store.state.dicdata;
     }
   },
-  methods:{
-    searchdata:function(){
-      console.log(this.cluefrom)
+  watch: {
+    datatime: function() {
+      if (this.datatime == null) {
+        (this.cluefrom.beginDate = ""), (this.topdata.endDate = "");
+      } else {
+        let startTime = new Date(this.datatime[0]);
+        let endTime = new Date(this.datatime[1]);
+        this.cluefrom.beginDate =
+          startTime.getFullYear() +
+          "-" +
+          (startTime.getMonth() + 1) +
+          "-" +
+          startTime.getDate();
+        this.cluefrom.endDate =
+          endTime.getFullYear() +
+          "-" +
+          (endTime.getMonth() + 1) +
+          "-" +
+          endTime.getDate();
+      }
+    }
+  },
+  methods: {
+    searchdata: function() {
+      this.getdata();
     },
-    getdata:function(data={}){
-      this.$ajax.post("/api/clue/overdue",{
-        page:this.index,
-        pagesize:this.size
-      }).then((res)=>{
-        this.datalist = res.data
-       // this.totaldata = res.data.l
-      })
-    },
-    handleSizeChange(val) {
-			console.log(`每页 ${val} 条`);
-			this.size = val
-			this.getdata()
-		},
-		handleCurrentChange(val) {
-			console.log(`当前页: ${val}`);
-			this.index = val;
-			this.getdata()
-		},
-    view(id) {
-			this.$router.push({
-				path: 'clueview',
-				query: {
-					clue_id: id
+    ordersdata: function(key) {
+			this.cluefrom.orders.forEach((e, k, arr) => {
+				if (e.column == key) {
+					e.order = (e.order == "1") ? '0' : '1'
 				}
 			})
+			this.getdata()
+
 		},
+    getdata: function(data = {}) {
+        var arrtep = []
+			for (var i in this.cluefrom.orders) {
+				if (this.cluefrom.orders[i].order == 0) {
+					arrtep.push(this.cluefrom.orders[i])
+				}
+			}
+      this.$ajax
+        .post("/api/clue/overdue", {
+          page: this.index,
+          pagesize: this.size,
+          keyword: this.cluefrom.keyword,
+          source: this.cluefrom.source,
+          entry_start_time: this.cluefrom.entry_start_time,
+          entry_end_time: this.cluefrom.entry_end_time,
+          orders: arrtep
+        })
+        .then(res => {
+          this.datalist = res.data.data;
+          this.totaldata = res.data.total;
+        });
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.size = val;
+      this.getdata();
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.index = val;
+      this.getdata();
+    },
+    view(id) {
+      this.$router.push({
+        path: "clueview",
+        query: {
+          clue_id: id
+        }
+      });
+    }
   },
-  created(){
-    this.getdata()
+  created() {
+    this.getdata();
   }
 };
-
 </script>
 <style scoped>
-  .el-tabs__nav-wrap {
-    background-color: #fff
-  }
+.el-tabs__nav-wrap {
+  background-color: #fff;
+}
 </style>

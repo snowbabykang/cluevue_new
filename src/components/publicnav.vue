@@ -41,8 +41,8 @@
                     <li><router-link :to="{path:'timeout',query:{breadNum:1}}">超期提醒</router-link><div v-if="remindtotal!=0" class="noft-red">{{remindtotal}}</div></li>
                     <li><router-link :to="{path:'distribution',query:{breadNum:1}}">登记发放</router-link></li>
                     <li><router-link :to="{path:'pagerwork',query:{breadNum:1}}">文书管理</router-link></li>
-                    <li><router-link :to="{path:'problemregister',query:{breadNum:1}}">问题线索处置情况登记表</router-link></li>
-                    <li><router-link :to="{path:'filngregister',query:{breadNum:1}}">立案案件登记表</router-link></li>
+                    <!-- <li><router-link :to="{path:'problemregister',query:{breadNum:1}}">问题线索处置情况登记表</router-link></li>
+                    <li><router-link :to="{path:'filngregister',query:{breadNum:1}}">立案案件登记表</router-link></li> -->
                     <li><router-link :to="{path:'excelin',query:{breadNum:1}}">Excel导入</router-link></li>
                     <li v-if="false"><router-link :to="{path:'regnumber',query:{breadNum:1}}">登号登记</router-link></li>
                 </ul>
@@ -122,8 +122,11 @@ export default {
   },
   created:function(){
       this.$ajax.post('/api/clue/remindtotal',{}).then((res)=>{
-            
+          try {
             this.remindtotal = res.data.total
+          } catch (error) {
+              console.log("超期总数获取失败")
+          }
         })
   }
 }

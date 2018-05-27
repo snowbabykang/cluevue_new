@@ -137,7 +137,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="5">
-                        <el-form-item label="去向" prop="clue_next" required>
+                        <el-form-item label="承办部门" prop="clue_next" required>
                             <el-input v-model="ruleForm.clue_next"></el-input>
                         </el-form-item>
                     </el-col>

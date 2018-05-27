@@ -68,16 +68,16 @@ export default new Router({
           name: '文书管理',
           component: pagerwork
         },
-        {
-          path: 'problemregister',
-          name: '问题线索处置情况登记表',
-          component: problemregister
-        },
-        {
-          path: 'filngregister',
-          name: '立案案件登记表',
-          component: filngregister
-        },
+        // {
+        //   path: 'problemregister',
+        //   name: '问题线索处置情况登记表',
+        //   component: problemregister
+        // },
+        // {
+        //   path: 'filngregister',
+        //   name: '立案案件登记表',
+        //   component: filngregister
+        // },
         {
           path: 'trend',
           name: '案件数量趋势',
