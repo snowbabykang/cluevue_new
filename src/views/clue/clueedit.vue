@@ -27,7 +27,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="线索来源" prop="source">
-                            <el-input type="text" v-model="ruleForm.source"  placeholder="请输入线索来源"></el-input>
+                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -42,7 +42,7 @@
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
                     </el-col>
-                     <el-col :span="1" v-show="Togg">
+                    <el-col :span="1" v-show="Togg">
                         <i @click="dialogTableVisible = true" class="size el-icon-warning" title="跳转到列表"></i>
                     </el-col>
                 </el-row>
@@ -221,61 +221,72 @@
 </template>
 <script>
 export default {
-    name: 'menuslider',
+    name: "menuslider",
     created() {
         if (!this.$route.query.clue_id) {
-            return false
+            return false;
         }
-        this.$ajax.post('/api/clue/view_clue', this.$route.query).then((res) => {
-            this.ruleForm = { ...res.data.clue,
+        this.$ajax.post("/api/clue/view_clue", this.$route.query).then(res => {
+            this.ruleForm = {
+                ...res.data.clue,
                 ...res.data.clue_detail
             };
             this.upFileEnd = res.data.clue_attachments;
-        })
+        });
     },
     data() {
         var checkAge = (rule, value, callback) => {
-            console.log(value, value.length)
+            console.log(value, value.length);
             if (!!value) {
-                if (value.length != 8) {
-                    callback(new Error('请录入8位编号！'));
-                } else {
-                    this.$ajax.post('/api/clue/check_clue_number/', {
+                this.$ajax
+                    .post("/api/clue/check_clue_number/", {
                         number: value,
                         clue_id: this.$route.query.clue_id
-                    }).then((res) => {
-                        if (!res.data.result) {
-                            callback();
-                        } else {
-                            callback(new Error('编号已存在，请重新录入'));
-                        }
-                    }, () => {
-                        callback(new Error('服务器错误'));
                     })
-                }
-
+                    .then(
+                        res => {
+                            if (!res.data.result) {
+                                callback();
+                            } else {
+                                callback(new Error("编号已存在，请重新录入"));
+                            }
+                        },
+                        () => {
+                            callback(new Error("服务器错误"));
+                        }
+                    );
             } else {
-                callback(new Error('请录入8位编号！'));
+                callback(new Error("请录入编号！"));
             }
         };
         var checkName = (rule, value, callback) => {
             if (!!value) {
-                this.$ajax.post('/api/clue/get_reflected_name_clue', {
-                    reflected_name: value,
-                }).then((res) => {
-                    let data = res.data;
-                    this.gridData = data;
-                    if (data.document.data.length || data.clue.data.length || data.case.case_clue.data.length || data.case.case_filing.data.length) {
-                        this.Togg = true;
-                    } else {
-                        this.Togg = false;
-                    }
-                    callback();
-                }, () => {
-                    callback();
-                })
+                this.$ajax
+                    .post("/api/clue/get_reflected_name_clue", {
+                        reflected_name: value
+                    })
+                    .then(
+                        res => {
+                            let data = res.data;
+                            this.gridData = data;
+                            if (
+                                data.document.data.length ||
+                                data.clue.data.length ||
+                                data.case.case_clue.data.length ||
+                                data.case.case_filing.data.length
+                            ) {
+                                this.Togg = true;
+                            } else {
+                                this.Togg = false;
+                            }
+                            callback();
+                        },
+                        () => {
+                            callback();
+                        }
+                    );
             } else {
-                callback(new Error('必填'));
+                callback(new Error("必填"));
             }
         };
         return {
@@ -284,21 +295,21 @@ export default {
             Togg: false,
             loading: false,
             upFileEnd: [],
-            url: 'http://clue.api.test/api/clue/clue_upload/',
+            url: "http://clue.api.test/api/clue/clue_upload/",
             img_: {
-                attachment_type: 'img'
+                attachment_type: "img"
             },
             audio_: {
-                attachment_type: 'audio'
+                attachment_type: "audio"
             },
             word_: {
-                attachment_type: 'word'
+                attachment_type: "word"
             },
             excel_: {
-                attachment_type: 'excel'
+                attachment_type: "excel"
             },
             file_: {
-                attachment_type: 'file'
+                attachment_type: "file"
             },
             img__: [],
             audio__: [],
@@ -311,167 +322,170 @@ export default {
             excel: [],
             file: [],
             ruleForm: {
-                'source': '',
-                'number': '',
-                'reflected_name': '',
-                'company': '',
-                'post': '',
-                'level': '',
-                'entry_time': '',
-                'closed_time': '',
-                'disposal_type': '',
-                'supervisor': 0,
-                'remind_days': '',
-                'clue_next': '',
-                'clue_state': '',
-                'main_content': '',
-                'department_opinion': '',
-                'leader_approval': '',
-                'remark': ''
+                source: "",
+                number: "",
+                reflected_name: "",
+                company: "",
+                post: "",
+                level: "",
+                entry_time: "",
+                closed_time: "",
+                disposal_type: "",
+                supervisor: 0,
+                remind_days: "",
+                clue_next: "",
+                clue_state: "",
+                main_content: "",
+                department_opinion: "",
+                leader_approval: "",
+                remark: ""
             },
             rules: {
                 source: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 number: [{
-                    validator: checkAge,
-                    trigger: 'blur'
-                }, {
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }, ],
+                        validator: checkAge,
+                        trigger: "blur"
+                    },
+                    {
+                        required: true,
+                        message: "必填",
+                        trigger: "blur"
+                    }
+                ],
                 reflected_name: [{
-                    validator: checkName,
-                    trigger: 'blur'
-                }, {
-                    required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
+                        validator: checkName,
+                        trigger: "blur"
+                    },
+                    {
+                        required: true,
+                        message: "必填",
+                        trigger: "blur"
+                    }
+                ],
                 company: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 post: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 level: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 entry_time: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 main_content: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 disposal_type: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 closed_time: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 remind_days: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 clue_next: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
+                    message: "必填",
+                    trigger: "blur"
                 }],
                 clue_state: [{
                     required: true,
-                    message: '必填',
-                    trigger: 'blur'
-                }],
+                    message: "必填",
+                    trigger: "blur"
+                }]
             }
         };
     },
     methods: {
-        back(){
-            this.$router.go(-1)
+        back() {
+            this.$router.go(-1);
         },
-        handleClose(index,item) {
+        handleClose(index, item) {
             this.upFileEnd.splice(index, 1);
-            let data=Object.assign(this.$route.query,{file_id:item.file_id});
-             this.$ajax.post('/api/clue/delete_clue_attachments', data).then((res) => {
-
-             })
+            let data = Object.assign(this.$route.query, {
+                file_id: item.file_id
+            });
+            this.$ajax
+                .post("/api/clue/delete_clue_attachments", data)
+                .then(res => {});
         },
         removeFile1(file, fileList) {
-            this.img__.splice(fileList.indexOf(file), 1)
+            this.img__.splice(fileList.indexOf(file), 1);
         },
         removeFile2(file, fileList) {
-            this.audio__.splice(fileList.indexOf(file), 1)
+            this.audio__.splice(fileList.indexOf(file), 1);
         },
         removeFile3(file, fileList) {
-            this.word__.splice(fileList.indexOf(file), 1)
+            this.word__.splice(fileList.indexOf(file), 1);
         },
         removeFile4(file, fileList) {
-            this.excel__.splice(fileList.indexOf(file), 1)
+            this.excel__.splice(fileList.indexOf(file), 1);
         },
         removeFile5(file, fileList) {
-            this.file__.splice(fileList.indexOf(file), 1)
+            this.file__.splice(fileList.indexOf(file), 1);
         },
         upSuccessFile(esponse, file, fileList) {
-            this[esponse.data.fileInfo.attachment_type + '__'].push(esponse.data.fileInfo);
+            this[esponse.data.fileInfo.attachment_type + "__"].push(
+                esponse.data.fileInfo
+            );
         },
         beforeUp(file) {},
-        submitUpload(a) {
-
-        },
-        handleRemove(file, fileList) {
-        },
-        handlePreview(file) {
-        },
+        submitUpload(a) {},
+        handleRemove(file, fileList) {},
+        handlePreview(file) {},
         resetForm() {
-            this.$refs['ruleForm'].resetFields();
+            this.$refs["ruleForm"].resetFields();
         },
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
+            this.$refs[formName].validate(valid => {
                 if (valid) {
                     let data = {
                         clue: {
-                            'source': '',
-                            'number': '',
-                            'reflected_name': '',
-                            'company': '',
-                            'post': '',
-                            'level': '',
-                            'entry_time': '',
-                            'closed_time': '',
-                            'disposal_type': '',
-                            'supervisor': '',
-                            'remind_days': '',
-                            'clue_next': '',
-                            'clue_state': '',
+                            source: "",
+                            number: "",
+                            reflected_name: "",
+                            company: "",
+                            post: "",
+                            level: "",
+                            entry_time: "",
+                            closed_time: "",
+                            disposal_type: "",
+                            supervisor: "",
+                            remind_days: "",
+                            clue_next: "",
+                            clue_state: "",
                             clue_id: this.$route.query.clue_id
                         },
                         clue_detail: {
-                            'main_content': '',
-                            'department_opinion': '',
-                            'leader_approval': '',
-                            'remark': ''
+                            main_content: "",
+                            department_opinion: "",
+                            leader_approval: "",
+                            remark: ""
                         }
-
-                    }
+                    };
                     for (let i in data.clue) {
                         data.clue[i] = this.ruleForm[i];
                     }
@@ -484,40 +498,54 @@ export default {
                     // excel__: [],
                     // file__: [],3213213
                     data.clue_attachments = [
-                        ...this.img__, ...this.audio__, ...this.word__, ...this.excel__, ...this.file__, ...this.upFileEnd
+                        ...this.img__,
+                        ...this.audio__,
+                        ...this.word__,
+                        ...this.excel__,
+                        ...this.file__,
+                        ...this.upFileEnd
                     ];
-                    var wenzi = ['img', 'audio', 'word', 'excel', 'file'],
-                        clear = [...wenzi, 'img__', 'audio__', 'word__', 'excel__', 'file__'];
+                    var wenzi = ["img", "audio", "word", "excel", "file"],
+                        clear = [
+                            ...wenzi,
+                            "img__",
+                            "audio__",
+                            "word__",
+                            "excel__",
+                            "file__"
+                        ];
                     this.loading = true;
-                    this.$ajax.post('/api/clue/save_clue/', data).then((res) => {
-                        this.loading = false;
-                        if (res.data) {
-                            this.ruleForm.department_opinion = ''
-                            this.ruleForm.leader_approval = ''
-                            this.ruleForm.remark = ''
-                            this.resetForm();
-                            for (let i = 0; i < clear.length; i++) {
-                                clear[i] = [];
+                    this.$ajax.post("/api/clue/save_clue/", data).then(
+                        res => {
+                            this.loading = false;
+                            if (res.data) {
+                                this.ruleForm.department_opinion = "";
+                                this.ruleForm.leader_approval = "";
+                                this.ruleForm.remark = "";
+                                this.resetForm();
+                                for (let i = 0; i < clear.length; i++) {
+                                    clear[i] = [];
+                                }
+                                for (let i = 0; i < wenzi.length; i++) {
+                                    this.$refs[wenzi[i]].clearFiles();
+                                }
+                                this.$message({
+                                    message: "恭喜你，保存成功！",
+                                    type: "success"
+                                });
+                                this.$router.go(-1);
+                            } else {
+                                this.$message.error("错了哦，保存失败");
                             }
-                            for (let i = 0; i < wenzi.length; i++) {
-                                this.$refs[wenzi[i]].clearFiles();
-                            }
-                            this.$message({
-                                message: '恭喜你，保存成功！',
-                                type: 'success'
-                            });
-                            this.$router.go(-1);
-
-                        } else {
-                            this.$message.error('错了哦，保存失败');
+                        },
+                        () => {
+                            this.loading = false;
                         }
-                    }, () => {
-                        this.loading = false;
-                    })
+                    );
                 } else {
                     this.$message({
-                        message: '警告哦，请检查输入是否有误！',
-                        type: 'warning'
+                        message: "警告哦，请检查输入是否有误！",
+                        type: "warning"
                     });
 
                     return false;
@@ -527,10 +555,10 @@ export default {
     },
     computed: {
         dicdata: function() {
-            return this.$store.state.dicdata
+            return this.$store.state.dicdata;
         }
     }
-}
+};
 </script>
 
 
