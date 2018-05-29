@@ -65,6 +65,31 @@
                 </el-table-column>
             </el-table>
         </el-tab-pane>
+
+
+
+        <el-tab-pane label="登记发放" name="register">
+            <el-table :data="data.register.data" height="350">
+                <el-table-column property="number" label="编号"></el-table-column>
+                <el-table-column property="reflected_name" label="被反映人"></el-table-column>
+                <el-table-column property="company" label="工作单位及职务">
+                    <template slot-scope="scope">
+                     {{scope.row.company}}-{{scope.row.post}}
+                    </template>
+                </el-table-column>
+                <el-table-column property="main_content" label="反应的主要问题"></el-table-column>
+                <el-table-column property="leader_approval" label="领导批示"></el-table-column>
+                <el-table-column property="remark" label="备注"></el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                    <el-button size="mini" @click="view(scope.$index, scope.row,5)">
+                        查看</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-tab-pane>
+
+
     </el-tabs>
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg1" :modal="false">
         <clueview :clurid="clue_id">
@@ -80,11 +105,15 @@
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg4" :modal="false">
          <infomodela :modelinfo="idinfo_"></infomodela>
     </el-dialog>
+    <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg5" :modal="false">
+         <checkInView :clurid="clue_id"></checkInView>
+    </el-dialog>
 </div>
 </template>
 
 <script>
 import clueview from "./clueview";
+import checkInView from "../checkIn/checkInView.vue";
 import infomodel from "../problemregister/info.vue";
 import infomodela from "../filngregister/info.vue";
 import infomodelb from "../pagerwork/view.vue";
@@ -95,7 +124,8 @@ export default {
     clueview,
     infomodel,
     infomodela,
-    infomodelb
+    infomodelb,
+    checkInView
   },
   created() {},
   data() {
@@ -142,6 +172,9 @@ export default {
           .then(res => {
             this.idinfo_ = res.data;
           });
+      }
+      if(tog==5){
+           this.clue_id = v.clue_id;
       }
     }
   }
