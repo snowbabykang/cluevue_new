@@ -283,7 +283,7 @@ export default {
             let data = {
                 clue_id: this.clurid ? this.clurid : this.$route.query.clue_id
             };
-            this.$ajax.post('/api/clue/export_word', data).then((res) => {
+            this.$ajax.post('/api/clue/register_export_word', data).then((res) => {
                 this.downF = 'http://clue.api.test/' + res.data.file_path;
                 this.open();
             })
