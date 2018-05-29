@@ -63,6 +63,7 @@
                 <table class="table-striped footable-res footable metro-blue" style="width:100%">
                     <thead>
                         <tr>
+                            <th><el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange"></el-checkbox></th>
                             <th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">
                                 编号
                                 <span class="footable-sort-indicator"></span>
@@ -104,7 +105,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,index) in tableData" :key="index">
+                        <tr v-for="item in tableData" :key="item.clue_id">
+                            <td>
+                                <input type="checkbox" name="checklist" id="" :value='item.clue_id' @change="handleCheckedCitiesChange" v-model="checkedCities">
+                               
                             <td>{{item.number}}</td>
                             <td>{{item.reflected_name}}</td>
                             <td>{{item.company}}—{{item.post}}</td>
@@ -123,7 +127,7 @@
                     </tbody>
                 </table>
 
-                <div id="printtable" v-show="false">
+                <div id="printtable" v-show="true">
                     <h3 style="text-align:center">登记发放</h3>
                     <table border="1" cellpadding="1" width="100%" cellspacing="0" style="text-align:center">
                         <tr>
@@ -131,15 +135,23 @@
                             <th>被反映人</th>
                             <th>工作单位及职务</th>
                             <th>反应的主要问题</th>
-                            <th>领导批示</th>
+                             <th>集体排查意见及领导批示</th>
+                              <th>领取人签字</th>
+                                   <th>承办领导</th>        
+                                   <th>承办部门</th>
+                               <th>进展情况</th>
                             <th>备注</th>
                         </tr>
-                        <tr v-for="(item,index) in tableData" :key="index">
-                            <td>{{item.number}}</td>
+                        <tr v-for="(item,index) in tableData" :key="index" v-if="Number(checkedCities.indexOf(String(item.clue_id)))>-1">
+                            <td>{{item.number}}{{Number(checkedCities.indexOf(String(item.clue_id)))}}</td>
                             <td>{{item.reflected_name}}</td>
                             <td>{{item.company}}—{{item.post}}</td>
                             <td>{{item.main_content}}</td>
                             <td>{{item.leader_approval}}</td>
+                            <td>{{item.signatory}}</td>
+                            <td>{{item.undertake_leader}}</td>
+                            <td>{{item.clue_next}}</td>
+                            <td>{{item.progress}}</td>
                             <td>{{item.remark}}</td>
                         </tr>
                     </table>
@@ -164,6 +176,9 @@
 export default {
     data() {
         return {
+            checkAll: true,
+            checkedCities:[],
+            isIndeterminate: true,
             showmodel: false,
             current_page: 1,
             totaldata: 1,
@@ -272,6 +287,20 @@ export default {
         }
     },
     methods: {
+        handleCheckAllChange(val) {
+        let allarr = []
+        this.tableData.map((v)=>{
+            allarr.push(v.clue_id);
+        })
+        this.checkedCities = val ? allarr : []; 
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange() {
+          
+        let checkedCount = this.checkedCities.length;
+        // this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.tableData.length;
+      },
         viewData(id) {
             this.$router.push({
                 path: 'checkInView',
@@ -297,9 +326,10 @@ export default {
                 }
             }
             pdata.orders = arrtep;
+            pdata.outputid = this.checkedCities.join(',');
             pdata.export = 1;
             pdata.orders = []
-            window.open(this.$store.state.baseURL + "/api/clue/closedlist" + this.urlArgs(pdata), 'download')
+            window.open(this.$store.state.baseURL + "/api/clue/closedlist" + this.urlArgs(pdata) , 'download')
         },
         printpage: function() {
             let newWindow = window.open("_blank"); //打开新窗口
@@ -348,6 +378,10 @@ export default {
                 this.tableData = res.data.data;
                 this.current_page = res.data.current_page;
                 this.totaldata = res.data.total;
+                this.tableData.map((v)=>{
+                    this.checkedCities.push(v.clue_id);
+                })
+                this.handleCheckedCitiesChange();
             })
         },
         handleSizeChange(val) {
