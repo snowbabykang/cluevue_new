@@ -25,11 +25,18 @@
 				<div class="col-md-12">
 					<el-form :inline="true" :model="topdata" class="demo-form-inline" >
                     <el-form-item label="线索来源">
+						<el-input  size="small" v-model="postdata.source_dic" placeholder="请输入线索来源"></el-input>
+						<!-- <el-select size="small" v-model="topdata.source" placeholder="请选择线索来源">
+							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
+							</el-option>
+						</el-select> -->
+					</el-form-item>
+                    <!-- <el-form-item label="线索来源">
 						<el-select size="small" v-model="postdata.source" placeholder="请选择线索来源">
 							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
 							</el-option>
 						</el-select>
-					</el-form-item>
+					</el-form-item> -->
                     <el-form-item label="关键字">
 						<el-input  size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
 					</el-form-item>
@@ -42,13 +49,13 @@
 						<el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
 						</el-date-picker>
 					</div> -->
-					<el-form-item label="线索来源" v-show="showmore">
+					<!-- <el-form-item label="线索来源" v-show="showmore">
 						<el-input  size="small" v-model="topdata.source" placeholder="请输入线索来源"></el-input>
-						<!-- <el-select size="small" v-model="topdata.source" placeholder="请选择线索来源">
+						<el-select size="small" v-model="topdata.source" placeholder="请选择线索来源">
 							<el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
 							</el-option>
-						</el-select> -->
-					</el-form-item>
+						</el-select>
+					</el-form-item> -->
 					<!-- <div class="block pull-left ml-lg" v-show="showmore">
 						<label>线索来源</label>
 						<el-select size="small" v-model="topdata.source" clearable placeholder="请选择线索来源">
@@ -95,7 +102,14 @@
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>线索来源</th>
+						<th class="footable-sortable footable-last-column " :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source_dic')">
+                            线索来源1
+                            <span class="footable-sort-indicator"></span>
+                            </th>
+                        <th class="footable-sortable footable-last-column " :class="postdata.orders[5].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source')">
+                            线索来源2
+                            <span class="footable-sort-indicator"></span>
+                            </th>
 						<th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">
 							编号
 							<span class="footable-sort-indicator"></span>
@@ -146,7 +160,8 @@
 				<tbody>
 					<tr v-for="(item,index) in tableData" :key="index">
 						<td>{{index+1}}</td>
-						<td>{{item.source}}</td>
+						<td>{{item.source_dic}}</td>
+                        <td>{{item.source}}</td>
 						<td>{{item.number}}</td>
 						<td>{{item.reflected_name}}</td>
 						<td>{{item.company}}</td>
@@ -180,7 +195,7 @@ export default {
 			cluefrom: "",
 			postdata: {
                 keyword: '',
-                source: '',
+                source_dic: '',
 				orders: [{
 					column: 'number',
 					order: 1
@@ -199,6 +214,12 @@ export default {
 				}, {
 					column: 'clue_state',
 					order: 1
+				},{
+					column: 'source_dic',
+					order: 1
+				},{
+					column: 'source',
+					order: 1
 				}],
 				index: 1,
 				size: 20,
@@ -207,7 +228,7 @@ export default {
 			topdata: {
 				entry_start_time: '',
 				entry_end_time: '',
-				source: '',
+				// source: '',
 				post: '',
 				reflected_name: '',
 				whereIn: []
@@ -288,6 +309,8 @@ export default {
 			}
 			this.postdata.level = '';
 			this.postdata.clue_state = '';
+            this.postdata.keyword = '';
+            this.postdata.source_dic = '';
 		},
 		edit(id) {
 			this.$router.push({

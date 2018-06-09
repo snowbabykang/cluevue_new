@@ -4,7 +4,7 @@
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
-                <span>录入线索</span>
+                <span>查看线索</span>
                  <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
@@ -43,7 +43,12 @@
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="线索来源" prop="source">
+                        <el-form-item label="线索来源1" prop="source">
+                            {{ruleForm.source_dic}}
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="线索来源2" prop="source">
                             {{ruleForm.source}}
                         </el-form-item>
                     </el-col>

@@ -24,12 +24,12 @@
                     <div class="col-md-12">
                         <div class="block pull-left">
                             <el-form :inline="true" :model="postdata" class="demo-form-inline">
-                                <el-form-item label="线索来源">
+                                <!-- <el-form-item label="线索来源">
                                     <el-select size="small" v-model="postdata.source" placeholder="请选择线索来源">
                                         <el-option v-for="item in dicdata.source.data" :key="item.id" :label="item.title" :value="item.title">
                                         </el-option>
                                     </el-select>
-                                </el-form-item>
+                                </el-form-item> -->
                                 <el-form-item label="关键字">
                                     <el-input size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
                                 </el-form-item>
@@ -127,7 +127,7 @@
                     </tbody>
                 </table>
 
-                <div id="printtable" v-show="true">
+                <div id="printtable" v-show="false">
                     <h3 style="text-align:center">登记发放</h3>
                     <table border="1" cellpadding="1" width="100%" cellspacing="0" style="text-align:center">
                         <tr>
@@ -326,7 +326,7 @@ export default {
                 }
             }
             pdata.orders = arrtep;
-            pdata.outputid = this.checkedCities.join(',');
+            pdata.fields = this.checkedCities.join(',');
             pdata.export = 1;
             pdata.orders = []
             window.open(this.$store.state.baseURL + "/api/clue/closedlist" + this.urlArgs(pdata) , 'download')

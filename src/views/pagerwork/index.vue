@@ -35,9 +35,9 @@
                                 </el-select>
                             </div>
                            
-                            <div class="block pull-left ml-lg form-group">
+                            <!-- <div class="block pull-left ml-lg form-group">
                                 <el-input size="small" v-model="postdata.document_user" placeholder="输入发件人"></el-input>
-                            </div>
+                            </div> -->
                             <div class="block pull-left ml-lg">
                                 <el-input size="small" v-model="postdata.keywords" placeholder="输入关键字"></el-input>
                             </div>
@@ -152,7 +152,7 @@
                     beginDate:'', //发文日期
                     endDate:'', //发文字号
                     document_type:'', //姓名
-                    document_user:'',//发文人
+                    // document_user:'',//发文人
                     keywords: '',
                     orders:[{column:'document_date',order:1},{column:'document_code',order:1},{column:'document_title',order:1},{column:'document_user',order:1},{column:'document_unit',order:1}], 
                     export:0,

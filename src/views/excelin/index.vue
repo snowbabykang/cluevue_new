@@ -42,9 +42,9 @@
                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
                                     </el-upload>
-                <el-card style="margin-top:16px" class="box-card" v-if="importfilinglist.total>0">
+                <el-card style="margin-top:16px" class="box-card" v-if="importfilinglist.total>0 || importfilinglistsuc.total>0">
                     <div slot="header" class="clearfix">
-                        <span>共{{importfilinglist.total}}条错误</span>
+                        <span>共{{importfilinglist.total}}条错误,{{importfilinglistsuc.total}}条成功</span>
                     </div>
                     <div v-for="o in importfilinglist.data" :key="o.line" class="text item" style="margin-bottom:6px">
                         第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
@@ -60,9 +60,9 @@
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
                                     </el-upload>
-                   <el-card style="margin-top:16px" class="box-card" v-if="importcasecluelist.total>0">
+                   <el-card style="margin-top:16px" class="box-card" v-if="importcasecluelist.total>0 || importfilinglistsuc.total>0">
                     <div slot="header" class="clearfix">
-                        <span>共{{importcasecluelist.total}}条错误</span>
+                        <span>共{{importcasecluelist.total}}条错误,{{importfilinglistsuc.total}}条成功</span>
                     </div>
                     <div v-for="o in importcasecluelist.data" :key="o.line" class="text item" style="margin-bottom:6px">
                         第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
@@ -77,9 +77,9 @@
                   :action="importfiling" :on-preview="handlePreview" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
-                    <el-card style="margin-top:16px" class="box-card" v-if="importcluelist.total>0">
+                    <el-card style="margin-top:16px" class="box-card" v-if="importcluelist.total>0 || importcluelistsuc.total>0">
                     <div slot="header" class="clearfix">
-                        <span>共{{importcluelist.total}}条错误</span>
+                        <span>共{{importcluelist.total}}条错误,{{importcluelistsuc.total}}条成功</span>
                     </div>
                     <div v-for="o in importcluelist.data" :key="o.line" class="text item" style="margin-bottom:6px">
                         第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
@@ -98,9 +98,9 @@
                   :action="importregister" :on-preview="handlePreview" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
-                    <el-card style="margin-top:16px" class="box-card" v-if="importregisterlist.total>0">
+                    <el-card style="margin-top:16px" class="box-card" v-if="importregisterlist.total>0 || importregisterlistsuc.total>0">
                     <div slot="header" class="clearfix">
-                        <span>共{{importregisterlist.total}}条错误</span>
+                        <span>共{{importregisterlist.total}}条错误,{{importregisterlistsuc.total}}条成功</span>
                     </div>
                     <div v-for="o in importregisterlist.data" :key="o.line" class="text item" style="margin-bottom:6px">
                         第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
@@ -115,9 +115,9 @@
                   :action="importdocument" :on-preview="handlePreview" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过500kb</div>
-                    <el-card style="margin-top:16px" class="box-card" v-if="importdocumentlist.total>0">
+                    <el-card style="margin-top:16px" class="box-card" v-if="importdocumentlist.total>0 || importdocumentlistsuc.total>0">
                     <div slot="header" class="clearfix">
-                        <span>共{{importdocumentlist.total}}条错误</span>
+                        <span>共{{importdocumentlist.total}}条错误,{{importdocumentlistsuc.total}}条成功</span>
                     </div>
                     <div v-for="o in importdocumentlist.data" :key="o.line" class="text item" style="margin-bottom:6px">
                         第{{o.line}}行,<el-tag v-for="(i,index) in o.error" :key="index" type="danger" style="margin-left:6px">{{i}}</el-tag>
@@ -143,7 +143,12 @@ export default {
       importcasecluelist: {},
       importcluelist: {},
       importregisterlist: {},
-      importdocumentlist: {}
+      importdocumentlist: {},
+      importfilinglistsuc: {},
+      importcasecluelistsuc: {},
+      importcluelistsuc: {},
+      importregisterlistsuc: {},
+      importdocumentlistsuc: {}
     };
   },
   methods: {
@@ -161,18 +166,23 @@ export default {
         switch (res.data.type) {
           case "t_clue":
             this.importfilinglist = res.data.failedData;
+            this.importfilinglistsuc = res.data.successData;
             break;
           case "t_case_clue":
             this.importcasecluelist = res.data.failedData;
+            this.importcasecluelistsuc = res.data.successData;
             break;
           case "t_filing":
             this.importcluelist = res.data.failedData;
+            this.importcluelistsuc = res.data.successData;
             break;
         case "t_register":
             this.importregisterlist = res.data.failedData;
+            this.importregisterlistsuc = res.data.successData;
             break;
         case "t_document":
             this.importdocumentlist = res.data.failedData;
+            this.importdocumentlistsuc = res.data.successData;
             break;
         }
       } else {
