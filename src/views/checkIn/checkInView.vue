@@ -29,7 +29,7 @@
 
         <div>
             <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="8">
                         <el-form-item label="结案日期" prop="source">
                             {{ruleForm.closed_time}}
@@ -40,9 +40,9 @@
                             距结案日期还有 <span style="color:red;font-weight:bold">{{newdata}}</span> 天
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="8">
+                </el-row> -->
+              <el-row>
+                     <!--  <el-col :span="8">
                         <el-form-item label="线索来源I" prop="source_dic">
                             {{ruleForm.source_dic}}
                         </el-form-item>
@@ -51,7 +51,7 @@
                         <el-form-item label="线索来源II" prop="source">
                             {{ruleForm.source}}
                         </el-form-item>
-                    </el-col>
+                    </el-col> -->
                     <el-col :span="8">
                         <el-form-item label="编号" prop="number">
                             {{ruleForm.number}}
@@ -84,13 +84,13 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="16">
                         <el-form-item label="部门意见">
                             {{ruleForm.department_opinion}}
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="集体排查意见及领导批示" label-width="225px">
@@ -107,7 +107,7 @@
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="8">
                         <el-form-item label="处置类型">
                             {{ruleForm.disposal_type}}
@@ -154,7 +154,7 @@
                             {{ruleForm.clue_state}}
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="进展情况" prop="progress">
@@ -163,17 +163,17 @@
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row class="jihao">
+                <!-- <el-row class="jihao">
                     <el-col :span="24">
                         <el-form-item label="已上传文件">
                             <el-button @click="fileClick(tag)" :key="tag.id" v-for="(tag, index) in upFileEnd">{{index+1}}. {{tag.filename}}</el-button>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <hr/>
+                </el-row> -->
+                <!-- <hr/>
                 <el-form-item>
                     <el-button type="primary" @click="daochu()">导出</el-button>
-                </el-form-item>
+                </el-form-item> -->
             </el-form>
         </div>
         <el-dialog title="图片" :visible.sync="dialogTableVisible" class="mod" width="996px">

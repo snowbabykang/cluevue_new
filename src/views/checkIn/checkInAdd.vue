@@ -29,7 +29,7 @@
         <div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
-                    <el-col :span="8">
+                    <!-- <el-col :span="8">
                         <el-form-item label="线索来源I" prop="source_dic">
                             <el-select v-model="ruleForm.source_dic" clearable placeholder="请选择线索来源I">
                                 <el-option v-for="item in dicdata.source_dic.data" :key="item.id" :label="item.title" :value="item.title">
@@ -41,7 +41,7 @@
                         <el-form-item label="线索来源II" prop="source">
                             <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源II"></el-input>
                         </el-form-item>
-                    </el-col>
+                    </el-col> -->
                     <el-col :span="8">
                         <el-form-item label="编号" prop="number">
                             <el-input type="number" v-model="ruleForm.number"></el-input>
@@ -80,13 +80,13 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="8">
                         <el-form-item label="录入时间" prop="entry_time">
                             <el-date-picker value-format="yyyy-MM-dd" type="date" placeholder="选择日期" v-model="ruleForm.entry_time" style="width: 100%;"></el-date-picker>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <hr/>
                 <el-row>
                     <el-col :span="16">
@@ -96,14 +96,14 @@
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="16">
                         <el-form-item label="部门意见">
                             <el-input type="textarea" v-model="ruleForm.department_opinion" :rows="5"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <hr/>
+                <hr/> -->
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="集体排查意见及领导批示" label-width="225px">
@@ -120,7 +120,7 @@
                     </el-col>
                 </el-row>
                 <hr/>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="8">
                         <el-form-item label="处置类型" prop="disposal_type">
                             <el-select v-model="ruleForm.disposal_type" clearable placeholder="请选择处置类型">
@@ -181,7 +181,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row>
                     <el-col :span="16">
                         <el-form-item label="进展情况" prop="progress">
@@ -189,7 +189,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <!-- <el-row>
                     <el-col :span="16">
                         <el-form-item label="上传附件">
                             <el-tabs tab-position="left" style="height: 200px;">
@@ -229,7 +229,7 @@
                             </el-tabs>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <hr/>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
