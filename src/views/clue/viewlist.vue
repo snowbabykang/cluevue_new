@@ -3,8 +3,8 @@
     <el-tabs name="viewlist_" v-model="activeName2" type="card">
         <el-tab-pane label="线索管理" name="first">
             <el-table :data="data.clue.data" height="350">
-                <el-table-column property="source_dic" label="线索来源1"></el-table-column>
-                <el-table-column property="source" label="线索来源2"></el-table-column>
+                <el-table-column property="source_dic" label="线索来源I"></el-table-column>
+                <el-table-column property="source" label="线索来源II"></el-table-column>
                 <el-table-column property="number" label="编号"></el-table-column>
                 <el-table-column property="reflected_name" label="被反映人"></el-table-column>
                 <el-table-column property="company" label="单位"></el-table-column>

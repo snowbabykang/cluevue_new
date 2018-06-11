@@ -4,19 +4,14 @@
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
-                <span>查看线索</span>
+                <span>{{pagename}}</span>
                  <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
         <div class="col-sm-7">
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
-
-               
-
-
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -43,12 +38,12 @@
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="线索来源1" prop="source">
+                        <el-form-item label="线索来源I" prop="source">
                             {{ruleForm.source_dic}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="线索来源2" prop="source">
+                        <el-form-item label="线索来源II" prop="source">
                             {{ruleForm.source}}
                         </el-form-item>
                     </el-col>
@@ -192,9 +187,16 @@ export default {
                 this.newdata = Math.ceil((new Date(this.ruleForm.closed_time) - this.newdata) / 1000 / 60 / 60 / 24);
             })
         }
+        if(this.$route.query.name == '1'){
+            this.pagename = '超期提醒查看'
+        }
+        if(this.$route.query.name == '2'){
+            this.pagename = '登记发放查看'
+        }
     },
     data() {
         return {
+            pagename: '查看线索',
             dialogTableVisible: false,
             srcimg: '',
             downF: '',

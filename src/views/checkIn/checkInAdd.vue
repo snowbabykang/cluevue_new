@@ -4,18 +4,14 @@
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
-                <span>录入登记 </span>
+                <span>登记发放添加</span>
+                <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
         <div class="col-sm-7">
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
-
-
-
-
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -31,7 +27,7 @@
                 <el-row>
                     <!-- <el-col :span="8">
                         <el-form-item label="线索来源I" prop="source_dic">
-                            <el-select v-model="ruleForm.source_dic" clearable placeholder="请选择线索来源I">
+                            <el-select v-model="ruleForm.source_dic" clearable placeholder="请输入线索来源I">
                                 <el-option v-for="item in dicdata.source_dic.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
@@ -47,10 +43,8 @@
                             <el-input type="number" v-model="ruleForm.number"></el-input>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="15">
-                        <el-form-item label="被反映人姓名" prop="reflected_name">
+                     <el-col :span="15">
+                        <el-form-item label="被反映人" prop="reflected_name"  label-width="225px">
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
                     </el-col>
@@ -60,13 +54,26 @@
                 </el-row>
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="单位" prop="company">
+                        <el-form-item label="工作单位及职务" prop="company">
                             <el-input v-model="ruleForm.company"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="8">
+                 <el-col :span="8">
+                        <el-form-item label="承办领导" prop="undertake_leader">
+                            <el-input v-model="ruleForm.undertake_leader"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                        <el-form-item label="承办部门" prop="clue_next">
+                            <el-select v-model="ruleForm.clue_next" clearable placeholder="请选择承办部门">
+                                <el-option v-for="item in dicdata.clue_next.data" :key="item.id" :label="item.title" :value="item.title">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                     <!-- <el-col :span="8">
                         <el-form-item label="职务" prop="post">
                             <el-input v-model="ruleForm.post"></el-input>
                         </el-form-item>
@@ -78,7 +85,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
+                    </el-col> -->
                 </el-row>
                 <!-- <el-row>
                     <el-col :span="8">
@@ -87,15 +94,16 @@
                         </el-form-item>
                     </el-col>
                 </el-row> -->
-                <hr/>
+            
                 <el-row>
+                   
                     <el-col :span="16">
-                        <el-form-item label="主要内容" prop="main_content">
+                        <el-form-item label="反应的主要问题" prop="main_content">
                             <el-input type="textarea" v-model="ruleForm.main_content" :rows="5"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <hr/>
+                
                 <!-- <el-row>
                     <el-col :span="16">
                         <el-form-item label="部门意见">
@@ -105,7 +113,12 @@
                 </el-row>
                 <hr/> -->
                 <el-row>
-                    <el-col :span="24">
+                 <el-col :span="8">
+                        <el-form-item label="领取人签字" prop="signatory">
+                            <el-input v-model="ruleForm.signatory"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16">
                         <el-form-item label="集体排查意见及领导批示" label-width="225px">
                             <el-input type="textarea" v-model="ruleForm.leader_approval" :rows="5"></el-input>
                         </el-form-item>
@@ -135,8 +148,6 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-
-
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="领取人签字" prop="signatory">
@@ -149,9 +160,6 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-
-
-
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="办结期限" prop="closed_time">
@@ -165,7 +173,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="8">
+                    <el-col :span="5">
                         <el-form-item label="承办部门" prop="clue_next">
                             <el-select v-model="ruleForm.clue_next" clearable placeholder="请选择承办部门">
                                 <el-option v-for="item in dicdata.clue_next.data" :key="item.id" :label="item.title" :value="item.title">
@@ -173,7 +181,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="8">
+                    <el-col :span="5">
                         <el-form-item label="线索状态" prop="clue_state">
                             <el-select v-model="ruleForm.clue_state" clearable placeholder="请选择状态">
                                 <el-option v-for="item in dicdata.clue_state.data" :key="item.id" :label="item.title" :value="item.title">
@@ -184,7 +192,7 @@
                 </el-row> -->
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="进展情况" prop="progress">
+                        <el-form-item label="进展" prop="progress">
                             <el-input v-model="ruleForm.progress"></el-input>
                         </el-form-item>
                     </el-col>
@@ -206,7 +214,7 @@
                                     </el-upload>
                                 </el-tab-pane>
                                 <el-tab-pane label="word">
-                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word" :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
+                                    <el-upload :before-remove="removeFile3" :on-success="upSuccessFile" :data="word_" class="upload-demo" ref="word" accept="application/msword" :action="url" :on-preview="handlePreview" :file-list="word" :auto-upload="true">
                                         <el-button slot="trigger" size="small">选取文件</el-button>
                                         <div slot="tip" class="el-upload__tip">只能上传word文件，且不超过500kb</div>
                                     </el-upload>
@@ -230,312 +238,344 @@
                         </el-form-item>
                     </el-col>
                 </el-row> -->
+                <!-- <hr/>
+                <el-row>
+                    <el-col :span="24">
+                        <el-form-item label="已上传文件">
+                            <el-tag :key="tag.id" v-for="(tag, index) in upFileEnd" closable :disable-transitions="false" @close="handleClose(index,tag)">
+                                {{tag.filename}}
+                            </el-tag>
+                        </el-form-item>
+                    </el-col>
+                </el-row> -->
                 <hr/>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
                 </el-form-item>
             </el-form>
+            <el-dialog width="1300px" name="vv" title="详情" :visible.sync="dialogTableVisible">
+                <viewlist name="aa" :data="gridData">
+                </viewlist>
+            </el-dialog>
         </div>
-        <el-dialog :modal-append-to-body="false" width="1300px" name="vv" title="详情" :visible.sync="dialogTableVisible">
-            <viewlist name="aa" :data="gridData">
-            </viewlist>
-        </el-dialog>
+
     </div>
 </div>
 </template>
 <script>
-import { mapState } from "vuex";
 export default {
-  name: "addlider",
-  data() {
-    var checkAge = (rule, value, callback) => {
-      console.log(value, value.length);
-      if (!!value) {
-        this.$ajax
-          .post("/api/clue/check_register_number", {
-            number: value
-          })
-          .then(
-            res => {
-              if (!res.data.result) {
-                callback();
-              } else {
-                callback(new Error("编号已存在，请重新录入"));
-              }
-            },
-            () => {
-              callback(new Error("服务器错误"));
-            }
-          );
-      } else {
-        callback(new Error("请录入编号！"));
-      }
-    };
-    var checkName = (rule, value, callback) => {
-      if (!!value) {
-        this.$ajax
-          .post("/api/clue/get_reflected_name_clue", {
-            reflected_name: value
-          })
-          .then(
-            res => {
-              let data = res.data;
-              this.gridData = data;
-              if (
-                data.document.data.length ||
-                data.clue.data.length ||
-                data.case.case_clue.data.length ||
-                data.case.case_filing.data.length
-              ) {
-                this.Togg = true;
-              } else {
-                this.Togg = false;
-              }
-              callback();
-            },
-            () => {
-              callback();
-            }
-          );
-      } else {
-        callback();
-      }
-    };
-    return {
-      gridData: {},
-      dialogTableVisible: false,
-      Togg: false,
-      loading: false,
-      upFileEnd: [],
-      url: "http://clue.api.test/api/clue/clue_upload/",
-      img_: {
-        attachment_type: "img"
-      },
-      audio_: {
-        attachment_type: "audio"
-      },
-      word_: {
-        attachment_type: "word"
-      },
-      excel_: {
-        attachment_type: "excel"
-      },
-      file_: {
-        attachment_type: "file"
-      },
-      img__: [],
-      audio__: [],
-      word__: [],
-      excel__: [],
-      file__: [],
-      img: [],
-      audio: [],
-      word: [],
-      excel: [],
-      file: [],
-      ruleForm: {
-        signatory: "",
-        undertake_leader: "",
-        progress: "",
-        source_dic: "",
-        source: "",
-        number: "",
-        reflected_name: "",
-        company: "",
-        post: "",
-        level: "",
-        entry_time: "",
-        closed_time: "",
-        disposal_type: "",
-        supervisor: "否",
-        remind_days: "",
-        clue_next: "",
-        clue_state: "",
-        main_content: "",
-        department_opinion: "",
-        leader_approval: "",
-        remark: ""
-      },
-      rules: {
-        number: [
-          {
-            validator: checkAge,
-            trigger: "blur"
-          },
-          {
-            required: true,
-            message: "必填",
-            trigger: "blur"
-          }
-        ],
-        reflected_name: [
-          {
-            validator: checkName,
-            trigger: "blur"
-          }
-        ]
-      }
-    };
-  },
-  methods: {
-    handleClose(index) {
-      this.upFileEnd.splice(index, 1);
-    },
-    removeFile1(file, fileList) {
-      this.img__.splice(fileList.indexOf(file), 1);
-    },
-    removeFile2(file, fileList) {
-      this.audio__.splice(fileList.indexOf(file), 1);
-    },
-    removeFile3(file, fileList) {
-      this.word__.splice(fileList.indexOf(file), 1);
-    },
-    removeFile4(file, fileList) {
-      this.excel__.splice(fileList.indexOf(file), 1);
-    },
-    removeFile5(file, fileList) {
-      this.file__.splice(fileList.indexOf(file), 1);
-    },
-    upSuccessFile(esponse, file, fileList) {
-      console.log(file, fileList);
-      this[esponse.data.fileInfo.attachment_type + "__"].push(
-        esponse.data.fileInfo
-      );
-    },
-    beforeUp(file) {},
-    submitUpload(a) {},
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
-    resetForm() {
-      this.$refs["ruleForm"].resetFields();
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let data = {
-            register: {
-              signatory: "",
-              undertake_leader: "",
-              progress: "",
-              source_dic: "",
-              source: "",
-              number: "",
-              reflected_name: "",
-              company: "",
-              post: "",
-              level: "",
-              entry_time: "",
-              closed_time: "",
-              disposal_type: "",
-              supervisor: "",
-              remind_days: "",
-              clue_next: "",
-              clue_state: "",
-              main_content: "",
-              department_opinion: "",
-              leader_approval: "",
-              remark: ""
-            }
-          };
-          for (let i in data.register) {
-            data.register[i] = this.ruleForm[i];
-          }
-          data.register_attachments = [
-            ...this.img__,
-            ...this.audio__,
-            ...this.word__,
-            ...this.excel__,
-            ...this.file__,
-            ...this.upFileEnd
-          ];
-          var wenzi = ["img", "audio", "word", "excel", "file"],
-            clear = [
-              ...wenzi,
-              "img__",
-              "audio__",
-              "word__",
-              "excel__",
-              "file__"
-            ];
-          this.loading = true;
-          this.$ajax.post("/api/clue/save_register", data).then(
-            res => {
-              this.loading = false;
-              if (res.data) {
-                this.ruleForm.department_opinion = "";
-                this.ruleForm.leader_approval = "";
-                this.ruleForm.remark = "";
-                this.resetForm();
-                for (let i = 0; i < clear.length; i++) {
-                  clear[i] = [];
-                }
-                for (let i = 0; i < wenzi.length; i++) {
-                  this.$refs[wenzi[i]].clearFiles();
-                }
-                this.$message({
-                  message: "恭喜你，保存成功！",
-                  type: "success"
-                });
-              } else {
-                this.$message.error("错了哦，保存失败");
-              }
-            },
-            () => {
-              this.loading = false;
-            }
-          );
-        } else {
-          this.$message({
-            message: "警告哦，请检查输入是否有误！",
-            type: "warning"
-          });
-          return false;
+    name: "menuslider",
+    created() {
+        if (!this.$route.query.clue_id) {
+            return false;
         }
-      });
+        this.$ajax.post("/api/clue/view_register", this.$route.query).then(res => {
+            this.ruleForm = {
+                ...res.data.register,
+                ...res.data.register_attachments
+            };
+            this.upFileEnd = res.data.register_attachments;
+        });
+    },
+    data() {
+        var checkAge = (rule, value, callback) => {
+            console.log(value, value.length);
+            if (!!value) {
+                this.$ajax
+                    .post("/api/clue/check_register_number", {
+                        number: value,
+                        clue_id: this.$route.query.clue_id
+                    })
+                    .then(
+                        res => {
+                            if (!res.data.result) {
+                                callback();
+                            } else {
+                                callback(new Error("编号已存在，请重新录入"));
+                            }
+                        },
+                        () => {
+                            callback(new Error("服务器错误"));
+                        }
+                    );
+            } else {
+                callback(new Error("请录入编号！"));
+            }
+        };
+        var checkName = (rule, value, callback) => {
+            if (!!value) {
+                this.$ajax
+                    .post("/api/clue/get_reflected_name_clue", {
+                        reflected_name: value
+                    })
+                    .then(
+                        res => {
+                            let data = res.data;
+                            this.gridData = data;
+                            if (
+                                data.document.data.length ||
+                                data.clue.data.length ||
+                                data.case.case_clue.data.length ||
+                                data.case.case_filing.data.length
+                            ) {
+                                this.Togg = true;
+                            } else {
+                                this.Togg = false;
+                            }
+                            callback();
+                        },
+                        () => {
+                            callback();
+                        }
+                    );
+            } else {
+                callback();
+            }
+        };
+        return {
+            dialogTableVisible: false,
+            gridData: {},
+            Togg: false,
+            loading: false,
+            upFileEnd: [],
+            url: "http://clue.api.test/api/clue/clue_upload/",
+            img_: {
+                attachment_type: "img"
+            },
+            audio_: {
+                attachment_type: "audio"
+            },
+            word_: {
+                attachment_type: "word"
+            },
+            excel_: {
+                attachment_type: "excel"
+            },
+            file_: {
+                attachment_type: "file"
+            },
+            img__: [],
+            audio__: [],
+            word__: [],
+            excel__: [],
+            file__: [],
+            img: [],
+            audio: [],
+            word: [],
+            excel: [],
+            file: [],
+            ruleForm: {
+                signatory: "",
+                undertake_leader: "",
+                progress: "",
+                source_dic: "",
+                source: "",
+                number: "",
+                reflected_name: "",
+                company: "",
+                post: "",
+                level: "",
+                entry_time: "",
+                closed_time: "",
+                disposal_type: "",
+                supervisor: 0,
+                remind_days: "",
+                clue_next: "",
+                clue_state: "",
+                main_content: "",
+                department_opinion: "",
+                leader_approval: "",
+                remark: ""
+            },
+            rules: {
+                number: [{
+                        validator: checkAge,
+                        trigger: "blur"
+                    },
+                    {
+                        required: true,
+                        message: "必填",
+                        trigger: "blur"
+                    }
+                ],
+                reflected_name: [{
+                    validator: checkName,
+                    trigger: "blur"
+                }]
+            }
+        };
+    },
+    methods: {
+        back() {
+            this.$router.go(-1);
+        },
+        handleClose(index, item) {
+            this.upFileEnd.splice(index, 1);
+            let data = Object.assign(this.$route.query, {
+                file_id: item.file_id
+            });
+            this.$ajax
+                .post("/api/clue/delete_clue_attachments", data)
+                .then(res => {});
+        },
+        removeFile1(file, fileList) {
+            this.img__.splice(fileList.indexOf(file), 1);
+        },
+        removeFile2(file, fileList) {
+            this.audio__.splice(fileList.indexOf(file), 1);
+        },
+        removeFile3(file, fileList) {
+            this.word__.splice(fileList.indexOf(file), 1);
+        },
+        removeFile4(file, fileList) {
+            this.excel__.splice(fileList.indexOf(file), 1);
+        },
+        removeFile5(file, fileList) {
+            this.file__.splice(fileList.indexOf(file), 1);
+        },
+        upSuccessFile(esponse, file, fileList) {
+            this[esponse.data.fileInfo.attachment_type + "__"].push(
+                esponse.data.fileInfo
+            );
+        },
+        beforeUp(file) {},
+        submitUpload(a) {},
+        handleRemove(file, fileList) {},
+        handlePreview(file) {},
+        resetForm() {
+            this.$refs["ruleForm"].resetFields();
+        },
+        submitForm(formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    let data = {
+                        register: {
+                            signatory: "",
+                            undertake_leader: "",
+                            progress: "",
+                            source_dic: "",
+                            source: "",
+                            number: "",
+                            reflected_name: "",
+                            company: "",
+                            post: "",
+                            level: "",
+                            entry_time: "",
+                            closed_time: "",
+                            disposal_type: "",
+                            supervisor: "",
+                            remind_days: "",
+                            clue_next: "",
+                            clue_state: "",
+                            clue_id: this.$route.query.clue_id,
+                            main_content: "",
+                            department_opinion: "",
+                            leader_approval: "",
+                            remark: ""
+                        }
+                    };
+                    for (let i in data.register) {
+                        data.register[i] = this.ruleForm[i];
+                    }
+                    data.register_attachments = [
+                        ...this.img__,
+                        ...this.audio__,
+                        ...this.word__,
+                        ...this.excel__,
+                        ...this.file__,
+                        ...this.upFileEnd
+                    ];
+                    var wenzi = ["img", "audio", "word", "excel", "file"],
+                        clear = [
+                            ...wenzi,
+                            "img__",
+                            "audio__",
+                            "word__",
+                            "excel__",
+                            "file__"
+                        ];
+                    this.loading = true;
+                    this.$ajax.post("/api/clue/save_register", data).then(
+                        res => {
+                            this.loading = false;
+                            if (res.data) {
+                                this.ruleForm.department_opinion = "";
+                                this.ruleForm.leader_approval = "";
+                                this.ruleForm.remark = "";
+                                this.resetForm();
+                                // for (let i = 0; i < clear.length; i++) {
+                                //     clear[i] = [];
+                                // }
+                                // for (let i = 0; i < wenzi.length; i++) {
+                                //     this.$refs[wenzi[i]].clearFiles();
+                                // }
+                                this.$message({
+                                    message: "恭喜你，保存成功！",
+                                    type: "success"
+                                });
+                                this.$router.go(-1);
+                            } else {
+                                this.$message.error("错了哦，保存失败");
+                            }
+                        },
+                        () => {
+                            this.loading = false;
+                        }
+                    );
+                } else {
+                    this.$message({
+                        message: "警告哦，请检查输入是否有误！",
+                        type: "warning"
+                    });
+
+                    return false;
+                }
+            });
+        }
+    },
+    computed: {
+        dicdata: function() {
+            return this.$store.state.dicdata;
+        }
     }
-  },
-  computed: {
-    dicdata: function() {
-      return this.$store.state.dicdata;
-    }
-  }
 };
 </script>
 
 
 <style scoped>
-.size {
-  font-size: 25px;
-  position: relative;
-  top: 5px;
-  left: 5px;
-  color: dodgerblue;
-  cursor: pointer;
+.dolog {
+    width: 1300px;
+    height: 600px;
 }
 
-.el-tag + .el-tag {
-  margin-left: 10px;
+.size {
+    font-size: 25px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.el-tag+.el-tag {
+    margin-left: 10px;
 }
 
 hr {
-  border-color: #9b9595;
+    border-color: #9b9595;
 }
 
 .demo-block {
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(202, 197, 197);
-  border-image: initial;
-  border-radius: 5px;
-  transition: 0.2s;
-  background: #fff;
-  width: 90%;
-  color: #606266;
-  margin: 10px auto 0;
-  padding: 10px 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(202, 197, 197);
+    border-image: initial;
+    border-radius: 5px;
+    transition: 0.2s;
+    background: #fff;
+    width: 90%;
+    color: #606266;
+    margin: 10px auto 0;
+    padding: 10px 15px;
 }
 </style>

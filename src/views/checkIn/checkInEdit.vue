@@ -4,7 +4,7 @@
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
-                <span>录入登记</span>
+                <span>登记发放编辑</span>
                 <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
@@ -43,10 +43,8 @@
                             <el-input type="number" v-model="ruleForm.number"></el-input>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="15">
-                        <el-form-item label="被反映人姓名" prop="reflected_name">
+                     <el-col :span="15">
+                        <el-form-item label="被反映人" prop="reflected_name"  label-width="225px">
                             <el-input v-model="ruleForm.reflected_name"></el-input>
                         </el-form-item>
                     </el-col>
@@ -55,14 +53,31 @@
                     </el-col>
                 </el-row>
                 <el-row>
+                   
+                    
+                </el-row>
+                <el-row>
                     <el-col :span="16">
-                        <el-form-item label="单位" prop="company">
+                        <el-form-item label="工作单位及职务" prop="company">
                             <el-input v-model="ruleForm.company"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="8">
+                 <el-col :span="8">
+                        <el-form-item label="承办领导" prop="undertake_leader">
+                            <el-input v-model="ruleForm.undertake_leader"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                        <el-form-item label="承办部门" prop="clue_next">
+                            <el-select v-model="ruleForm.clue_next" clearable placeholder="请选择承办部门">
+                                <el-option v-for="item in dicdata.clue_next.data" :key="item.id" :label="item.title" :value="item.title">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                     <!-- <el-col :span="8">
                         <el-form-item label="职务" prop="post">
                             <el-input v-model="ruleForm.post"></el-input>
                         </el-form-item>
@@ -74,7 +89,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
+                    </el-col> -->
                 </el-row>
                 <!-- <el-row>
                     <el-col :span="8">
@@ -83,15 +98,16 @@
                         </el-form-item>
                     </el-col>
                 </el-row> -->
-                <hr/>
+            
                 <el-row>
+                   
                     <el-col :span="16">
-                        <el-form-item label="主要内容" prop="main_content">
+                        <el-form-item label="反应的主要问题" prop="main_content">
                             <el-input type="textarea" v-model="ruleForm.main_content" :rows="5"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <hr/>
+                
                 <!-- <el-row>
                     <el-col :span="16">
                         <el-form-item label="部门意见">
@@ -101,6 +117,11 @@
                 </el-row>
                 <hr/> -->
                 <el-row>
+                 <el-col :span="8">
+                        <el-form-item label="领取人签字" prop="signatory">
+                            <el-input v-model="ruleForm.signatory"></el-input>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="16">
                         <el-form-item label="集体排查意见及领导批示" label-width="225px">
                             <el-input type="textarea" v-model="ruleForm.leader_approval" :rows="5"></el-input>
@@ -175,7 +196,7 @@
                 </el-row> -->
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="进展情况" prop="progress">
+                        <el-form-item label="进展" prop="progress">
                             <el-input v-model="ruleForm.progress"></el-input>
                         </el-form-item>
                     </el-col>
@@ -486,12 +507,12 @@ export default {
                                 this.ruleForm.leader_approval = "";
                                 this.ruleForm.remark = "";
                                 this.resetForm();
-                                for (let i = 0; i < clear.length; i++) {
-                                    clear[i] = [];
-                                }
-                                for (let i = 0; i < wenzi.length; i++) {
-                                    this.$refs[wenzi[i]].clearFiles();
-                                }
+                                // for (let i = 0; i < clear.length; i++) {
+                                //     clear[i] = [];
+                                // }
+                                // for (let i = 0; i < wenzi.length; i++) {
+                                //     this.$refs[wenzi[i]].clearFiles();
+                                // }
                                 this.$message({
                                     message: "恭喜你，保存成功！",
                                     type: "success"

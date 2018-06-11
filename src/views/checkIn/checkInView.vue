@@ -4,19 +4,14 @@
         <div class="col-lg-3">
             <h2 class="tittle-content-header">
                 <i class="icon-window"></i>
-                <span>录入线索</span>
+                <span>登记发放查看</span>
                 <el-button size="mini" type="primary" @click="back">返回</el-button>
             </h2>
         </div>
         <div class="col-sm-7">
             <div class="devider-vertical visible-lg"></div>
             <div class="tittle-middle-header">
-
-
-
-
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -26,7 +21,6 @@
     </div>
 
     <div class="demo-block">
-
         <div>
             <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <!-- <el-row>
@@ -55,31 +49,41 @@
                     <el-col :span="8">
                         <el-form-item label="编号" prop="number">
                             {{ruleForm.number}}
-                        </el-form-item>
+                        </el-form-item> 
                     </el-col>
-                </el-row>
-                <el-row>
                     <el-col :span="16">
-                        <el-form-item label="被反映人姓名">
+                        <el-form-item label="被反映人"  label-width="225px">
                             {{ruleForm.reflected_name}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="职务">
-                            {{ruleForm.post}}
+                        <el-form-item label="工作单位及职务">
+                            {{ruleForm.company}}
                         </el-form-item>
                     </el-col>
-                    <el-col :span="8">
+                    <!--<el-col :span="8">
                         <el-form-item label="级别">
                             {{ruleForm.level}}
+                        </el-form-item>
+                    </el-col>-->
+                </el-row>
+                <el-row>
+                     <el-col :span="8">
+                        <el-form-item label="承办领导" prop="undertake_leader">
+                            {{ruleForm.undertake_leader}}
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="8">
+                        <el-form-item label="承办部门"  label-width="225px">
+                            {{ruleForm.clue_next}}
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="主要内容">
+                        <el-form-item label="反应的主要问题">
                             {{ruleForm.main_content}}
                         </el-form-item>
                     </el-col>
@@ -92,7 +96,12 @@
                     </el-col>
                 </el-row> -->
                 <el-row>
-                    <el-col :span="16">
+                    <el-col :span="8">
+                        <el-form-item label="领取人签字" prop="signatory">
+                            {{ruleForm.signatory}}
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="16">
                         <el-form-item label="集体排查意见及领导批示" label-width="225px">
                             {{ruleForm.leader_approval}}
                         </el-form-item>
@@ -157,7 +166,7 @@
                 </el-row> -->
                 <el-row>
                     <el-col :span="16">
-                        <el-form-item label="进展情况" prop="progress">
+                        <el-form-item label="进展" prop="progress">
                             {{ruleForm.progress}}
                         </el-form-item>
                     </el-col>

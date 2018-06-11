@@ -252,7 +252,8 @@ export default {
       this.$router.push({
         path: "clueview",
         query: {
-          clue_id: id
+          clue_id: id,
+          name: '1'
         }
       });
     }

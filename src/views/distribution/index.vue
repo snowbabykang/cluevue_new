@@ -48,8 +48,8 @@
                         </div>
                         <div class="block pull-left ml-lg">
                             <el-button size="small" type="primary" @click="searchdata" style="margin-left:15px">查询</el-button>
-
                             <el-button size="small" type="primary" @click="printpage" style="margin-left:15px">打印</el-button>
+                            <el-button size="small" type="primary" @click="adddata" style="margin-left:15px">添加</el-button>
                             <el-button size="small" type="primary" @click="output" style="margin-left:15px">导出EXCEL</el-button>
                         </div>
 
@@ -301,11 +301,17 @@ export default {
         // this.checkAll = checkedCount === this.cities.length;
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.tableData.length;
       },
+      adddata: function(){
+           this.$router.push({
+                path: 'checkInAdd',
+            })
+      },
         viewData(id) {
             this.$router.push({
                 path: 'checkInView',
                 query: {
-                    clue_id: id
+                    clue_id: id,
+                    name: '2'
                 }
             })
         },
