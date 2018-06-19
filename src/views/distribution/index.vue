@@ -77,7 +77,7 @@
                                 <span class="footable-sort-indicator"></span>
                             </th>
                             <th class="footable-sortable footable-last-column " :class="postdata.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('main_content')">
-                                反应的主要问题
+                                反映的主要问题
                                 <span class="footable-sort-indicator"></span>
                             </th>
                             <th class="footable-sortable footable-last-column " :class="postdata.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('leader_approval')">

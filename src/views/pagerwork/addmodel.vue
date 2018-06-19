@@ -3,14 +3,14 @@
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <div class="row" style="margin:0px">
     <el-col :span="12">
-       <el-form-item label="发文类型" prop="document_type" >
+       <el-form-item label="发文类型" prop="document_type" required>
           <!-- <el-input v-model="ruleForm.document_type"></el-input> -->
         <el-select v-model="ruleForm.document_type" placeholder="请选择发文类型" style="width:100%">
             <el-option v-for="item in dicdata.document_type.data" :key="item.id" :label="item.title" :value="item.title">
 									</el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="发文日期" required>
+        <el-form-item label="发文日期" >
         <el-form-item prop="document_date">
                 <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.document_date" style="width: 100%;"></el-date-picker>
             </el-form-item>
@@ -67,30 +67,30 @@
           ],
           document_code: [
             { required: false, message: '请输入发文字号', trigger: 'blur' },
-            { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
+            // { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           document_type: [
-            { required: false, message: '请选择发文类型', trigger: 'change' }
+            { required: true, message: '请选择发文类型', trigger: 'change' }
           ],
           document_title: [
             { required: false, message: '请输入文件标题', trigger: 'blur' },
-            { min:5, max:20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
+            // { min:5, max:20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
            document_signatory: [
             { required: false, message: '请输入领取签字人', trigger: 'blur' },
-            { min:1, max:20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+            // { min:1, max:20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
           ],
            document_user: [
              { required: false, message: '请输入发文人', trigger: 'blur' },
-            { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+            // { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
           ],
            document_unit: [
             { required: false, message: '请输入发文单位', trigger: 'blur' },
-            { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+            // { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
           ],
            memo: [
             { required: false, message: '请输入发文字号', trigger: 'blur' },
-            { min: 5, max: 200, message: '长度在 5 到 200 个字符', trigger: 'blur' }
+            // { min: 5, max: 200, message: '长度在 5 到 200 个字符', trigger: 'blur' }
           ],  
         }
       };

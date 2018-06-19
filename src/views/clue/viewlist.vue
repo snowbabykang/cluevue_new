@@ -79,8 +79,9 @@
                      {{scope.row.company}}-{{scope.row.post}}
                     </template>
                 </el-table-column>
-                <el-table-column property="main_content" label="反应的主要问题"></el-table-column>
-                <el-table-column property="leader_approval" label="领导批示"></el-table-column>
+                <el-table-column property="main_content" label="反映的主要问题"></el-table-column>
+                <el-table-column property="leader_approval" label="集体排查意见及领导批示"></el-table-column>
+                <el-table-column property="signatory" label="领取人签字"></el-table-column>
                 <el-table-column property="remark" label="备注"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
