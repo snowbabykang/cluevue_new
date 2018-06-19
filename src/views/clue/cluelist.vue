@@ -103,11 +103,11 @@
 					<tr>
 						<th>序号</th>
 						<th class="footable-sortable footable-last-column " :class="postdata.orders[6].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source_dic')">
-                            线索来源I
+                            线索来源I级
                             <span class="footable-sort-indicator"></span>
                             </th>
                         <th class="footable-sortable footable-last-column " :class="postdata.orders[7].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source')">
-                            线索来源II
+                            线索来源II级
                             <span class="footable-sort-indicator"></span>
                             </th>
 						<th class="footable-sortable footable-last-column " :class="postdata.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">

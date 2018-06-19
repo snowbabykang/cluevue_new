@@ -38,12 +38,12 @@
                 </el-row>
                 <el-row>
                     <el-col :span="8">
-                        <el-form-item label="线索来源I" prop="source">
+                        <el-form-item label="线索来源I级" prop="source">
                             {{ruleForm.source_dic}}
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="线索来源II" prop="source">
+                        <el-form-item label="线索来源II级" prop="source">
                             {{ruleForm.source}}
                         </el-form-item>
                     </el-col>

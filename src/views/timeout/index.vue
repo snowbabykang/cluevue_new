@@ -56,8 +56,8 @@
            <table class="table-striped footable-res footable metro-blue" style="width:100%">
           <thead>
             <tr>
-              <th class="footable-sortable footable-last-column" :class="cluefrom.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source_dic')">线索来源1<span class="footable-sort-indicator"></span></th>
-              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source')">线索来源2<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column" :class="cluefrom.orders[0].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source_dic')">线索来源I级<span class="footable-sort-indicator"></span></th>
+              <th class="footable-sortable footable-last-column " :class="cluefrom.orders[1].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('source')">线索来源II级<span class="footable-sort-indicator"></span></th>
               <th class="footable-sortable footable-last-column " :class="cluefrom.orders[2].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('number')">编号<span class="footable-sort-indicator"></span></th>
               <th class="footable-sortable footable-last-column " :class="cluefrom.orders[3].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('reflected_name')">被反映人<span class="footable-sort-indicator"></span></th>
               <th class="footable-sortable footable-last-column " :class="cluefrom.orders[4].order==1?'footable-sorted-desc':'footable-sorted'" @click="ordersdata('closed_time')">结案日期<span class="footable-sort-indicator"></span></th>

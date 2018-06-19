@@ -26,16 +26,16 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-row>
                     <!-- <el-col :span="8">
-                        <el-form-item label="线索来源I" prop="source_dic">
-                            <el-select v-model="ruleForm.source_dic" clearable placeholder="请输入线索来源I">
+                        <el-form-item label="线索来源I级" prop="source_dic">
+                            <el-select v-model="ruleForm.source_dic" clearable placeholder="请输入线索来源I级">
                                 <el-option v-for="item in dicdata.source_dic.data" :key="item.id" :label="item.title" :value="item.title">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item label="线索来源II" prop="source">
-                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源II"></el-input>
+                        <el-form-item label="线索来源II级" prop="source">
+                            <el-input type="text" v-model="ruleForm.source" placeholder="请输入线索来源II级"></el-input>
                         </el-form-item>
                     </el-col> -->
                     <el-col :span="8">

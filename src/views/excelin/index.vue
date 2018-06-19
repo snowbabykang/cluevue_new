@@ -156,11 +156,11 @@ export default {
       window.open(this.$store.state.baseURL + url, "download");
     },
     upSuccessFile: function(res) {
-      console.log(res);
       if (res.success) {
+        var msg = "上传成功"+res.data.successData.total+"条，失败"+res.data.failedData.total+"条";
         this.$message({
           showClose: true,
-          message: "上传成功",
+          message: msg,
           type: "success"
         });
         switch (res.data.type) {
