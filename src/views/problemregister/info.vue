@@ -27,9 +27,9 @@
             <el-col :span="6"><div class="grid-content bg-purple">岗位：{{this.modelinfo. detail.station}}</div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple">企业人员级别：{{this.modelinfo. detail.enterprise_persion_level}}</div></el-col>
 
-            <el-col :span="6"><div class="grid-content bg-purple">职务犯罪行为：{{this.modelinfo. detail.crime_of_duty}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">其他违法犯罪行为：{{this.modelinfo. detail.other_offenses}}</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">组织措施统计时间：{{this.modelinfo. detail.clue_measures_count_time}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">职务犯罪行为：{{this.modelinfo. sheet.crime_of_duty}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">其他违法犯罪行为：{{this.modelinfo. sheet.other_offenses}}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">组织措施统计时间：{{this.modelinfo. sheet2.clue_measures_count_time}}</div></el-col>
 
             <!-- <el-col :span="6"><div class="grid-content bg-purple">年龄：{{this.modelinfo. detail.units_event}}</div></el-col> -->
             <!-- <el-col :span="6"><div class="grid-content bg-purple">职务：{{this.modelinfo. detail.post}}</div></el-col> -->

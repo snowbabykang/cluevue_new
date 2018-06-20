@@ -95,11 +95,11 @@
 
     </el-tabs>
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg1" :modal="false">
-        <clueview :clurid="clue_id">
+        <clueview :ruleForm="clue_ruleForm" :upFileEnd="upFileEnd" :newdata="newdata">
         </clueview>
     </el-dialog>
     <el-dialog width="800px" name="vv" title="详情" :visible.sync="togg2" :modal="false">
-        <infomodelb :id="id">
+        <infomodelb :ruleForm="ruleForm">
         </infomodelb>
     </el-dialog>
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg3" :modal="false">
@@ -109,14 +109,14 @@
          <infomodela :modelinfo="idinfo_"></infomodela>
     </el-dialog>
     <el-dialog width="1300px" name="vv" title="详情" :visible.sync="togg5" :modal="false">
-         <checkInView :clurid="clue_id"></checkInView>
+         <checkInView :ruleForm="ruleForm_"></checkInView>
     </el-dialog>
 </div>
 </template>
 
 <script>
-import clueview from "./clueview";
-import checkInView from "../checkIn/checkInView.vue";
+import clueview from "./view";
+import checkInView from "../checkIn/view.vue";
 import infomodel from "../problemregister/info.vue";
 import infomodela from "../filngregister/info.vue";
 import infomodelb from "../pagerwork/view.vue";
@@ -139,7 +139,13 @@ export default {
       togg3: false,
       togg4: false,
       togg5: false,
+      nowdata: new Date(),
       clue_id: "",
+      clue_ruleForm : "",
+      upFileEnd : "",
+      newdata : "",
+      ruleForm : "",
+      ruleForm_ : "",
       infoid: "",
       infoid_: "",
       idinfo: "",
@@ -152,9 +158,22 @@ export default {
       this["togg" + tog] = true;
       if (tog == 1) {
         this.clue_id = v.clue_id;
+        this.$ajax.post('/api/clue/view_clue', {clue_id:this.clue_id}).then((res) => {
+            this.clue_ruleForm = { ...res.data.clue,
+                ...res.data.clue_detail
+            };
+            this.upFileEnd = res.data.clue_attachments;
+            this.newdata = Math.ceil((new Date(this.clue_ruleForm.closed_time) - this.nowdata) / 1000 / 60 / 60 / 24);
+        })
       }
       if (tog == 2) {
         this.id = v.id;
+        this.$ajax.post("/api/document/view", {
+            id: v.id
+        })
+        .then(res => {
+        this.ruleForm = res.data;
+        });
       }
       if (tog == 3) {
         this.infoid = v.clue_number;
@@ -178,6 +197,14 @@ export default {
       }
       if(tog==5){
            this.clue_id = v.clue_id;
+        this.$ajax.post("/api/clue/view_register", {
+            clue_id: this.clue_id
+        })
+        .then(res => {
+            this.ruleForm_ = { ...res.data.register,...res.data.register_attachments};
+        });
+
+
       }
     }
   }
