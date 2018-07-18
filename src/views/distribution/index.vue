@@ -111,7 +111,7 @@
                                
                             <td>{{item.number}}</td>
                             <td>{{item.reflected_name}}</td>
-                            <td>{{item.company}}—{{item.post}}</td>
+                            <td>{{item.company}}</td>
                             <td>{{item.main_content}}</td>
                             <td>{{item.leader_approval}}</td>
                             <td>{{item.signatory}}</td>
