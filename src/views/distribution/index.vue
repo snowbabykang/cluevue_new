@@ -31,7 +31,7 @@
                                     </el-select>
                                 </el-form-item> -->
                                 <el-form-item label="关键字">
-                                    <el-input size="small" v-model="postdata.keyword" placeholder="请输入线索来源、被反映人姓名"></el-input>
+                                    <el-input size="small" v-model="postdata.keyword" placeholder="请输入被反映人姓名"></el-input>
                                 </el-form-item>
                                 <label>请选择时间</label>
                                 <el-date-picker size="small" v-model="datatime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
@@ -111,7 +111,7 @@
                                
                             <td>{{item.number}}</td>
                             <td>{{item.reflected_name}}</td>
-                            <td>{{item.company}}—{{item.post}}</td>
+                            <td>{{item.company}}</td>
                             <td>{{item.main_content}}</td>
                             <td>{{item.leader_approval}}</td>
                             <td>{{item.signatory}}</td>
@@ -157,7 +157,7 @@
                     </table>
                 </div>
 
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current_page" :page-sizes="[10, 20, 50, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper" :total="totaldata">
                 </el-pagination>
             </div>
         </div>
@@ -230,7 +230,7 @@ export default {
                 export: 0,
                 print: 0,
                 page: 1,
-                pagesize: 10
+                pagesize: 20
             },
             pickerOptions2: {
                 shortcuts: [{
@@ -391,12 +391,12 @@ export default {
             })
         },
         handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-            this.postdata.pagesize = val
+            // console.log(`每页 ${val} 条`);
+            this.postdata.pagesize = val;
             this.getdata()
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+            // console.log(`当前页: ${val}`);
             this.postdata.page = val;
             this.getdata()
         }

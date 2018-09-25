@@ -76,7 +76,7 @@
                 <el-table-column property="reflected_name" label="被反映人"></el-table-column>
                 <el-table-column property="company" label="工作单位及职务">
                     <template slot-scope="scope">
-                     {{scope.row.company}}-{{scope.row.post}}
+                     {{scope.row.company}}
                     </template>
                 </el-table-column>
                 <el-table-column property="main_content" label="反映的主要问题"></el-table-column>
